@@ -31,7 +31,7 @@ if (isset($_FILES["file"])) {
         } else {
             Database::iud("INSERT INTO contract(`path`) VALUE('" . $file_name . "');");
             echo "Successfully Uploaded Contract Form";
-            echo "INSERT INTO contract(`path`) VALUE('" . $file_name . "');";
+          //  echo "INSERT INTO contract(`path`) VALUE('" . $file_name . "');";
         }
     } else {
         echo "Invalid file type";

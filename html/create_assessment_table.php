@@ -10,7 +10,7 @@ $createassesmnt_date = $_POST['createassesmnt_date'];
 if ($createassesmnt_uni != 'x' && $createassesmnt_batch != 'x'  && $createassesmnt_field != 'x' && $createassesmnt_degre != 'x') {
 ?>
 
-    <table class=" table  table-striped  ">
+    <table class=" table  table-striped  " id="tb_create_assesmnt">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -32,33 +32,40 @@ if ($createassesmnt_uni != 'x' && $createassesmnt_batch != 'x'  && $createassesm
             INNER JOIN university ON degree.deg_uni_id=university.uni_id
             INNER JOIN worksite ON training_establishment.worksite_wrksit_id=worksite.wrksit_id
             INNER JOIN training_place ON worksite.wrksit_tran_plc_id=training_place.tran_plc_id
-            WHERE university.uni_id='" . $createassesmnt_uni . "' AND YEAR(student.reg_date)='" . $createassesmnt_batch . "' AND field.fld_name='" . $createassesmnt_field . "' AND degree.degree_name='" . $createassesmnt_degre . "';");
+            WHERE  university.uni_id='" . $createassesmnt_uni . "' 
+            AND YEAR(student.reg_date)='" . $createassesmnt_batch . "' 
+            AND field.fld_name='" . $createassesmnt_field . "' 
+            AND degree.degree_name='" . $createassesmnt_degre . "';");
 
             if ($rs->num_rows > 0) {
 
                 for ($i = 0; $i < $rs->num_rows; $i++) {
                     $d = $rs->fetch_assoc();
+
+                    $rs_st = Database::search("SELECT * FROM assessment WHERE student_st_id='" . $d['st_id'] . "';");
+                    if ($rs_st->num_rows == 0) {
             ?>
-                    <tr style="background-color: #ffb45f67;" >
-                        <td><?= $i + 1; ?></td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="myCheckbox">
-                            </div>
-                        </td>
-                        <td><?= $d['naita_id']; ?></td>
-                        <td><?= $d['first_name']; ?></td>
-                        <td><?= $d['wrksit_name']; ?></td>
-                        <td><?= $d['tran_plc_name']; ?></td>
-                        <td><?= $d['uni_name']; ?></td>
-                        <td><?= $d['fld_name']; ?></td>
-                    </tr>
+                        <tr class="table-warning" id="ca_td">
+                            <td><?= $i + 1; ?></td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="myCheckbox">
+                                </div>
+                            </td>
+                            <td><?= $d['naita_id']; ?></td>
+                            <td><?= $d['first_name']; ?></td>
+                            <td><?= $d['wrksit_name']; ?></td>
+                            <td><?= $d['tran_plc_name']; ?></td>
+                            <td><?= $d['uni_name']; ?></td>
+                            <td><?= $d['fld_name']; ?></td>
+                        </tr>
                 <?php
+                    }
                 }
             } else {
                 ?>
                 <tr style="background-color: #ffb45f67;">
-                    <td colspan="7" class="text-center ">No students with this detaila</td>
+                    <td colspan="8" class="text-center ">No students with this detaila</td>
                 </tr>
             <?php
             }

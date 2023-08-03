@@ -86,7 +86,7 @@ $inspector = $rsins->fetch_assoc();
                     $tbd = $rsm->fetch_assoc();
 
                     require 'monitoringValidation.php';
-                    $x = T::x($tbd['st_id']);
+                    $x = MonitoringValidation::x($tbd['st_id']);
 
                     if ($x == 0) {
 
@@ -238,9 +238,3 @@ $inspector = $rsins->fetch_assoc();
 
     </div>
 </div>
-<script>
-    /****************************************
-     *       Basic Table                   *
-     ****************************************/
-    $("#zero_config").DataTable();
-</script>

@@ -339,7 +339,20 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                               <i class="mdi mdi-account-multiple-plus"></i>
                             </h1>
                             <h6 class="text-white text-uppercase text-truncate">All Students Count</h6>
-                            <h4 class="text-white text-uppercase">40,000</h4>
+                            <?php
+                            $rs_ad_dash_st = Database::search('SELECT COUNT(st_id) FROM student;');
+                            $d_ad_dash_st = $rs_ad_dash_st->fetch_assoc();
+
+                            ?>
+                            <h4 class="text-white text-uppercase"><?php
+                                                                  if ($rs_ad_dash_st->num_rows > 0) {
+                                                                    echo $d_ad_dash_st['COUNT(st_id)'];
+                                                                  } else {
+                                                                    echo '_ _ _';
+                                                                  }
+
+
+                                                                  ?></h4>
                           </div>
                         </div>
                       </div>
@@ -470,23 +483,23 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             <!-- ============================================================== -->
             <div class="col-12 " id="mtngsdl" style="display: none;">
               <h1 class="text-decoration-underline text-center border border-2 border-primary  p-2 rounded my-2 text-uppercase fw-bold">Meeting schedule</h1>
-              <div class="row ">
-                <div class="col-12 col-lg-8 offset-lg-2 g-lg-2">
+              <div class="row g-2 mx-2">
+                <div class="col-12">
                   <label class="form-label"><span class="text-danger">*</span>Coordinator</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <input type="text" id="Meeshedl" class="form-control" placeholder="Pleace Enter Coordinator's Name">
                 </div>
-                <div class="col-12 col-lg-4 offset-lg-2  g-lg-2 d-grid">
+                <div class="col-12  d-grid">
                   <label class="form-label"><span class="text-danger">*</span>Date</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <input type="date" name="" class="form-control" id="MDate">
                 </div>
-                <div class="col-12 col-lg-4 g-lg-2 d-grid">
+                <div class="col-12 d-grid">
                   <label class="form-label"><span class="text-danger">*</span>Time</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <input type="time" name="" class="form-control" id="MTime">
                 </div>
-                <div class="col-12 col-lg-4 offset-lg-2 g-lg-2">
+                <div class="col-12">
                   <label class="form-label"><span class="text-danger">*</span>Name of meeting</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <?php
@@ -505,7 +518,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                     ?>
                   </select>
                 </div>
-                <div class="col-12 col-lg-4 g-lg-2">
+                <div class="col-12">
                   <label class="form-label"><span class="text-danger">*</span>Type of meeting</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <?php
@@ -524,22 +537,22 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                     ?>
                   </select>
                 </div>
-                <div class="col-12 col-lg-8 offset-lg-2 g-lg-2 d-grid">
+                <div class="col-12 d-grid">
                   <label class="form-label"><span class="text-danger">*</span>Zoom Meeting Link</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <input type="text" name="" class="form-control" id="MLink" placeholder="Paste the zoom link here...">
                 </div>
-                <div class="col-12 col-lg-8 offset-lg-2 g-lg-2 d-grid">
+                <div class="col-12 d-grid">
                   <label class="form-label"><span class="text-danger">*</span>Location</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <input type="text" name="" class="form-control" id="MLocation" placeholder="Enter Location.....">
                 </div>
-                <div class="col-12 col-lg-8 offset-lg-2 g-lg-2 d-grid">
+                <div class="col-12 d-grid">
                   <label class="form-label"><span class="text-danger">*</span>Special Notes</label>
                   <small id="MunmSM" style="display: none;" class="small"></small>
                   <textarea class="form-control" id="" cols="30" rows="4" placeholder="Special Notes for Students"></textarea>
                 </div>
-                <div class="col-12 col-lg-6 offset-lg-3 d-grid g-2 mt-4 mb-4">
+                <div class="col-12 mt-4 mb-4 d-grid">
                   <button class="btn btn-outline-primary  shadow fw-bold fs-4" onclick="meetingShedule();">Schedule Meeting</button>
                 </div>
               </div>
@@ -838,36 +851,43 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                 <div class="col-12 mt-4">
                   <div class="row g-2">
                     <div class="col-12 col-lg-2 offset-lg-0 d-grid mb-3">
-                      <button class="btn btn-outline-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#create_assessment">Export data as a excel</button>
+                      <button class="btn btn-outline-primary fw-bold shadow">Export data as a excel</button>
                     </div>
                     <div class="col-12 col-lg-2 offset-lg-8 d-grid mb-3">
                       <button class="btn btn-outline-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#create_assessment">Create Assessment</button>
                     </div>
-                    <div class="col-12 col-lg-3">
-                      <input type="text" class="form-control" placeholder="Search">
+                    <div class="col-12 col-lg-6">
+                      <input type="text" class="form-control" placeholder="Search" id="admin_assessment_sort_srch" onkeyup="admin_assessment_sort();">
                     </div>
                     <div class="col-12 col-lg-3">
-                      <select class="form-select">
+                      <select class="form-select" onchange="admin_assessment_sort();" id="admin_assessment_sort_preabs">
                         <option value="x">Select present or absent</option>
                         <option value="1">Present</option>
                         <option value="2">Absent</option>
                       </select>
                     </div>
                     <div class="col-12 col-lg-3">
-                      <select class="form-select">
+                      <select class="form-select" onchange="admin_assessment_sort();" id="admin_assessment_sort_psfl">
                         <option value="x">Select Pass or Fail</option>
                         <option value="1">Pass</option>
                         <option value="2">Fail</option>
+                        <option value="3">pending</option>
                       </select>
                     </div>
-                    <div class="col-12 col-lg-3">
-                      <input type="date" class="form-control">
+                    <div class="col-12 col-lg-3"><label class="form-label">from</label>
+                      <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_from">
+                    </div>
+                    <div class="col-12 col-lg-3"><label class="form-label">to</label>
+                      <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_to">
+                    </div>
+                    <div class="col-12 col-lg-3 d-grid"><label class="form-label"></label>
+                      <button class="btn btn-outline-primary fw-bold" onclick="admin_assessment_sort();">Search</button>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 table-responsive shadow mt-4">
+                <div class="col-12 table-responsive shadow mt-4" id="admin_assessment_sort_table">
                   <h4>Assessment Faced Training Students</h4>
-                  <table class=" table  table-striped  ">
+                  <table class=" table table-striped  " id="assessment_table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -879,6 +899,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                         <th scope="col">Field</th>
                         <th scope="col">Assessment date</th>
                         <th scope="col">Assessment Status</th>
+                        <th scope="col">participation</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -895,13 +917,12 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                       INNER JOIN university ON degree.deg_uni_id=university.uni_id
                       INNER JOIN training_establishment ON training_establishment.tran_est_st_id=student.st_id
                       INNER JOIN worksite ON training_establishment.worksite_wrksit_id=worksite.wrksit_id
-                      INNER JOIN training_place ON worksite.wrksit_tran_plc_id=training_place.tran_plc_id
-                          WHERE assessment.as_done='1';");
+                      INNER JOIN training_place ON worksite.wrksit_tran_plc_id=training_place.tran_plc_id;");
 
                       for ($i = 0; $i < $rs_admin_assessment->num_rows; $i++) {
                         $d_admin_assessmen = $rs_admin_assessment->fetch_assoc();
                       ?>
-                        <tr style="background-color: #ffb45f67;">
+                        <tr class="table-warning">
                           <td><?= $i + 1; ?></td>
                           <td><?= $d_admin_assessmen['naita_id']; ?></td>
                           <td><?= $d_admin_assessmen['first_name']; ?></td>
@@ -910,7 +931,45 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                           <td><?= $d_admin_assessmen['uni_name']; ?></td>
                           <td><?= $d_admin_assessmen['fld_name']; ?></td>
                           <td><?= $d_admin_assessmen['as_date']; ?></td>
-                          <td><?= $d_admin_assessmen['status']; ?></td>
+                          <td>
+                            <select class="form-select" id="assess_select_pass<?= $d_admin_assessmen['naita_id']; ?>">
+                              <?php
+                              $rs_admin_assessment_stat = Database::search("SELECT * FROM as_status;");
+                              while ($d_admin_assessment_stat = $rs_admin_assessment_stat->fetch_assoc()) {
+                                if ($d_admin_assessment_stat['status'] == $d_admin_assessmen['status']) {
+                              ?>
+                                  <option value="<?= $d_admin_assessment_stat['asstat_id']; ?>" selected><?= $d_admin_assessment_stat['status']; ?></option>
+                                <?php
+                                } else {
+                                ?>
+                                  <option value="<?= $d_admin_assessment_stat['asstat_id']; ?>"><?= $d_admin_assessment_stat['status']; ?></option>
+                              <?php
+                                }
+                              }
+                              ?>
+                            </select>
+                          </td>
+                          <td>
+                            <select class="form-select" id="assess_select_present<?= $d_admin_assessmen['naita_id']; ?>">
+                              <?php
+                              $rs_admin_assessment_pati = Database::search("SELECT * FROM participation;");
+                              while ($d_admin_assessment_pati = $rs_admin_assessment_pati->fetch_assoc()) {
+                                if ($d_admin_assessment_pati['parti_id'] == $d_admin_assessmen['participation_parti_id']) {
+                              ?>
+                                  <option selected value="<?= $d_admin_assessment_pati['parti_id'] ?>"><?= $d_admin_assessment_pati['parti_stat'] ?></option>
+                                <?php
+                                } else {
+                                ?>
+                                  <option value="<?= $d_admin_assessment_pati['parti_id'] ?>"><?= $d_admin_assessment_pati['parti_stat'] ?></option>
+                              <?php
+                                }
+                              }
+                              ?>
+                            </select>
+                          </td>
+                          <td>
+                            <div class="col d-grid"><button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Checked</button></div>
+                          </td>
                         </tr>
                       <?php
                       }
@@ -1081,12 +1140,14 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <select id="sf" class="form-control" onclick="searchmonitorInspect();">
                               <option value="x">select Field</option>
                               <?php
-                              $f = Database::search("SELECT * FROM field;");
+                              $f = Database::search("SELECT * FROM field
+                              INNER JOIN degree ON field.fld_deg_id=degree.deg_id
+                              INNER JOIN university ON degree.deg_uni_id=university.uni_id;");
                               $fn = $f->num_rows;
                               for ($i = 0; $i < $fn; $i++) {
                                 $fd = $f->fetch_assoc();
                               ?>
-                                <option value="<?= $fd["fld_id"]; ?>"><?= $fd["fld_name"]; ?></option>
+                                <option value="<?= $fd["fld_id"]; ?>"><?= $fd["fld_name"]; ?> - <?= $fd["degree_name"]; ?> - <?= $ud["uni_name"]; ?></option>
                               <?php
                               }
                               ?>
@@ -1321,6 +1382,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               <h1 class="text-center fw-bold text-uppercase" id="staticBackdropLabel">Create Assessment</h1>
             </div>
             <div class="modal-body">
+              <h4 class="text-center text-danger fw-bold p-1" id="createassesmnt_main"></h4>
               <div class="row">
                 <div class="col-12 col-lg-3 mt-2">
                   <?php
@@ -1394,7 +1456,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                   </select>
                 </div>
                 <div class="col-12 col-lg-3 mt-2">
-                  <input class="form-control" type="date" id="createassesmnt_date" onclick="select_students_to_assessment();">
+                  <input class="form-control" type="date" id="createassesmnt_date" id="createassesmnt_date">
                 </div>
                 <div class="col-12 mt-2">
                   <div class="table-responsive" id="createassesmnt_table">
@@ -1430,7 +1492,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-danger fw-bold shadow" data-bs-dismiss="modal">Close</button>
-              <button class="btn btn-outline-primary fw-bold shadow" id="createassesmnt_button" disabled>Create</button>
+              <button class="btn btn-outline-primary fw-bold shadow" id="createassesmnt_button" disabled onclick="assessment_create();">Create</button>
             </div>
           </div>
         </div>
@@ -1443,10 +1505,10 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <div class="modal fade " id="add_university" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
           <div class="modal-content ">
-            <small class="text-success fw-bold fs-4 text-center mt-2" id="admnaddegalrt"></small>
             <div class="modal-header">
               <h1 class="text-center fw-bold text-uppercase">University Or Institute Register</h1>
             </div>
+            <small class="text-success fw-bold fs-4 text-center mt-2 d-block" id="admin_uni_reg_uni_main_sm"></small>
             <div class="modal-body">
               <div class="row ">
                 <div class="col-12">
@@ -1455,14 +1517,14 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                       <div class="row">
                         <div class="col-12 g-2 ">
                           <label class="form-label"><span class="text-danger">*</span>University or Institute</label>
-                          <small id="uiSM" style="display: none;" class="small">Please Select this is University or Institute</small>
+                          <small id="admin_uni_reg_uni_type_sm" class="small text-danger d-block"></small>
                           <?php
 
                           $runiuni = Database::search("SELECT * FROM uni_type;");
                           $nuniuni = $runiuni->num_rows;
 
                           ?>
-                          <select class="form-select bg-transparent " id="ui">
+                          <select class="form-select bg-transparent " id="admin_uni_reg_uni_type">
                             <option value="x">Select University or Institute</option>
                             <?php
 
@@ -1479,13 +1541,13 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                         </div>
                         <div class="col-12 g-2">
                           <label class="form-label" id="uin"><span class="text-danger">*</span>University or Institute Name</label>
-                          <small id="uiniSM" style="display: none;" class="small">Please Enter Your University or Institute Name</small>
-                          <input type="text" class="form-control" id="uini">
+                          <small id="admin_uni_reg_uni_sm" class="small text-danger d-block"></small>
                         </div>
+                        <input type="text" class="form-control" id="admin_uni_reg_uni">
                         <div class="col-12  g-2">
                           <label class="form-label" id="uig"><span class="text-danger">*</span>Is this Government University or Institute</label>
-                          <small id="uigovSM" style="display: none;" class="small">Please Select Your University or Institute Type</small>
-                          <select id="uigov" class="form-select bg-transparent ">
+                          <small id="admin_uni_reg_uni_gov_sm" class="small text-danger d-block"></small>
+                          <select id="admin_uni_reg_uni_gov" class="form-select bg-transparent ">
                             <option value="x">Is This government</option>
                             <?php
 
@@ -1505,28 +1567,28 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                         </div>
                         <div class="col-12 g-2">
                           <label class="form-label" id="uia"><span class="text-danger">*</span>University or Institute Located Address</label>
-                          <small id="uiaiSM" style="display: none;" class="small">Please Enter Your University or Institute Name</small>
-                          <input type="text" class="form-control" id="uiai">
+                          <small id="admin_uni_reg_uni_addr_sm" class="small text-danger d-block"></small>
+                          <input type="text" class="form-control" id="admin_uni_reg_uni_addr">
                         </div>
                         <div class="col-12 g-2">
                           <label class="form-label" id="uie"><span class="text-danger">*</span>Email Address of the University or Institute</label>
-                          <small id="uieiSM" style="display: none;" class="small">Please Enter Your Email Address</small>
-                          <input type="text" class="form-control" id="uiei">
+                          <small id="admin_uni_reg_uni_email_sm" class="small text-danger d-block"></small>
+                          <input type="text" class="form-control" id="admin_uni_reg_uni_email">
                         </div>
                         <div class="col-12 g-2">
                           <label class="form-label"><span class="text-danger">*</span>Telephone number 1</label>
-                          <small id="uit1iSM" style="display: none;" class="small">Please Enter Mobile Number 1</small>
-                          <input type="text" class="form-control" id="uit1i">
+                          <small id="admin_uni_reg_uni_teli_1_sm" class="small text-danger d-block"></small>
+                          <input type="text" class="form-control" id="admin_uni_reg_uni_teli_1">
                         </div>
                         <div class="col-12 g-2">
                           <label class="form-label">Telephone number 2</label>
-                          <small id="uit2iSM" style="display: none;" class="small">Please Enter Mobile Number 1</small>
-                          <input type="text" class="form-control" id="uit2i">
+                          <small id="admin_uni_reg_uni_teli_2_sm" class="small text-danger d-block"></small>
+                          <input type="text" class="form-control" id="admin_uni_reg_uni_teli_2">
                         </div>
                         <div class="col-12 g-2">
                           <label class="form-label"><span class="text-danger">*</span>Password</label>
-                          <small id="UPswdSM" style="display: none;" class="small">Please Enter Your Password</small>
-                          <input type="text" class="form-control" id="UPswd">
+                          <small id="admin_uni_reg_uni_pass_sm" class="small text-danger d-block"></small>
+                          <input type="text" class="form-control" id="admin_uni_reg_uni_pass">
                         </div>
                       </div>
                     </div>
@@ -1537,10 +1599,10 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             <div class="modal-footer">
               <div class="row w-100">
                 <div class="col-6 d-grid">
-                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="adminadddegreeclose();">Close</button>
+                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="admin_uni_reg_close();">Close</button>
                 </div>
                 <div class="col-6 d-grid">
-                  <button class="btn btn-outline-primary fw-bold text-uppercase" onclick="UReg();">Register now</button>
+                  <button class="btn btn-outline-primary fw-bold text-uppercase" onclick="admin_uni_reg();">Register now</button>
                 </div>
               </div>
             </div>
@@ -1555,20 +1617,20 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <div class="modal fade " id="add_degree" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
           <div class="modal-content ">
-            <small class="text-success fw-bold fs-4 text-center mt-2" id="admnaddegalrt"></small>
             <div class="modal-header">
-              <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Degree</h1>
+              <h1 class="text-center fw-bold text-uppercase fs-2">Add Degree</h1>
             </div>
             <div class="modal-body">
+              <small class="text-success fs-4 text-center mt-2" id="admin_add_deg_main"></small>
               <div class="row">
                 <div class="col-12 ">
                   <label class="form-label"><span class="text-danger">*</span>Select University or Institute</label><br>
-                  <small id="admnaddeguniSM" style="display: none;" class="small">Please Select University or Institute</small>
+                  <small id="admin_add_deg_uni_sm" class="small text-danger d-block"></small>
                   <?php
                   $rs_admin_add_degree_uni = Database::search("SELECT * FROM university;");
                   $n_admin_add_degree_uni = $rs_admin_add_degree_uni->num_rows;
                   ?>
-                  <select class="form-select bg-transparent" id="admnaddeguni">
+                  <select class="form-select bg-transparent" id="admin_add_deg_uni">
                     <option value="x">Select Your University</option>
                     <?php
                     for ($i = 0; $i < $n_admin_add_degree_uni; $i++) {
@@ -1582,8 +1644,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                 </div>
                 <div class="col-12 ">
                   <label class="form-label"><span class="text-danger">*</span>Degree Name</label><br>
-                  <small id="admnaddegdegSM" style="display: none;" class="small">Please Degree Name</small>
-                  <select class="form-select bg-transparent" id="admnaddegdeg" onchange="admin_add_other_degree(this);">
+                  <small id="admin_add_deg_deg_sm" class="small text-danger d-block"></small>
+                  <select class="form-select bg-transparent" id="admin_add_deg_deg" onchange="admin_add_other_degree(this);">
                     <option value="x">Select Your Degree</option>
                     <option value="y">Enter Other Degree</option>
                     <?php
@@ -1592,22 +1654,25 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                     for ($i = 0; $i < $n_admin_add_degree_deg; $i++) {
                       $d_admin_add_degree_deg = $rs_admin_add_degree_deg->fetch_assoc();
                     ?>
-                      <option value="<?= $d_admin_add_degree_deg["deg_id"]; ?>"><?= $d_admin_add_degree_deg["degree_name"]; ?></option>
+                      <option value="<?= $d_admin_add_degree_deg["degree_name"]; ?>"><?= $d_admin_add_degree_deg["degree_name"]; ?></option>
                     <?php
                     }
                     ?>
                   </select>
-                  <input type="text" class="form-control mt-2" placeholder="Type Other Degree Name" style="display: none;" id="admin_add_degree_other_deg">
+                </div>
+                <div class="col-12">
+                  <small id="admin_add_deg_deg_other_sm" class="small text-danger d-block"></small>
+                  <input type="text" class="form-control mt-2" placeholder="Type Other Degree Name" style="display: none;" id="admin_add_deg_deg_other">
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <div class="row w-100">
                 <div class="col-6 d-grid">
-                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="adminadddegreeclose();">Close</button>
+                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="admin_add_deg_uni_close();">Close</button>
                 </div>
                 <div class="col-6 d-grid">
-                  <button type="button" class="btn btn-outline-primary fw-bold" onclick="adminadddegree();">Add</button>
+                  <button type="button" class="btn btn-outline-primary fw-bold" onclick="admin_add_deg();">Add</button>
                 </div>
               </div>
             </div>
@@ -1622,46 +1687,26 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <div class="modal fade " id="add_field" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog ">
           <div class="modal-content ">
-            <small class="text-success fw-bold text-center fs-4 mt-1 text-uppercase" id="admnaddfldalrtSM"></small>
             <div class="modal-header">
               <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Field</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              <small id="admin_add_field_main"></small>
               <div class="row">
                 <div class="col-12 ">
-                  <label class="form-label"><span class="text-danger">*</span>Select University or Institute</label><br>
-                  <small id="admnaddeguniSM" style="display: none;" class="small">Please Select University or Institute</small>
-                  <?php
-                  $rs_admin_add_field_uni = Database::search("SELECT * FROM university;");
-                  $n_admin_add_field_uni = $rs_admin_add_field_uni->num_rows;
-                  ?>
-                  <select class="form-select bg-transparent" id="admnaddeguni">
-                    <option value="x">Select Your University</option>
-                    <?php
-                    for ($i = 0; $i < $n_admin_add_field_uni; $i++) {
-                      $d_admin_add_field_uni = $rs_admin_add_field_uni->fetch_assoc();
-                    ?>
-                      <option value="<?= $d_admin_add_field_uni["uni_id"]; ?>"><?= $d_admin_add_field_uni["uni_name"]; ?></option>
-                    <?php
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="col-12 ">
                   <label class="form-label"><span class="text-danger">*</span>Select Degree</label><br>
-                  <small id="admnaddegSM" style="display: none;" class="small">Please Select Degree</small>
+                  <small id="admin_add_field_deg_sm" class="small text-danger d-block"></small>
                   <?php
-                  $rs_admin_add_field_deg = Database::search("SELECT * FROM degree;");
+                  $rs_admin_add_field_deg = Database::search("SELECT * FROM degree INNER JOIN university ON degree.deg_uni_id=university.uni_id;");
                   $n_admin_add_field_deg = $rs_admin_add_field_deg->num_rows;
                   ?>
-                  <select class="form-select bg-transparent" id="admnaddeg">
+                  <select class="form-select bg-transparent" id="admin_add_field_deg">
                     <option value="x">Select Your Degree</option>
                     <?php
                     for ($i = 0; $i < $n_admin_add_field_deg; $i++) {
                       $d_admin_add_field_deg = $rs_admin_add_field_deg->fetch_assoc();
                     ?>
-                      <option value="<?= $d_admin_add_field_deg["deg_id"]; ?>"><?= $d_admin_add_field_deg["degree_name"]; ?></option>
+                      <option value="<?= $d_admin_add_field_deg["deg_id"]; ?>"><?= $d_admin_add_field_deg["degree_name"] . ' - ' . $d_admin_add_field_deg["uni_name"]; ?></option>
                     <?php
                     }
                     ?>
@@ -1669,18 +1714,18 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                 </div>
                 <div class="col-12 ">
                   <label class="form-label"><span class="text-danger">*</span>Field Name</label><br>
-                  <small id="admnadfldSM" style="display: none;" class="small">Please Enter Field Name</small>
-                  <input type="text" class="form-control" placeholder="Type Field Name" id="admnadfld">
+                  <small id="admin_add_field_field_sm" class="small text-danger d-block"></small>
+                  <input type="text" class="form-control" placeholder="Type Field Name" id="admin_add_field_field">
                 </div>
               </div>
             </div>
             <div class="modal-footer">
               <div class="row w-100">
                 <div class="col-6 d-grid">
-                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="adminaddfieldclose();">Close</button>
+                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="admin_add_field_field_close();">Close</button>
                 </div>
                 <div class="col-6 d-grid">
-                  <button type="button" class="btn btn-outline-primary fw-bold" onclick="adminaddfield();">Add</button>
+                  <button type="button" class="btn btn-outline-primary fw-bold" onclick="admin_add_field();">Add</button>
                 </div>
               </div>
             </div>
@@ -1717,7 +1762,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <script src="../assets/libs/flot/jquery.flot.time.js"></script>
       <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
       <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-      <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+      <!-- <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script> -->
       <script src="../dist/js/pages/chart/chart-page-init.js"></script>
       <script src="script.js"></script>
       <!-- newly -->

@@ -937,6 +937,50 @@ function student_reg() {
 }
 
 
+function enter_naita_id(nic) {
+    console.log(nic);
+    var nt_id = document.getElementById('add_nt_id' + nic);
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+
+            if (t != "") {
+                console.log(t);
+                alert(t);
+            }
+
+        }
+    }
+    var f = new FormData();
+    f.append("nic", nic);
+    f.append("nt_id", nt_id.value);
+    r.open("POST", "enter_naita_id_process.php", true);
+    r.send(f);
+}
+
+function update_naita_id(nic) {
+    console.log(nic);
+    var nt_id = document.getElementById('update_nt_id' + nic);
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var t = r.responseText;
+
+            if (t != "") {
+                console.log(t);
+                alert(t);
+            }
+
+        }
+    }
+    var f = new FormData();
+    f.append("nic", nic);
+    f.append("nt_id", nt_id.value);
+    r.open("POST", "update_naita_id_process.php", true);
+    r.send(f);
+}
+
 //=========================================================================================================================
 //-----Contract form upload 
 //==========================================================================================================================
@@ -1022,12 +1066,12 @@ function admin_indi_uni() {
 
 function admin_add_other_degree(elm) {
     console.log(elm.value);
-    var admin_add_degree_other_deg = document.getElementById("admin_add_degree_other_deg");
+    var admin_add_deg_deg_other = document.getElementById("admin_add_deg_deg_other");
 
     if (elm.value == "y") {
-        admin_add_degree_other_deg.style.display='block';
+        admin_add_deg_deg_other.style.display = 'block';
     } else {
-        admin_add_degree_other_deg.style.display = 'none';
+        admin_add_deg_deg_other.style.display = 'none';
     }
 }
 
@@ -1086,20 +1130,389 @@ function select_students_to_assessment() {
     }
 }
 
+//=======================================================================================================
+
+function admin_uni_reg() {
+    let admin_uni_reg_uni_type = document.getElementById('admin_uni_reg_uni_type').value;
+    let admin_uni_reg_uni = document.getElementById('admin_uni_reg_uni').value;
+    let admin_uni_reg_uni_gov = document.getElementById('admin_uni_reg_uni_gov').value;
+    let admin_uni_reg_uni_addr = document.getElementById('admin_uni_reg_uni_addr').value;
+    let admin_uni_reg_uni_email = document.getElementById('admin_uni_reg_uni_email').value;
+    let admin_uni_reg_uni_teli_1 = document.getElementById('admin_uni_reg_uni_teli_1').value;
+    let admin_uni_reg_uni_teli_2 = document.getElementById('admin_uni_reg_uni_teli_2').value;
+    let admin_uni_reg_uni_pass = document.getElementById('admin_uni_reg_uni_pass').value;
+
+    let admin_uni_reg_uni_type_sm = document.getElementById('admin_uni_reg_uni_type_sm');
+    let admin_uni_reg_uni_sm = document.getElementById('admin_uni_reg_uni_sm');
+    let admin_uni_reg_uni_gov_sm = document.getElementById('admin_uni_reg_uni_gov_sm');
+    let admin_uni_reg_uni_addr_sm = document.getElementById('admin_uni_reg_uni_addr_sm');
+    let admin_uni_reg_uni_email_sm = document.getElementById('admin_uni_reg_uni_email_sm');
+    let admin_uni_reg_uni_teli_1_sm = document.getElementById('admin_uni_reg_uni_teli_1_sm');
+    let admin_uni_reg_uni_teli_2_sm = document.getElementById('admin_uni_reg_uni_teli_2_sm');
+    let admin_uni_reg_uni_pass_sm = document.getElementById('admin_uni_reg_uni_pass_sm');
+    let admin_uni_reg_uni_main_sm = document.getElementById('admin_uni_reg_uni_main_sm');
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+
+            if (t == 'Please select university type') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = t;
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please enter university name') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = t;
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please select government or not') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = t;
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please enter university address') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = t;
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please enter university email') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = t;
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please enter telephone no 1') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = t;
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please enter telephone no 2') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = t;
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'Please enter password') {
+                admin_uni_reg_uni_main_sm.innerHTML = '';
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = t;
+            } else if (t == 'This university already registered') {
+                admin_uni_reg_uni_main_sm.classList.add('text-danger', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
+                admin_uni_reg_uni_main_sm.innerHTML = t;
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            } else if (t == 'success') {
+                admin_uni_reg_uni_main_sm.classList.add('text-success', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
+                admin_uni_reg_uni_main_sm.innerHTML = t;
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+                location.reload();
+            } else {
+                admin_uni_reg_uni_main_sm.classList = ['text-danger', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block'];
+                admin_uni_reg_uni_main_sm.innerHTML = t;
+                admin_uni_reg_uni_type_sm.innerHTML = '';
+                admin_uni_reg_uni_sm.innerHTML = '';
+                admin_uni_reg_uni_gov_sm.innerHTML = '';
+                admin_uni_reg_uni_addr_sm.innerHTML = '';
+                admin_uni_reg_uni_email_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_1_sm.innerHTML = '';
+                admin_uni_reg_uni_teli_2_sm.innerHTML = '';
+                admin_uni_reg_uni_pass_sm.innerHTML = '';
+            }
+
+        }
+    }
+    var f = new FormData();
+    f.append('admin_uni_reg_uni_type', admin_uni_reg_uni_type);
+    f.append('admin_uni_reg_uni', admin_uni_reg_uni);
+    f.append('admin_uni_reg_uni_gov', admin_uni_reg_uni_gov);
+    f.append('admin_uni_reg_uni_addr', admin_uni_reg_uni_addr);
+    f.append('admin_uni_reg_uni_email', admin_uni_reg_uni_email);
+    f.append('admin_uni_reg_uni_teli_1', admin_uni_reg_uni_teli_1);
+    f.append('admin_uni_reg_uni_teli_2', admin_uni_reg_uni_teli_2);
+    f.append('admin_uni_reg_uni_pass', admin_uni_reg_uni_pass);
+    r.open("POST", "admin_uni_reg_process.php", true);
+    r.send(f);
 
 
+}
+
+function admin_uni_reg_close() {
+    admin_uni_reg_uni_main_sm.classList = ['text-danger', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block'];
+    document.getElementById('admin_uni_reg_uni_type').value = '';
+    document.getElementById('admin_uni_reg_uni').value = '';
+    document.getElementById('admin_uni_reg_uni_gov').value = '';
+    document.getElementById('admin_uni_reg_uni_addr').value = '';
+    document.getElementById('admin_uni_reg_uni_email').value = '';
+    document.getElementById('admin_uni_reg_uni_teli_1').value = '';
+    document.getElementById('admin_uni_reg_uni_teli_2').value = '';
+    document.getElementById('admin_uni_reg_uni_pass').value = '';
+}
+
+function admin_add_deg() {
+    console.log('admin_add_deg');
+    let admin_add_deg_uni = document.getElementById('admin_add_deg_uni');
+    let admin_add_deg_deg = document.getElementById('admin_add_deg_deg');
+    let admin_add_deg_deg_other = document.getElementById('admin_add_deg_deg_other');
+
+    let admin_add_deg_main = document.getElementById('admin_add_deg_main');
+    let admin_add_deg_uni_sm = document.getElementById('admin_add_deg_uni_sm');
+    let admin_add_deg_deg_sm = document.getElementById('admin_add_deg_deg_sm');
+    let admin_add_deg_deg_other_sm = document.getElementById('admin_add_deg_deg_other_sm');
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            if (t == 'Please select university') {
+                admin_add_deg_main.innerHTML = '';
+                admin_add_deg_uni_sm.innerHTML = t;
+                admin_add_deg_deg_sm.innerHTML = '';
+                admin_add_deg_deg_other_sm.innerHTML = '';
+            } else if (t == 'Please select degree') {
+                admin_add_deg_main.innerHTML = '';
+                admin_add_deg_uni_sm.innerHTML = '';
+                admin_add_deg_deg_sm.innerHTML = t;
+                admin_add_deg_deg_other_sm.innerHTML = '';
+            } else if (t == 'Please enter other degree') {
+                admin_add_deg_main.innerHTML = '';
+                admin_add_deg_uni_sm.innerHTML = '';
+                admin_add_deg_deg_sm.innerHTML = '';
+                admin_add_deg_deg_other_sm.innerHTML = t;
+            } else if (t == 'success') {
+                admin_add_deg_main.classList.add('text-success', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
+                admin_add_deg_main.innerHTML = t;
+                admin_add_deg_uni_sm.innerHTML = '';
+                admin_add_deg_deg_sm.innerHTML = '';
+                admin_add_deg_deg_other_sm.innerHTML = '';
+                location.reload();
+            } else if (t == 'This degree already have') {
+                admin_add_deg_main.classList.add('text-danger', 'fs-4', 'text-center', 'mt-2');
+                admin_add_deg_main.innerHTML = t;
+                admin_add_deg_uni_sm.innerHTML = '';
+                admin_add_deg_deg_sm.innerHTML = '';
+                admin_add_deg_deg_other_sm.innerHTML = '';
+            } else {
+                admin_add_deg_main.classList.add('text-danger', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
+                admin_add_deg_main.innerHTML = t;
+                admin_add_deg_uni_sm.innerHTML = '';
+                admin_add_deg_deg_sm.innerHTML = '';
+                admin_add_deg_deg_other_sm.innerHTML = '';
+            }
+        }
+    }
+    var f = new FormData();
+    f.append('admin_add_deg_uni', admin_add_deg_uni.value);
+    f.append('admin_add_deg_deg', admin_add_deg_deg.value);
+    f.append('admin_add_deg_deg_other', admin_add_deg_deg_other.value);
+    r.open("POST", "admin_add_deg_process.php", true);
+    r.send(f);
+}
+
+function admin_add_deg_uni_close() {
+    console.log('admin_add_deg_uni_close');
+    document.getElementById('admin_add_deg_main').value = '';
+    document.getElementById('admin_add_deg_uni').value = 'x';
+    document.getElementById('admin_add_deg_deg').value = 'x';
+    document.getElementById('admin_add_deg_deg_other').value = '';
+}
+
+function admin_add_field() {
+    console.log('admin_add_field');
+    let admin_add_field_deg = document.getElementById('admin_add_field_deg');
+    let admin_add_field_field = document.getElementById('admin_add_field_field');
+
+    let admin_add_field_main = document.getElementById('admin_add_field_main');
+    let admin_add_field_deg_sm = document.getElementById('admin_add_field_deg_sm');
+    let admin_add_field_field_sm = document.getElementById('admin_add_field_field_sm');
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            if (t == 'Please select Degree') {
+                admin_add_field_main.innerHTML = '';
+                admin_add_field_deg_sm.innerHTML = t;
+                admin_add_field_field_sm.innerHTML = '';
+            } else if (t == 'Please enter field') {
+                admin_add_field_main.innerHTML = '';
+                admin_add_field_deg_sm.innerHTML = '';
+                admin_add_field_field_sm.innerHTML = t;
+            } else if (t == 'success') {
+                admin_add_field_main.classList.add('text-success', 'text-center', 'mt-2');
+                admin_add_field_main.innerHTML = t;
+                admin_add_field_deg_sm.innerHTML = '';
+                admin_add_field_field_sm.innerHTML = '';
+            } else if (t == 'This field already registered') {
+                admin_add_field_main.classList.add('text-danger', 'text-center', 'mt-2');
+                admin_add_field_main.innerHTML = t;
+                admin_add_field_deg_sm.innerHTML = '';
+                admin_add_field_field_sm.innerHTML = '';
+            } else {
+                admin_add_field_main.classList.add('text-danger', 'text-center', 'mt-2');
+                admin_add_field_main.innerHTML = t;
+                admin_add_field_deg_sm.innerHTML = '';
+                admin_add_field_field_sm.innerHTML = '';
+            }
+        }
+    }
+    var f = new FormData();
+    f.append('admin_add_field_deg', admin_add_field_deg.value);
+    f.append('admin_add_field_field', admin_add_field_field.value);
+    r.open("POST", "admin_add_field_process.php", true);
+    r.send(f);
+}
+
+//========================================Assesments=======================================================================
+
+function admin_assessment_sort() {
+    var admin_assessment_sort_srch = document.getElementById('admin_assessment_sort_srch');
+    var admin_assessment_sort_preabs = document.getElementById('admin_assessment_sort_preabs');
+    var admin_assessment_sort_psfl = document.getElementById('admin_assessment_sort_psfl');
+    var admin_assessment_sort_from = document.getElementById('admin_assessment_sort_from');
+    var admin_assessment_sort_to = document.getElementById('admin_assessment_sort_to');
+    console.log('admin_assessment_sort');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            document.getElementById('admin_assessment_sort_table').innerHTML = t;
+        }
+    }
+    var f = new FormData();
+    f.append('admin_assessment_sort_srch', admin_assessment_sort_srch.value);
+    f.append('admin_assessment_sort_preabs', admin_assessment_sort_preabs.value);
+    f.append('admin_assessment_sort_psfl', admin_assessment_sort_psfl.value);
+    f.append('admin_assessment_sort_from', admin_assessment_sort_from.value);
+    f.append('admin_assessment_sort_to', admin_assessment_sort_to.value);
+    r.open("POST", "admin_assessment_sort_process.php", true);
+    r.send(f);
+}
+
+function assessment_create() {
+    console.log('assessment_create');
+    var count = 0;
+    var rows = document.querySelectorAll('table[id=tb_create_assesmnt] tr[id=ca_td]');
+    var createassesmnt_date = document.getElementById('createassesmnt_date');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            document.getElementById('createassesmnt_main').innerHTML = t;
+            if (t == 'success') {
+                location.reload();
+            }
+        }
+    }
+    var f = new FormData();
+    console.log(rows.length);
+    for (let index = 0; index < rows.length; index++) {
+        var checkbox = rows[index].getElementsByTagName('input')[0];
+        console.log(checkbox.checked);
+
+        if (checkbox.checked) {
+            var nt_id = rows[index].getElementsByTagName("td")[2];
+            f.append("nt_id" + index, nt_id.innerHTML);
+        }
+        count++;
+    }
+    f.append('count', count);
+    f.append('createassesmnt_date', createassesmnt_date.value);
+    r.open("POST", "assessment_create_process.php", true);
+    r.send(f);
+
+}
+
+function assessment_checked(nt_id) {
+    // console.log('assessment_checked');
+
+    // let td = document.querySelectorAll('table[id=assessment_table] tbody tr td[id=nt]');
+    // let nt_id = td[1].innerHTML;
+    let td2 = document.querySelectorAll('table[id=assessment_table] tbody tr td select[id=assess_select_pass' + nt_id + ']');
+    let pass = td2[0].value;
+    let td3 = document.querySelectorAll('table[id=assessment_table] tbody tr td select[id=assess_select_present' + nt_id + ']');
+    let Present = td3[0].value;
+    // console.log(td3[0].value);
 
 
+    // td.forEach((element) => {
+    //     let pass = element.querySelector('select[id=assess_select_pass]');
+    //     console.log(pass.value);
+    //   });
 
-
-
-
-
-
-
-
-
-
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            alert(t);
+        }
+    }
+    var f = new FormData();
+    f.append("nt_id", nt_id);
+    f.append("pass", pass);
+    f.append("Present", Present);
+    r.open('POST', 'assessment_checked_proccess.php', true);
+    r.send(f);
+}
 
 
 

@@ -53,16 +53,24 @@ $tbn = $rstbl->num_rows;
                                 ?> alert-info <?php
                                             } else {
                                                 ?> alert-danger <?php
-                                                                } ?>">
+                                                            } ?>">
                         <td><?= $tbd["st_id"]; ?></td>
-                        <td><?php if ($tbd["naita_id"] == "") {
-                            ?> <button onclick="addNaitaId('<?= $tbd['first_name']; ?>','<?= $tbd['st_id']; ?>');" class="btn btn-outline-primary fw-bold">Enter NAITA Id</button> <?php
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    ?>
-                                <input type="text" class="form-control" value="<?= $tbd["naita_id"]; ?>">
-                                <button class="btn btn-outline-danger fw-bold">Update</button>
+                        <td>
+                            <?php if ($tbd["naita_id"] == "") {
+                            ?>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Recipient's username" id="add_nt_id<?= $tbd['nic']; ?>">
+                                    <button class="btn btn-outline-primary fw-bold input-group-btn" onclick="enter_naita_id(<?= $tbd['nic']; ?>);">Enter</button>
+                                </div>
                             <?php
-                                                                                                                                                                                }  ?>
+                            } else {
+                            ?>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Recipient's username" id="update_nt_id<?= $tbd['nic']; ?>" value="<?= $tbd["naita_id"]; ?>">
+                                    <button class="btn btn-outline-danger fw-bold input-group-btn" onclick="update_naita_id(<?= $tbd['nic']; ?>);">Update</button>
+                                </div>
+                            <?php
+                            }  ?>
                         </td>
                         <td><?= $tbd["first_name"]; ?></td>
                         <td><?= $tbd["last_name"]; ?></td>
