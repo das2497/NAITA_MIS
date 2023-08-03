@@ -111,19 +111,18 @@ CREATE TABLE `assessment` (
   `participation_parti_id` int NOT NULL,
   `periods_period_id` int NOT NULL,
   `student_st_id` int NOT NULL,
-  `as_done` varchar(50) NOT NULL DEFAULT '',
+  `as_done` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`as_id`),
   KEY `fk_assessment_inspector1_idx` (`inspector_ins_id`),
   KEY `fk_assessment_as_status1_idx` (`as_status_asstat_id`),
   KEY `fk_assessment_participation1_idx` (`participation_parti_id`),
   KEY `fk_assessment_periods1_idx` (`periods_period_id`),
-  KEY `fk_assessment_student1_idx` (`student_st_id`),
+  KEY `fk_assessment_student1_idx` (`student_st_id`) USING BTREE,
   CONSTRAINT `fk_assessment_as_status1` FOREIGN KEY (`as_status_asstat_id`) REFERENCES `as_status` (`asstat_id`),
   CONSTRAINT `fk_assessment_inspector1` FOREIGN KEY (`inspector_ins_id`) REFERENCES `inspector` (`ins_id`),
   CONSTRAINT `fk_assessment_participation1` FOREIGN KEY (`participation_parti_id`) REFERENCES `participation` (`parti_id`),
-  CONSTRAINT `fk_assessment_periods1` FOREIGN KEY (`periods_period_id`) REFERENCES `periods` (`period_id`),
-  CONSTRAINT `fk_assessment_student1` FOREIGN KEY (`student_st_id`) REFERENCES `student` (`st_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_assessment_periods1` FOREIGN KEY (`periods_period_id`) REFERENCES `periods` (`period_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +131,7 @@ CREATE TABLE `assessment` (
 
 LOCK TABLES `assessment` WRITE;
 /*!40000 ALTER TABLE `assessment` DISABLE KEYS */;
-INSERT INTO `assessment` VALUES (1,'2023-06-24',1,3,1,1,1,'1');
+INSERT INTO `assessment` VALUES (2,'2023-08-04',1,1,1,1,6,'0'),(5,'2023-07-26',1,1,1,1,7,'0'),(6,'2023-08-05',1,1,1,1,1,'0'),(7,'2023-08-05',1,3,1,1,5,'0');
 /*!40000 ALTER TABLE `assessment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +146,7 @@ CREATE TABLE `contract` (
   `id` int NOT NULL AUTO_INCREMENT,
   `path` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +155,7 @@ CREATE TABLE `contract` (
 
 LOCK TABLES `contract` WRITE;
 /*!40000 ALTER TABLE `contract` DISABLE KEYS */;
-INSERT INTO `contract` VALUES (1,'traineecontract/6493ff923104bE1946042LitReview.pdf');
+INSERT INTO `contract` VALUES (2,'traineecontract/64a7ba1a7a438Invoice # 286 (3).pdf');
 /*!40000 ALTER TABLE `contract` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +173,7 @@ CREATE TABLE `degree` (
   PRIMARY KEY (`deg_id`),
   KEY `FK_degree_university` (`deg_uni_id`),
   CONSTRAINT `FK_degree_university` FOREIGN KEY (`deg_uni_id`) REFERENCES `university` (`uni_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +224,7 @@ CREATE TABLE `field` (
   PRIMARY KEY (`fld_id`),
   KEY `FK_field_degree` (`fld_deg_id`),
   CONSTRAINT `FK_field_degree` FOREIGN KEY (`fld_deg_id`) REFERENCES `degree` (`deg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -539,7 +538,7 @@ CREATE TABLE `participation` (
   `parti_id` int NOT NULL AUTO_INCREMENT,
   `parti_stat` varchar(45) NOT NULL,
   PRIMARY KEY (`parti_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,7 +547,7 @@ CREATE TABLE `participation` (
 
 LOCK TABLES `participation` WRITE;
 /*!40000 ALTER TABLE `participation` DISABLE KEYS */;
-INSERT INTO `participation` VALUES (1,'Present'),(2,'Absent');
+INSERT INTO `participation` VALUES (1,'Present'),(2,'Absent'),(3,'none');
 /*!40000 ALTER TABLE `participation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -639,7 +638,7 @@ CREATE TABLE `student` (
   KEY `fk_student_field1_idx` (`field_fld_id`),
   CONSTRAINT `fk_student_field1` FOREIGN KEY (`field_fld_id`) REFERENCES `field` (`fld_id`),
   CONSTRAINT `fk_student_gender` FOREIGN KEY (`gender_gn_id`) REFERENCES `gender` (`gn_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -648,7 +647,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'2222','wwwww','aaaa','wwwww','dddddd','555','ttttt','56655','7777','gggg','0000','2023-06-21',1,1),(5,NULL,'Dhanushka','Sandagiri','Dhanushka','Sandagiri','8888','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-06-24',1,1),(6,NULL,'Dhanushka','Sandagiri','Dhanushka','Sandagiri','971153733','751,Nungamuwa,Pallewela','+94774771042','077200382','danushkasandagiri@gmail.com','0000','2023-06-26',1,2);
+INSERT INTO `student` VALUES (1,'2222','wwwww','aaaa','wwwww','dddddd','555','ttttt','56655','7777','gggg','0000','2023-06-21',1,1),(5,'2223','Dhanushka','Sandagiri','Dhanushka','Sandagiri','8888','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-06-24',1,1),(6,'2224','Dhanushka','Sandagiri','Dhanushka','Sandagiri','971153733','751,Nungamuwa,Pallewela','+94774771042','077200382','danushkasandagiri@gmail.com','0000','2023-06-26',1,2),(7,'2225','Kasun','Harsha','Kasun Harsha kumara','k.p. Kasun Harsha kumara','971153555','no 7, nittambuwa.','0774771042','0332296678','kasun87@gmail.com','0000','2023-07-07',1,2);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -676,7 +675,7 @@ CREATE TABLE `training_establishment` (
   CONSTRAINT `FK_training_establishment_periods` FOREIGN KEY (`tran_perion`) REFERENCES `periods` (`period_id`),
   CONSTRAINT `fk_training_establishment_student1` FOREIGN KEY (`tran_est_st_id`) REFERENCES `student` (`st_id`),
   CONSTRAINT `fk_training_establishment_worksite1` FOREIGN KEY (`worksite_wrksit_id`) REFERENCES `worksite` (`wrksit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -685,7 +684,7 @@ CREATE TABLE `training_establishment` (
 
 LOCK TABLES `training_establishment` WRITE;
 /*!40000 ALTER TABLE `training_establishment` DISABLE KEYS */;
-INSERT INTO `training_establishment` VALUES (2,'2023-05-16','2023-11-16',1,1,1,1);
+INSERT INTO `training_establishment` VALUES (2,'2023-05-16','2023-11-16',1,1,1,1),(3,'2023-07-23','2023-12-23',5,1,1,1),(4,'2023-07-23','2023-12-23',6,1,1,1),(5,'2023-07-24','2023-12-24',7,1,1,1);
 /*!40000 ALTER TABLE `training_establishment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -756,18 +755,18 @@ DROP TABLE IF EXISTS `university`;
 CREATE TABLE `university` (
   `uni_id` int NOT NULL AUTO_INCREMENT,
   `uni_name` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `uni_email` varchar(50) DEFAULT NULL,
-  `uni_contact_1` varchar(50) DEFAULT NULL,
+  `uni_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `uni_contact_1` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `uni_contact_2` varchar(50) DEFAULT NULL,
   `uni_type_uni_typ_id` int NOT NULL,
   `gov_status_govstat_id` int NOT NULL,
-  `uni_pass` int DEFAULT NULL,
+  `uni_pass` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`uni_id`),
   KEY `fk_university_uni_type1_idx` (`uni_type_uni_typ_id`),
   KEY `fk_university_gov_status1_idx` (`gov_status_govstat_id`),
   CONSTRAINT `fk_university_gov_status1` FOREIGN KEY (`gov_status_govstat_id`) REFERENCES `gov_status` (`govstat_id`),
   CONSTRAINT `fk_university_uni_type1` FOREIGN KEY (`uni_type_uni_typ_id`) REFERENCES `uni_type` (`uni_typ_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -776,7 +775,7 @@ CREATE TABLE `university` (
 
 LOCK TABLES `university` WRITE;
 /*!40000 ALTER TABLE `university` DISABLE KEYS */;
-INSERT INTO `university` VALUES (81,'University of Colombo',NULL,NULL,NULL,1,1,NULL),(82,'University of Peradeniya',NULL,NULL,NULL,1,1,NULL),(83,'University of Moratuwa',NULL,NULL,NULL,1,1,NULL),(84,'University of Kelaniya',NULL,NULL,NULL,1,1,NULL),(85,'University of Sri Jayewardenepura',NULL,NULL,NULL,1,1,NULL),(86,'University of Ruhuna',NULL,NULL,NULL,1,1,NULL),(87,'University of Jaffna',NULL,NULL,NULL,1,1,NULL),(88,'Eastern University, Sri Lanka',NULL,NULL,NULL,1,1,NULL),(89,'South Eastern University of Sri Lanka',NULL,NULL,NULL,1,1,NULL),(90,'Uva Wellassa University',NULL,NULL,NULL,1,1,NULL),(91,'Wayamba University of Sri Lanka',NULL,NULL,NULL,1,1,NULL),(92,'Sabaragamuwa University of Sri Lanka',NULL,NULL,NULL,1,1,NULL),(93,'Rajarata University of Sri Lanka',NULL,NULL,NULL,1,1,NULL),(94,'Open University of Sri Lanka',NULL,NULL,NULL,1,1,NULL),(95,'SLIIT',NULL,NULL,NULL,1,3,NULL),(96,'National Institute of Education',NULL,NULL,NULL,2,1,NULL),(97,'SLIATE',NULL,NULL,NULL,2,1,NULL),(98,'General Sir John Kotelawala Defence University',NULL,NULL,NULL,1,1,NULL),(99,'KDU University',NULL,NULL,NULL,1,1,NULL),(100,'University of the Visual and Performing Arts',NULL,NULL,NULL,1,1,NULL);
+INSERT INTO `university` VALUES (81,'University of Colombo','kkk','777','77777',1,1,'0000'),(84,'University of Kelaniya','kkkkkk','77','7777',1,1,'0000');
 /*!40000 ALTER TABLE `university` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -825,4 +824,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-30 17:23:40
+-- Dump completed on 2023-08-03 14:46:59
