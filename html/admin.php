@@ -850,35 +850,39 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               <div class="row">
                 <div class="col-12 mt-4">
                   <div class="row g-2">
-                    <div class="col-12 col-lg-2 offset-lg-0 d-grid mb-3">
-                      <button class="btn btn-outline-primary fw-bold shadow">Export data as a excel</button>
-                    </div>
-                    <div class="col-12 col-lg-2 offset-lg-8 d-grid mb-3">
-                      <button class="btn btn-outline-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#create_assessment">Create Assessment</button>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                      <input type="text" class="form-control" placeholder="Search" id="admin_assessment_sort_srch" onkeyup="admin_assessment_sort();">
-                    </div>
-                    <div class="col-12 col-lg-3">
-                      <select class="form-select" onchange="admin_assessment_sort();" id="admin_assessment_sort_preabs">
-                        <option value="x">Select present or absent</option>
-                        <option value="1">Present</option>
-                        <option value="2">Absent</option>
-                      </select>
-                    </div>
-                    <div class="col-12 col-lg-3">
-                      <select class="form-select" onchange="admin_assessment_sort();" id="admin_assessment_sort_psfl">
-                        <option value="x">Select Pass or Fail</option>
-                        <option value="1">Pass</option>
-                        <option value="2">Fail</option>
-                        <option value="3">pending</option>
-                      </select>
-                    </div>
-                    <div class="col-12 col-lg-3"><label class="form-label">from</label>
-                      <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_from">
-                    </div>
-                    <div class="col-12 col-lg-3"><label class="form-label">to</label>
-                      <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_to">
+                    <div class="col-12">
+                      <form class="row" action="admin_assessment_data_export.php" method="POST">
+                        <div class="col-12 col-lg-2 offset-lg-0 d-grid mb-3">
+                          <button class="btn btn-outline-primary fw-bold shadow" type="submit">Export data as a excel</button>
+                        </div>
+                        <div class="col-12 col-lg-2 offset-lg-8 d-grid mb-3">
+                          <button class="btn btn-outline-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#create_assessment" type="button">Create Assessment</button>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                          <input type="text" class="form-control" placeholder="Search" id="admin_assessment_sort_srch" name="admin_assessment_sort_srch" onkeyup="admin_assessment_sort();">
+                        </div>
+                        <div class="col-12 col-lg-3">
+                          <select class="form-select" onchange="admin_assessment_sort();" id="admin_assessment_sort_preabs" name="admin_assessment_sort_preabs">
+                            <option value="x">Select present or absent</option>
+                            <option value="1">Present</option>
+                            <option value="2">Absent</option>
+                          </select>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                          <select class="form-select" onchange="admin_assessment_sort();" id="admin_assessment_sort_psfl" name="admin_assessment_sort_psfl">
+                            <option value="x">Select Pass or Fail</option>
+                            <option value="1">Pass</option>
+                            <option value="2">Fail</option>
+                            <option value="3">pending</option>
+                          </select>
+                        </div>
+                        <div class="col-12 col-lg-3"><label class="form-label">from</label>
+                          <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_from" name="admin_assessment_sort_from">
+                        </div>
+                        <div class="col-12 col-lg-3"><label class="form-label">to</label>
+                          <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_to" name="admin_assessment_sort_to">
+                        </div>
+                      </form>
                     </div>
                     <div class="col-12 col-lg-3 d-grid"><label class="form-label"></label>
                       <button class="btn btn-outline-primary fw-bold" onclick="admin_assessment_sort();">Search</button>

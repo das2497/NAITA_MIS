@@ -1,3 +1,20 @@
+//====================================================================================================================================
+//-------------------------STUDENT FUNCTIONS-------------------------------------------------------------------------------------------
+//====================================================================================================================================
+
+function st_dashboard() {
+    document.getElementById('st_dashboard').style.display = 'block';
+    document.getElementById('st_my_details').style.display = 'none';
+}
+
+function st_my_details() {
+    document.getElementById('st_dashboard').style.display = 'none';
+    document.getElementById('st_my_details').style.display = 'block';
+}
+
+//====================================================================================================================================
+//-------------------------ADIMIN FUNCTIONS-------------------------------------------------------------------------------------------
+//====================================================================================================================================
 
 function dashb() {
     document.getElementById('dsbrd').style.display = 'block';
@@ -135,12 +152,18 @@ function login() {
                 passSM.innerHTML = t;
                 passSM.style.display = "block";
                 loginSM.style.display = "none";
-            } else if (t == "Success") {
+            } else if (t == "1") {
                 unameSM.style.display = "none";
                 passSM.style.display = "none";
                 loginSM.innerHTML = t;
                 loginSM.style.display = "block";
                 window.location = "admin.php";
+            } else if (t == "2") {
+                unameSM.style.display = "none";
+                passSM.style.display = "none";
+                loginSM.innerHTML = t;
+                loginSM.style.display = "block";
+                window.location = "student_account.php";
             } else {
                 unameSM.style.display = "none";
                 passSM.style.display = "none";
