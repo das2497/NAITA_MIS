@@ -81,12 +81,14 @@ $inspector = $rsins->fetch_assoc();
             </thead>
             <tbody>
                 <?php
+                require 'monitoringValidation.php';
 
                 for ($i = 0; $i < $nsm; $i++) {
                     $tbd = $rsm->fetch_assoc();
 
-                    require 'monitoringValidation.php';
-                    $x = MonitoringValidation::x($tbd['st_id']);
+                    $x = MonitValidation::x($tbd['st_id']);
+
+                    // echo $x;
 
                     if ($x == 0) {
 

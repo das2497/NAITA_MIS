@@ -12,6 +12,38 @@ function st_my_details() {
     document.getElementById('st_my_details').style.display = 'block';
 }
 
+function student_prfile_update(st_id) {
+    console.log('student_prfile_update');
+    let st_prof_first_name = document.getElementById('st_prof_first_name');
+    let st_prof_last_name = document.getElementById('st_prof_last_name');
+    let st_prof_full_name_with_init = document.getElementById('st_prof_full_name_with_init');
+    let st_prof_full_name = document.getElementById('st_prof_full_name');
+    let st_prof_address = document.getElementById('st_prof_address');
+
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            if (t == 'success') {
+                location.reload();
+            }
+        }
+    }
+
+    var f = new FormData();
+    f.append("st_id", st_id);
+    f.append("st_prof_first_name", st_prof_first_name.value);
+    f.append("st_prof_last_name", st_prof_last_name.value);
+    f.append("st_prof_full_name_with_init", st_prof_full_name_with_init.value);
+    f.append("st_prof_full_name", st_prof_full_name.value);
+    f.append("st_prof_address", st_prof_address.value);
+
+    r.open("POST", "student_prfile_update_proccess.php", true);
+    r.send(f);
+}
+
 //====================================================================================================================================
 //-------------------------ADIMIN FUNCTIONS-------------------------------------------------------------------------------------------
 //====================================================================================================================================
@@ -622,7 +654,7 @@ function std_Back_to_select_admin() {
     document.getElementById("selctBody").style.display = 'block';
 }
 
-function student_reg() {
+function admin_student_reg() {
     var ad_st_main_SM = document.getElementById("ad_st_main_SM");
     var ad_st_FName = document.getElementById("ad_st_FName");
     var ad_st_FName_SM = document.getElementById("ad_st_FName_SM");
@@ -1126,17 +1158,17 @@ function select_students_to_assessment() {
         createassesmnt_batch.setAttribute('disabled', true);
     }
     if (createassesmnt_batch.value != 'x') {
-        createassesmnt_field.removeAttribute('disabled');
-    } else {
-        createassesmnt_field.setAttribute('disabled', true);
-    }
-    if (createassesmnt_field.value != 'x') {
         createassesmnt_degre.removeAttribute('disabled');
     } else {
         createassesmnt_degre.setAttribute('disabled', true);
     }
-
     if (createassesmnt_degre.value != 'x') {
+        createassesmnt_field.removeAttribute('disabled');
+    } else {
+        createassesmnt_field.setAttribute('disabled', true);
+    }
+
+    if (createassesmnt_field.value != 'x') {
         createassesmnt_button.removeAttribute('disabled');
         var r = new XMLHttpRequest();
         r.onreadystatechange = function () {
@@ -1538,9 +1570,39 @@ function assessment_checked(nt_id) {
 }
 
 
+function admin_add_inspector() {
+    console.log('admin_add_inspector');
+    let admin_add_inspector = document.getElementById('admin_add_inspector');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            alert(t);
+        }
+    }
+    var f = new FormData();
+    f.append("admin_add_inspector", admin_add_inspector.value);
+    r.open('POST', 'admin_add_inspector_proccess.php', true);
+    r.send(f);
+}
+
+function admin_add_inspector_close() {
+    console.log('admin_add_inspector_close');
+    document.getElementById('admin_add_inspector').value = 'x';
+}
 
 
-
+function st_trn_worksite() {
+    let st_trn_worksite = document.getElementById('st_trn_worksite');
+    let st_other_worksite = document.getElementById('st_other_worksite');
+    console.log(st_trn_worksite.value);
+    if (st_trn_worksite.value=='z') {
+        st_other_worksite.style.display='block';
+    } else {
+        st_other_worksite.style.display='none';        
+    }
+}
 
 
 

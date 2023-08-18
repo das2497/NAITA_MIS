@@ -1,7 +1,7 @@
 <?php
 // require 'connection.php';
 
-class MonitoringValidation
+class MonitValidation
 {
 
     public static function x($st_id)

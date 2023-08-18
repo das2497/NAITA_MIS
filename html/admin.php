@@ -567,16 +567,16 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             <div class="col-12 " id="stdnt" style="display: none;">
               <h1 class="text-decoration-underline text-center border border-2 border-primary  p-2 rounded my-2 text-uppercase fw-bold">Students</h1>
               <div class="row">
-                <div class="col-10 offset-1 col-lg-2 offset-lg-0">
+                <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
                   <input class="d-none" type="file" accept="pdf/*" id="addcontract" />
                   <label for="addcontract" onclick="selctcontract();" class="btn btn-outline-primary  fw-bold shadow m-2">Select Contract Form
                     <small id="viewM" class="text-warning"></small>
                   </label>
                 </div>
-                <div class="col-10 offset-1 col-lg-2 offset-lg-0">
+                <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
                   <button class="btn btn-outline-primary  fw-bold shadow m-2" onclick="upload_contract();">Upload Contract Form</button>
                 </div>
-                <div class="col-10 offset-1 col-lg-2 offset-lg-6 ">
+                <div class="col-12 offset-0 col-lg-2 offset-lg-6 d-grid">
                   <button class="btn btn-outline-primary  fw-bold shadow m-2" data-bs-toggle="modal" data-bs-target="#add_student">Add New Student</button>
                 </div>
                 <div class="col-12">
@@ -851,7 +851,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                 <div class="col-12 mt-4">
                   <div class="row g-2">
                     <div class="col-12">
-                      <form class="row" action="admin_assessment_data_export.php" method="POST">
+                      <form class="row g-2" action="admin_assessment_data_export.php" method="POST">
                         <div class="col-12 col-lg-2 offset-lg-0 d-grid mb-3">
                           <button class="btn btn-outline-primary fw-bold shadow" type="submit">Export data as a excel</button>
                         </div>
@@ -880,17 +880,18 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                           <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_from" name="admin_assessment_sort_from">
                         </div>
                         <div class="col-12 col-lg-3"><label class="form-label">to</label>
-                          <input type="date" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_to" name="admin_assessment_sort_to">
+                          <input type="date" placeholder="kkkkkk" class="form-control" onclick="admin_assessment_sort();" id="admin_assessment_sort_to" name="admin_assessment_sort_to">
+                        </div>
+                        <div class="col-12 col-lg-3 d-grid"><label class="form-label"></label>
+                          <button class="btn btn-outline-primary fw-bold" onclick="admin_assessment_sort();" type="button">Search</button>
                         </div>
                       </form>
                     </div>
-                    <div class="col-12 col-lg-3 d-grid"><label class="form-label"></label>
-                      <button class="btn btn-outline-primary fw-bold" onclick="admin_assessment_sort();">Search</button>
-                    </div>
+
                   </div>
                 </div>
                 <div class="col-12 table-responsive shadow mt-4" id="admin_assessment_sort_table">
-                  <h4>Assessment Faced Training Students</h4>
+                  <h4>All Assessment Selected and faced Students</h4>
                   <table class=" table table-striped  " id="assessment_table">
                     <thead>
                       <tr>
@@ -972,7 +973,9 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             </select>
                           </td>
                           <td>
-                            <div class="col d-grid"><button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Checked</button></div>
+                            <div class="col d-grid">
+                              <button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Submit</button>
+                            </div>
                           </td>
                         </tr>
                       <?php
@@ -1005,34 +1008,14 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                   <div class="col-12">
                     <div class="row">
                       <div class="col-12 col-lg-4 d-grid">
-                        <select class="form-select select2 shadow-none fw-bold" id="addinsselct">
-                          <option value="0">Select inspector</option>
-                          <?php
-                          $rsinsadd = Database::search("SELECT * FROM admin");
-                          //  WHERE ad_admin_typ_id='2';
-                          $ninsadd = $rsinsadd->num_rows;
-                          for ($i = 0; $i < $ninsadd; $i++) {
-                            $dinsadd = $rsinsadd->fetch_assoc();
-
-                            $rsin = Database::search("SELECT * FROM inspector 
-                          INNER JOIN admin ON inspector.admin_ad_id=admin.ad_id WHERE admin_ad_id='" . $dinsadd["ad_id"] . "';");
-                            $tbnin = $rsin->num_rows;
-                            if ($tbnin == 0) {
-                          ?>
-                              <option value="<?= $dinsadd["ad_id"] ?>"><?= $dinsadd["name"] ?></option>
-                          <?php
-
-                            }
-                          }
-                          ?>
-                        </select>
+                        <button class="btn btn-outline-primary fw-bold shadow mt-lg-0 mt-2" data-bs-toggle="modal" data-bs-target="#add_inspector" type="button">Add Inspector</button>
                       </div>
                       <div class="col-12 col-lg-4 d-grid">
-                        <button class="btn btn-outline-primary fw-bold shadow mt-lg-0 mt-2" onclick="addinspectors();">Add To Inspectors</button>
+                        <button class="btn btn-outline-primary fw-bold shadow mt-lg-0 mt-2" data-bs-toggle="modal" data-bs-target="#add_admin" type="button">Add Admin</button>
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-lg-4">
+                  <div class="col-12 mt-2">
                     <h4>Inspectors</h4>
 
                     <?php
@@ -1048,6 +1031,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Name</th>
+                          <th scope="col">NIC</th>
+                          <th scope="col">Admin Type</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1060,6 +1045,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                           <tr onclick="INSselctST('<?= $tbd2['ins_id']; ?>');" id="<?= $tbd2['ad_nic']; ?>" class="clickable">
                             <td><?= $tbd2["ins_id"]; ?></td>
                             <td><?= $tbd2["name"]; ?></td>
+                            <td><?= $tbd2["ad_nic"]; ?></td>
+                            <td><?= $tbd2["admn_typ"]; ?></td>
                           </tr>
 
                         <?php
@@ -1367,7 +1354,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                   <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="adminadddegreeclose();">Close</button>
                 </div>
                 <div class="col-6 d-grid">
-                  <button class="btn btn-outline-primary fw-bold fs-4 " onclick="student_reg();">Register now</button>
+                  <button class="btn btn-outline-primary fw-bold fs-4 " onclick="admin_student_reg();">Register now</button>
                 </div>
               </div>
             </div>
@@ -1425,24 +1412,6 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                 </div>
                 <div class="col-12 col-lg-3 mt-2">
                   <?php
-                  $rs_createassesmnt_field = Database::search("SELECT DISTINCT fld_name FROM field;");
-                  $n_createassesmnt_field = $rs_createassesmnt_field->num_rows;
-                  ?>
-                  <select class="form-select bg-transparent" id="createassesmnt_field" onchange="select_students_to_assessment();" disabled>
-                    <option value="x">Select Field</option>
-                    <?php
-                    for ($i = 0; $i < $n_createassesmnt_field; $i++) {
-                      $d_createassesmnt_field = $rs_createassesmnt_field->fetch_assoc();
-
-                    ?>
-                      <option value="<?= $d_createassesmnt_field["fld_name"]; ?>"><?= $d_createassesmnt_field["fld_name"]; ?></option>
-                    <?php
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="col-12 col-lg-3 mt-2">
-                  <?php
                   $rs_createassesmnt_degre = Database::search("SELECT DISTINCT degree_name FROM degree;");
                   $n_createassesmnt_degre = $rs_createassesmnt_degre->num_rows;
                   ?>
@@ -1454,6 +1423,24 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
 
                     ?>
                       <option value="<?= $d_createassesmnt_degre["degree_name"]; ?>"><?= $d_createassesmnt_degre["degree_name"]; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-3 mt-2">
+                  <?php
+                  $rs_createassesmnt_field = Database::search("SELECT DISTINCT fld_name FROM field;");
+                  $n_createassesmnt_field = $rs_createassesmnt_field->num_rows;
+                  ?>
+                  <select class="form-select bg-transparent" id="createassesmnt_field" onchange="select_students_to_assessment();" disabled>
+                    <option value="x">Select Field</option>
+                    <?php
+                    for ($i = 0; $i < $n_createassesmnt_field; $i++) {
+                      $d_createassesmnt_field = $rs_createassesmnt_field->fetch_assoc();
+
+                    ?>
+                      <option value="<?= $d_createassesmnt_field["fld_name"]; ?>"><?= $d_createassesmnt_field["fld_name"]; ?></option>
                     <?php
                     }
                     ?>
@@ -1739,37 +1726,118 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
 
       <!-- =========================== add field ================================================= -->
 
-      <!-- ============================================================== -->
-      <!-- MODALS -->
-      <!-- ============================================================== -->
+      <!-- ================================add inspector=============================================== -->
 
-      <!-- ============================================================== -->
-      <!-- All Jquery -->
-      <!-- ============================================================== -->
-      <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-      <!-- Bootstrap tether Core JavaScript -->
-      <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-      <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
-      <!--Wave Effects -->
-      <script src="../dist/js/waves.js"></script>
-      <!--Menu sidebar -->
-      <script src="../dist/js/sidebarmenu.js"></script>
-      <!--Custom JavaScript -->
-      <script src="../dist/js/custom.min.js"></script>
-      <!--This page JavaScript -->
-      <!-- <script src="../dist/js/pages/dashboards/dashboard1.js"></script> -->
-      <!-- Charts js Files -->
-      <script src="../assets/libs/flot/excanvas.js"></script>
-      <script src="../assets/libs/flot/jquery.flot.js"></script>
-      <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-      <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-      <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-      <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-      <!-- <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script> -->
-      <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-      <script src="script.js"></script>
-      <!-- newly -->
+      <div class="modal fade " id="add_inspector" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Inspector</h1>
+            </div>
+            <div class="modal-body">
+              <small id="admin_add_field_main"></small>
+              <div class="row">
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Select Admin</label><br>
+                  <small id="admin_add_field_inspector_sm" class="small text-danger d-block"></small>
+                  <?php
+                  $rs_admin_add_field_inspector = Database::search("SELECT * FROM admin 
+                  INNER JOIN admin_type ON admin.ad_admin_typ_id=admin_type.admn_typ_id;");
+                  $n_admin_add_field_inspector = $rs_admin_add_field_inspector->num_rows;
+                  ?>
+                  <select class="form-select bg-transparent" id="admin_add_inspector">
+                    <option value="x">Select Admin</option>
+                    <?php
+                    for ($i = 0; $i < $n_admin_add_field_inspector; $i++) {
+                      $d_admin_add_field_inspector = $rs_admin_add_field_inspector->fetch_assoc();
+                    ?>
+                      <option value="<?= $d_admin_add_field_inspector["ad_id"]; ?>"><?= $d_admin_add_field_inspector["name"] . ' - ' . $d_admin_add_field_inspector["admn_typ"]; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="row w-100">
+                <div class="col-6 d-grid">
+                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="admin_add_inspector_close();">Close</button>
+                </div>
+                <div class="col-6 d-grid">
+                  <button type="button" class="btn btn-outline-primary fw-bold" onclick="admin_add_inspector();">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===============================add inspector================================================ -->
+
+      <!-- ================================add admin=============================================== -->
+
+      <div class="modal fade " id="add_admin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Admin</h1>
+            </div>
+            <div class="modal-body">
+              <small id="admin_add_field_main"></small>
+              <div class="row">
+
+                <div class="col-12 ">
+                  <h4>under developing</h4>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="row w-100">
+                  <div class="col-6 d-grid">
+                    <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="">Close</button>
+                  </div>
+                  <div class="col-6 d-grid">
+                    <button type="button" class="btn btn-outline-primary fw-bold" onclick="" disabled>Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================add admin================================================ -->
+
+        <!-- ============================================================== -->
+        <!-- MODALS -->
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- All Jquery -->
+        <!-- ============================================================== -->
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+        <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+        <!--Wave Effects -->
+        <script src="../dist/js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="../dist/js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="../dist/js/custom.min.js"></script>
+        <!--This page JavaScript -->
+        <!-- <script src="../dist/js/pages/dashboards/dashboard1.js"></script> -->
+        <!-- Charts js Files -->
+        <script src="../assets/libs/flot/excanvas.js"></script>
+        <script src="../assets/libs/flot/jquery.flot.js"></script>
+        <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
+        <script src="../assets/libs/flot/jquery.flot.time.js"></script>
+        <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
+        <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
+        <!-- <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script> -->
+        <script src="../dist/js/pages/chart/chart-page-init.js"></script>
+        <script src="script.js"></script>
+        <!-- newly -->
 
   </html>
 

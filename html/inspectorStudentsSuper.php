@@ -7,7 +7,7 @@ session_start();
 
 ?>
 
-<div class="row">
+<div class="row mt-2">
 
     <div class="col-12 col-lg-12 ">
         <h4>Selected Students To Monitoring</h4>
@@ -25,7 +25,7 @@ session_start();
         ?>
 
         <div class="row">
-            <div class="col-2 offset-8 d-grid ">
+            <div class="col-12 col-lg-2 offset-0 offset-lg-8 d-grid ">
 
                 <?php
 
@@ -129,7 +129,7 @@ session_start();
         <h4>Monitored Students</h4>
 
         <div class="row">
-            <div class="col-2">
+            <div class="col-12 col-lg-2">
                 <select id="sampr" class="form-select select2 " onchange="superApproveMonitoring('<?= $_POST['inid']; ?>');">
                     <option value="0" class="text-dark">Select Monitoring Phase</option>
                     <option value="monitoring_1" class="text-dark">Monitoring 1</option>
@@ -137,7 +137,7 @@ session_start();
                     <option value="monitoring_3" class="text-dark">Monitoring 3</option>
                 </select>
             </div>
-            <div class="col-2 offset-6 d-grid g-2 my-2">
+            <div class="col-12 col-lg-2 offset-0 offset-lg-6 d-grid g-2 my-2">
                 <button class="btb btn-primary" onclick="approveMonitoredStudents('<?= $_POST['inid']; ?>');" id="monitoredaprrbtn">Checked</button>
             </div>
             <div class="col-12" id="imtbappr">

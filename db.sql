@@ -647,7 +647,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'2222','wwwww','aaaa','wwwww','dddddd','555','ttttt','56655','7777','gggg','0000','2023-06-21',1,1),(5,'2223','Dhanushka','Sandagiri','Dhanushka','Sandagiri','8888','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-06-24',1,1),(6,'2224','Dhanushka','Sandagiri','Dhanushka','Sandagiri','971153733','751,Nungamuwa,Pallewela','+94774771042','077200382','danushkasandagiri@gmail.com','0000','2023-06-26',1,2),(7,'2225','Kasun','Harsha','Kasun Harsha kumara','k.p. Kasun Harsha kumara','971153555','no 7, nittambuwa.','0774771042','0332296678','kasun87@gmail.com','0000','2023-07-07',1,2);
+INSERT INTO `student` VALUES (1,'2222','wwwww','aaaa','wwwww','dddddd','555','ttttt','56655','7777','gggg','0000','2023-06-21',1,1),(5,'2223','Dhanushka','Sandagiri','Dhanushka','Sandagiri','8888','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-06-24',1,1),(6,'2224','Dhanushka','Sandagiri','Dhanushka','Sandagiri','971153733','751,Nungamuwa,Pallewela','+94774771042','077200382','danushka@gmail.com','0000','2023-06-26',1,2),(7,'2225','Kasun','Harsha','Kasun Harsha kumara','k.p. Kasun Harsha kumara','971153555','no 7, nittambuwa.','0774771042','0332296678','kasun87@gmail.com','0000','2023-07-07',1,2);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -824,4 +824,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-03 14:46:59
+-- Dump completed on 2023-08-08 13:48:21

@@ -231,8 +231,7 @@ if (isset($_SESSION["ST"])) {
                                     <img src="../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31" />
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-account me-1 ms-1"></i> My Profile</a>
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-settings me-1 ms-1"></i> Account Setting</a>
+                                    <button class="dropdown-item ms-0" onclick="st_my_details();"><i class="mdi mdi-account me-1 ms-1"></i> My Profile</button>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" onclick="logout();"><i class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 </ul>
@@ -380,64 +379,287 @@ if (isset($_SESSION["ST"])) {
 
                         <di class="col-12 " id="st_my_details" style="display: none;" v>
                             <h1 class="text-decoration-underline text-center border border-2 border-primary  p-2 rounded my-2 text-uppercase fw-bold">My Details</h1>
+                            <div class="row">
+                                <div class="col-12">
+                                    <?php
+
+                                    $rs = Database::search("SELECT *
+                                    FROM student
+                                    INNER JOIN field ON student.field_fld_id=field.fld_id
+                                    INNER JOIN degree ON field.fld_deg_id=degree.deg_id
+                                    INNER JOIN university ON degree.deg_uni_id=university.uni_id
+                                    INNER JOIN gender ON student.gender_gn_id=gender.gn_id
+                                    INNER JOIN gov_status ON university.gov_status_govstat_id=gov_status.govstat_id
+                                    WHERE student.st_id='" . $_SESSION["ST"]['st_id'] . "';");
+
+                                    $det = $rs->fetch_assoc();
+
+                                    ?>
+
+                                    <div class="row ">
+
+                                        <div class="col-12 border-right">
+                                            <div class="p-3 py-5 ">
+                                                <div class="row mt-3">
+                                                    <div class="col-12 mb-3">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="row">
+                                                                    <div class="col-lg-8 d-grid col-12 border-bottom mb-3">
+                                                                        <button class="btn btn-outline-primary fw-bold m-2" disabled>Download Contract</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="row">
+                                                                    <div class="col-lg-9 col-12 offset-lg-3 border-bottom mb-3">
+                                                                        <div class="row">
+
+
+                                                                            <?php
+
+                                                                            if ($det["gov_status_govstat_id"] == 1) {
+                                                                            ?>
+                                                                                <div class="col-8 ">
+                                                                                    <label class=" d-inline me-4 fs-5 fw-bold" for="ch1">Government Univercity</label>
+                                                                                </div>
+                                                                                <div class="col-2">
+                                                                                    <span class="float-end p-1 rounded alert-warning ">checked</span>
+                                                                                    <?php
+                                                                                } else {
+
+
+                                                                                    if ($det["status"] == 1) {
+                                                                                    ?>
+                                                                                        <div class="col-8 ">
+                                                                                            <label class=" d-inline me-4 fs-5 fw-bold" for="ch1">Paid</label>
+                                                                                        </div>
+                                                                                        <div class="col-2">
+                                                                                            <span class="float-end p-1 rounded alert-success ">checked</span>
+                                                                                        <?php
+                                                                                    } else {
+                                                                                        ?>
+                                                                                            <div class="col-8 ">
+                                                                                                <label class=" d-inline me-4 fs-5 fw-bold" for="ch1">Unpaid</label>
+                                                                                            </div>
+                                                                                            <div class="col-2">
+                                                                                                <span class="float-end p-1 rounded alert-danger">unchecked</span>
+                                                                                        <?php
+                                                                                    }
+                                                                                }
+                                                                                        ?>
+
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="col-lg-9 col-12 offset-lg-3 border-bottom mb-3">
+                                                                                    <div class="row">
+                                                                                        <div class="col-8 ">
+                                                                                            <label class=" d-inline me-4 fs-5 fw-bold" for="ch2">Training Pleacement Seminar</label>
+                                                                                        </div>
+                                                                                        <div class="col-2">
+                                                                                            <span class="float-end p-1 rounded alert-danger">none</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-9 col-12 offset-lg-3 border-bottom mb-3">
+                                                                                    <div class="row">
+                                                                                        <div class="col-8 ">
+                                                                                            <div class="row">
+                                                                                                <div class="col-12">
+                                                                                                    <label class=" d-inline me-4 fs-5 fw-bold" for="ch3">1st Monitoring</label>
+                                                                                                </div>
+                                                                                                <div class="col-12">
+                                                                                                    <label class="fw-bold">(Assessor)</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-2">
+                                                                                            <span class="float-end p-1 rounded alert-danger">none</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-9 col-12 offset-lg-3 border-bottom mb-3">
+                                                                                    <div class="row">
+                                                                                        <div class="col-8">
+                                                                                            <div class="row">
+                                                                                                <div class="col-12">
+                                                                                                    <label class=" d-inline me-4 fs-5 fw-bold" for="ch4">2nd Monitoring</label>
+                                                                                                </div>
+                                                                                                <div class="col-12">
+                                                                                                    <label class="fw-bold">(Assessor)</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-2">
+                                                                                            <span class="float-end p-1 rounded alert-success">checked</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-9 col-12 offset-lg-3 border-bottom mb-3">
+                                                                                    <div class="row">
+                                                                                        <div class="col-8">
+                                                                                            <div class="row">
+                                                                                                <div class="col-12">
+                                                                                                    <label class=" d-inline me-4 fs-5 fw-bold" for="ch5">3rd Monitoring</label>
+                                                                                                </div>
+                                                                                                <div class="col-12">
+                                                                                                    <label class="fw-bold">(Assessor)</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-2">
+                                                                                            <span class="float-end p-1 rounded alert-success">checked</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 mb-3">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <h4 class="text-center text-lg-start">Profile Settings</h4>
+                                                                    </div>
+                                                                    <div class="col-6"><label class="labels">NAITA ID</label>
+
+                                                                        <?php
+                                                                        if ($det["naita_id"] == "") {
+                                                                        ?>
+                                                                            <input id="fn" type="text" class="form-control" placeholder="NAITA ID" readonly>
+                                                                        <?php
+
+                                                                        } else {
+
+                                                                        ?>
+
+                                                                            <input id="fn" type="text" class="form-control" placeholder="NAITA ID" value=" <?php echo $det["naita_id"]; ?>" readonly>
+                                                                        <?php
+
+                                                                        }
+
+                                                                        ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- ==================================================================================================================================                                                             -->
+                                                            <div class="col-12 col-lg-6"><label class="labels">First Name</label>
+                                                                <input type="text" id="st_prof_first_name" class="form-control" placeholder="Full Name" value=" <?php echo $det["first_name"]; ?>">
+                                                            </div>
+                                                            <div class="col-12 col-lg-6"><label class="labels">Last Name</label>
+                                                                <input type="text" id="st_prof_last_name" class="form-control" placeholder="Full Name" value="<?php echo $det["last_name"]; ?>">
+                                                            </div>
+                                                            <div class="col-12 "><label class="labels">Full Name With initials</label>
+                                                                <input type="text" id="st_prof_full_name_with_init" class="form-control" placeholder="Full Name With initials" value="<?php echo $det["full_name_with_init"]; ?>">
+                                                            </div>
+                                                            <div class="col-12 "><label class="labels">Full Name</label>
+                                                                <input type="text" id="st_prof_full_name" class="form-control" placeholder="Full Name" value="<?php echo $det["full_name"]; ?>">
+                                                            </div>
+                                                            <div class="col-md-12"><label class="labels">Address</label>
+                                                                <input type="text" id="st_prof_address" class="form-control" placeholder="Address" value="<?php echo $det["address"]; ?>">
+                                                            </div>
+                                                            <!-- ====================================================================================================================================== -->
+                                                            <div class="col-12 col-md-6"><label class="labels">Gender</label>
+                                                                <input type="text" id="gen" class="form-control" placeholder="Gender" value="<?php echo $det["gender_type"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 col-md-6"><label class="labels">N.I.C. No</label>
+                                                                <input type="text" id="nic" class="form-control" placeholder="N.I.C. No" value="<?php echo $det["nic"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 col-md-6"><label class="labels">Mobile No</label>
+                                                                <input type="text" id="mobl" class="form-control" placeholder="Mobile No" value="<?php echo $det["mobile_no"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 col-md-6"><label class="labels">Land Line No</label>
+                                                                <input type="text" id="land" class="form-control" placeholder="Land Line No" value="<?php echo $det["land_line"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 col-md-6"><label class="labels">Email Address</label>
+                                                                <input type="text" id="email" class="form-control" placeholder="Email Address" value="<?php echo $det["email"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 col-md-6"><label class="labels">Password</label>
+                                                                <input type="text" id="paswd" class="form-control" placeholder="Password" value="<?php echo $det["password"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12"><label class="labels">Univercity Or Institute</label>
+                                                                <input type="text" class="form-control" placeholder="Univercity Or Institute" value="<?php echo $det["uni_name"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12"><label class="labels">Relevant Field</label>
+                                                                <input type="text" class="form-control" placeholder="Relevant Field" value="<?php echo $det["fld_name"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 ">
+                                                                <label class="labels">your Degree / Diploma / NVQ</label>
+                                                                <input type="text" class="form-control" placeholder="Relevant Field" value="<?php echo $det["degree_name"]; ?>" readonly>
+                                                            </div>
+                                                            <div class="col-12 text-center">
+                                                                <div class="row mt-4">
+                                                                    <div class="col-12 col-lg-8 offset-lg-2 d-grid ">
+                                                                        <button class="btn btn-outline-primary fw-bold" type="button" onclick="student_prfile_update('<?php echo $det['st_id']; ?>');">Update Profile</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ============================================================== -->
+                                <!-- MY DETAILS  -->
+                                <!-- ============================================================== -->
+
+
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- End Container fluid  -->
+                            <!-- ============================================================== -->
 
                     </div>
-
                     <!-- ============================================================== -->
-                    <!-- MY DETAILS  -->
+                    <!-- End Page wrapper  -->
                     <!-- ============================================================== -->
-
-
                 </div>
                 <!-- ============================================================== -->
-                <!-- End Container fluid  -->
+                <!-- End Wrapper -->
                 <!-- ============================================================== -->
 
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-
-        <!-- ============================================================== -->
-        <!-- MODALS -->
-        <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- MODALS -->
+                <!-- ============================================================== -->
 
 
-        <!-- ============================================================== -->
-        <!-- MODALS -->
-        <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- MODALS -->
+                <!-- ============================================================== -->
 
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="../dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="../dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="../dist/js/custom.min.js"></script>
-        <!--This page JavaScript -->
-        <!-- <script src="../dist/js/pages/dashboards/dashboard1.js"></script> -->
-        <!-- Charts js Files -->
-        <script src="../assets/libs/flot/excanvas.js"></script>
-        <script src="../assets/libs/flot/jquery.flot.js"></script>
-        <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
-        <script src="../assets/libs/flot/jquery.flot.time.js"></script>
-        <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
-        <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <!-- <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script> -->
-        <script src="../dist/js/pages/chart/chart-page-init.js"></script>
-        <script src="script.js"></script>
-        <!-- newly -->
+                <!-- ============================================================== -->
+                <!-- All Jquery -->
+                <!-- ============================================================== -->
+                <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+                <!-- Bootstrap tether Core JavaScript -->
+                <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+                <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
+                <!--Wave Effects -->
+                <script src="../dist/js/waves.js"></script>
+                <!--Menu sidebar -->
+                <script src="../dist/js/sidebarmenu.js"></script>
+                <!--Custom JavaScript -->
+                <script src="../dist/js/custom.min.js"></script>
+                <!--This page JavaScript -->
+                <!-- <script src="../dist/js/pages/dashboards/dashboard1.js"></script> -->
+                <!-- Charts js Files -->
+                <script src="../assets/libs/flot/excanvas.js"></script>
+                <script src="../assets/libs/flot/jquery.flot.js"></script>
+                <script src="../assets/libs/flot/jquery.flot.pie.js"></script>
+                <script src="../assets/libs/flot/jquery.flot.time.js"></script>
+                <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
+                <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
+                <!-- <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script> -->
+                <script src="../dist/js/pages/chart/chart-page-init.js"></script>
+                <script src="script.js"></script>
+                <!-- newly -->
 
     </html>
 

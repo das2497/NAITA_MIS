@@ -428,7 +428,7 @@ switch ($search) {
 #===================================================================================================================
 #===================================================================================================================
 ?>
-<h4>Assessment Faced Training Students</h4>
+<h4>All Assessment Selected and faced Students</h4>
 <table class=" table table-striped  " id="assessment_table">
     <thead>
         <tr>
@@ -450,7 +450,7 @@ switch ($search) {
 
         $rs_admin_assessment = Database::search($query . ';');
 
-         // echo  $query . ";";
+        // echo  $query . ";";
 
         for ($i = 0; $i < $rs_admin_assessment->num_rows; $i++) {
             $d_admin_assessmen = $rs_admin_assessment->fetch_assoc();
@@ -501,7 +501,9 @@ switch ($search) {
                     </select>
                 </td>
                 <td>
-                    <div class="col d-grid"><button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Checked</button></div>
+                    <div class="col d-grid">
+                        <button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Submit</button>
+                    </div>
                 </td>
             </tr>
         <?php

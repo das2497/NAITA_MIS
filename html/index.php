@@ -95,7 +95,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                                         <h1 class="text-center text-uppercase fw-bold">Login</h1>
                                         <small id="loginSM" style="display: none; " class="small text-success fw-bold text-center"></small>
                                         <div class="col-12 g-2">
-                                            <label class="form-label text-uppercase"><span class="text-danger">* </span>User Name</label>
+                                            <label class="form-label text-uppercase"><span class="text-danger">* </span>User Name OR Email</label>
                                             <small id="unameSM" style="display: none; " class="small text-danger fw-bold"></small>
                                             <input type="text" class="form-control" id="uname" value="<?php echo $uname; ?>">
                                         </div>
@@ -203,7 +203,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
         <script src="../assets/libs/flot/jquery.flot.time.js"></script>
         <script src="../assets/libs/flot/jquery.flot.stack.js"></script>
         <script src="../assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+        <!-- <script src="../assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script> -->
         <script src="../dist/js/pages/chart/chart-page-init.js"></script>
         <script src="script.js"></script>
     </body>
