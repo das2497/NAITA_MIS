@@ -17,8 +17,23 @@ $U = $con->fetch_assoc();
         <div>
 
             <div class="row mt-3 ">
-                <div class="col-md-12">
-                    <h4 class="text-right">Profile Settings</h4>
+                <div class="col-md-12 p-4">
+                    <h4 class="text-center text-uppercase">Profile Settings</h4>
+                </div>
+                <div class="col-md-12 p-2">
+                    <div class="row">
+                        <?php
+
+                        $email = $U['uni_email']
+
+                        ?>
+                        <div class="col-12 col-lg-6 d-grid">
+                            <button class="btn btn-outline-primary fw-bold shadow" onclick="send_student_registration_email('<?= $email; ?>');">Send Student Registration By Email</button>
+                        </div>
+                        <div class="col-12 col-lg-6 d-grid">
+                            <button class="btn btn-outline-primary fw-bold shadow" onclick="send_training_establishment_email('<?= $_POST['uni_id']; ?>');">Send Training Establishment Registration By Email for all registered students</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-12"><label class="labels"><?php echo $U["uni_typ"]; ?></label>
                     <input type="text" class="form-control" placeholder="<?php echo $U["uni_typ"]; ?> Name" value="<?php echo $U["uni_name"]; ?>">
@@ -50,63 +65,64 @@ $U = $con->fetch_assoc();
 
 
                     ?>
-
-                    <table class="table table-responsive shadow ">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Degree Name
-                                </th>
-                                <th>
-                                    Field
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            <?php
-
-                            if ($n2 > 0) {
+                    <div class="table-responsive border border-4">
+                        <table class="table table-stripe">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Degree Name
+                                    </th>
+                                    <th>
+                                        Field
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
-                                for ($i = 0; $i < $n2; $i++) {
-                                    $d2 = $c->fetch_assoc();
-                            ?>
+                                <?php
+
+                                if ($n2 > 0) {
+
+
+                                    for ($i = 0; $i < $n2; $i++) {
+                                        $d2 = $c->fetch_assoc();
+                                ?>
+                                        <tr>
+                                            <td>
+                                                <input type="text" value="<?php echo $d2["degree_name"]; ?>" class="w-100 form-control">
+                                            </td>
+                                            <td>
+                                                <input type="text" value="<?php echo $d2["fld_name"]; ?>" class="w-100 form-control">
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
                                     <tr>
                                         <td>
-                                            <input type="text" value="<?php echo $d2["degree_name"]; ?>" class="w-100 form-control">
-                                        </td>
-                                        <td>
-                                            <input type="text" value="<?php echo $d2["fld_name"]; ?>" class="w-100 form-control">
+                                            <input type="text" value="Degrees Not Registered By <?php echo $U["uni_typ"]; ?>" class="w-100 form-control" readonly>
                                         </td>
                                     </tr>
                                 <?php
                                 }
-                            } else {
+
                                 ?>
-                                <tr>
-                                    <td>
-                                        <input type="text" value="Degrees Not Registered By <?php echo $U["uni_typ"]; ?>" class="w-100 form-control" readonly>
-                                    </td>
-                                </tr>
-                            <?php
-                            }
-
-                            ?>
 
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-12 d-grid g-2 mt-4 text-center">
                     <div class="row ">
                         <div class="col-12 col-lg-6 d-grid ">
-                            <button class="btn btn-outline-primary fw-bold profile-button" type="button" onclick="UNIUpdateProfile2();">Update Profile</button>
+                            <button class="btn btn-outline-primary shadow fw-bold profile-button" type="button" onclick="UNIUpdateProfile2();">Update Profile</button>
                         </div>
                         <div class="col-12 col-lg-6 d-grid ">
-                            <button class="btn btn-outline-danger fw-bold mt-2 mt-lg-0" onclick="admin_indi_uni();">Go Back</button>
+                            <button class="btn btn-outline-danger shadow fw-bold mt-2 mt-lg-0" onclick="admin_indi_uni();">Go Back</button>
                         </div>
                     </div>
 

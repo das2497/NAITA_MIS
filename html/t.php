@@ -1,63 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet" />
-    <!-- Custom CSS -->
-    <link href="../dist/css/style.min.css" rel="stylesheet" />
-</head>
+// Store a string into the variable which
+// needs to be encrypted
+$simple_string = "1";
 
-<body>
+// Display the original string
+echo "Original String: " . $simple_string . "<br/>";
 
-    <button class="btn btn-primary" onclick="t();">table</button>
-    <div id="tb">
+// Store cipher method
+$ciphering = "BF-CBC";
 
-    </div>
+// Use OpenSSL encryption method
+$iv_length = openssl_cipher_iv_length($ciphering);
+$options = 0;
 
-   
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="../assets/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="../dist/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="../dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="../dist/js/custom.min.js"></script>
-    <!-- this page js -->
-    <script src="../assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-    <script src="../assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-    <script src="../assets/extra-libs/DataTables/datatables.min.js"></script>
-    <script>
-        /****************************************
-         *       Basic Table                   *
-         ****************************************/
-        $("#zero_config").DataTable();
+// Use random_bytes() function to generate a random initialization vector (iv)
+$encryption_iv = random_bytes($iv_length);
 
-        function t() {
-            var r = new XMLHttpRequest();
-            r.onreadystatechange = function() {
-                if (this.readyState == 4) {
-                    var t = r.responseText;
+// Alternatively, you can use a fixed iv if needed
+// $encryption_iv = openssl_random_pseudo_bytes($iv_length);
 
-                    // alert(t);
+// Use php_uname() as the encryption key
+$encryption_key = openssl_digest(php_uname(), 'MD5', TRUE);
 
-                    document.getElementById('tb').innerHTML = t;
+// Encryption process
+$encryption = openssl_encrypt($simple_string, $ciphering,$encryption_key, $options, $encryption_iv);
 
-                }
-            }
+// Display the encrypted string
+echo "Encrypted String: " . $encryption . "<br/>";
 
-            r.open("POST", "t2.php", true);
-            r.send();
+// Decryption process
+$decryption = openssl_decrypt($encryption, $ciphering,$encryption_key, $options, $encryption_iv);
 
-        }
-    </script>
-</body>
+// Display the decrypted string
+echo "Decrypted String: " . $decryption."<br/>";
 
-</html>
+##########################################################################################################################endregion
+
+$originalDate = '2023-08-30'; // Replace this with your original date
+
+// Create a DateTime object from the original date
+$dateTime = new DateTime($originalDate);
+
+// Subtract one day
+$dateTime->modify('-1 day');
+
+// Format the result back to your desired format
+$newDate = $dateTime->format('Y-m-d');
+
+echo "Original Date: $originalDate<br>";
+echo "New Date (One day earlier): $newDate";
+

@@ -28,8 +28,17 @@ $det = $rs->fetch_assoc();
                         <div class="col-lg-6">
                             <div class="row">
                                 <div class="col-lg-8 d-grid col-12 border-bottom mb-3">
-                                    <button class="btn btn-outline-primary fw-bold m-2">Upload Certificate</button>
+                                    <button class="btn btn-outline-primary fw-bold shadow m-2">Upload Certificate</button>
                                 </div>
+                                <?php
+                                // if ($det["naita_id"] != "") {
+                                ?>
+                                    <!-- <div class="col-lg-8 d-grid col-12 border-bottom mb-3">                                    
+                                        <button class="btn btn-outline-primary fw-bold shadow m-2">Send Training Establishment Registration Email</button>
+                                    </div> -->
+                                <?php
+                                // }
+                                ?>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -470,7 +479,7 @@ $det = $rs->fetch_assoc();
                         <div class="col-12 text-center">
                             <div class="row mt-4">
                                 <div class="col-12 col-lg-6 d-grid ">
-                                    <button class="btn btn-outline-primary fw-bold" type="button" <?php
+                                    <button class="btn btn-outline-primary shadow fw-bold" type="button" <?php
 
                                                                                                     $x = $det['st_id'];
 
@@ -482,13 +491,13 @@ $det = $rs->fetch_assoc();
                                                                                                                                                                                                             ?>>Update Profile</button>
                                 </div>
                                 <div class="col-12 col-lg-6 d-grid mt-2 mt-lg-0">
-                                    <button class="btn btn-outline-danger fw-bold" <?php
-                                                                    if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
-                                                                    ?> onclick="std_Back_to_select_admin();" <?php
-                                                                                                            } elseif (isset($_SESSION['Uni'])) {
-                                                                                                                ?> onclick="std_Back_to_select_uni();" <?php
-                                                                                                                                }
-                                                                                                                                    ?>>Go Back</button>
+                                    <button class="btn btn-outline-danger shadow fw-bold" <?php
+                                                                                    if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
+                                                                                    ?> onclick="std_Back_to_select_admin();" <?php
+                                                                                                                            } elseif (isset($_SESSION['Uni'])) {
+                                                                                                                                ?> onclick="std_Back_to_select_uni();" <?php
+                                                                                                                                                    }
+                                                                                                                                                        ?>>Go Back</button>
                                 </div>
                             </div>
                         </div>

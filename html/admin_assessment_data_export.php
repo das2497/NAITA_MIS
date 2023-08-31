@@ -436,6 +436,8 @@ $n2 = $c2->num_rows;
 
 if (mysqli_num_rows($c2) > 0) {
     $output .= "NAITA Id,First Name,Worksite,Training Place,University,Field,Assessment date,Assessment Status,participation\n";
+    $output .= "NAITA Id;First Name;Worksite;Training Place;University;Field;Assessment date;Assessment Status;participation\n";
+
 
     while ($d = mysqli_fetch_array($c2)) {
         $output .= $d["naita_id"] . "," . $d["first_name"] . "," . $d["wrksit_name"] . "," . $d["tran_plc_name"] . "," . $d["uni_name"] . "," . $d["fld_name"] . "," . $d["as_date"] . "," . $d["status"] . "," . $d["parti_stat"] . "\n";

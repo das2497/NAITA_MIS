@@ -707,6 +707,14 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             <!-- ============================================================== -->
             <div class="col-12 " id="trnplc" style="display: none;">
               <h1 class="text-decoration-underline text-center border border-2 border-primary  p-2 rounded my-2 text-uppercase fw-bold">Training Places</h1>
+              <div class="row">
+                <div class="col-10 offset-1 col-lg-4 offset-lg-0 d-grid">
+                  <button class="btn btn-outline-primary  fw-bold shadow m-2">Add New Worksite</button>
+                </div>
+                <div class="col-10 offset-1 col-lg-4 offset-lg-0 d-grid">
+                  <button class="btn btn-outline-primary  fw-bold shadow m-2">Add New Training Place</button>
+                </div>
+              </div>
             </div>
             <!-- ============================================================== -->
             <!-- TRAINING PLACE -->
@@ -855,7 +863,15 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                         <div class="col-12 col-lg-2 offset-lg-0 d-grid mb-3">
                           <button class="btn btn-outline-primary fw-bold shadow" type="submit">Export data as a excel</button>
                         </div>
-                        <div class="col-12 col-lg-2 offset-lg-8 d-grid mb-3">
+                        <div class="col-12 col-lg-3 offset-lg-0 d-grid mb-3">
+                          <!-- <button class="btn btn-outline-primary fw-bold shadow" type="button">Export data for the Certificate devision</button> -->
+                          <a href="admin_assessment_data_export_book_certificate.php" class="btn btn-outline-primary fw-bold shadow">Export data for the Certificate devision</a>
+                        </div>
+                        <div class="col-12 col-lg-3 offset-lg-0 d-grid mb-3">
+                          <!-- <button class="btn btn-outline-primary fw-bold shadow" type="button">Export data for log book</button> -->
+                          <a href="admin_assessment_data_export_book.php" class="btn btn-outline-primary fw-bold shadow">Export data for log book</a>
+                        </div>
+                        <div class="col-12 col-lg-3 offset-lg-1 d-grid mb-3">
                           <button class="btn btn-outline-primary fw-bold shadow" data-bs-toggle="modal" data-bs-target="#create_assessment" type="button">Create Assessment</button>
                         </div>
                         <div class="col-12 col-lg-6">

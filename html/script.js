@@ -991,6 +991,411 @@ function admin_student_reg() {
 
 }
 
+function student_reg() {
+    var st_st_main_SM = document.getElementById("st_st_main_SM");
+    var st_st_FName = document.getElementById("st_st_FName");
+    var st_st_FName_SM = document.getElementById("st_st_FName_SM");
+    var st_st_LName = document.getElementById("st_st_LName");
+    var st_st_LName_SM = document.getElementById("st_st_LName_SM");
+    var st_st_FullName = document.getElementById("st_st_FullName");
+    var st_st_FullName_SM = document.getElementById("st_st_FullName_SM");
+    var st_st_FullNameInit = document.getElementById("st_st_FullNameInit");
+    var st_st_FullNameInit_SM = document.getElementById("st_st_FullNameInit_SM");
+    var st_st_Address = document.getElementById("st_st_Address");
+    var st_st_Address_SM = document.getElementById("st_st_Address_SM");
+    var st_st_Gender = document.getElementById("st_st_Gender");
+    var st_st_Gender_SM = document.getElementById("st_st_Gender_SM");
+    var st_st_NIC = document.getElementById("st_st_NIC");
+    var st_st_NIC_SM = document.getElementById("st_st_NIC_SM");
+    var st_st_Mobile = document.getElementById("st_st_Mobile");
+    var st_st_Mobile_SM = document.getElementById("st_st_Mobile_SM");
+    var st_st_Landline = document.getElementById("st_st_Landline");
+    var st_st_Landline_SM = document.getElementById("st_st_Landline_SM");
+    var st_st_Email = document.getElementById("st_st_Email");
+    var st_st_Email_SM = document.getElementById("st_st_Email_SM");
+    var st_st_Uni = document.getElementById("st_st_Uni");
+    var st_st_Uni_SM = document.getElementById("st_st_Uni_SM");
+    var st_st_Degree = document.getElementById("st_st_Degree");
+    var st_st_Degree_SM = document.getElementById("st_st_Degree_SM");
+    var st_st_Field = document.getElementById("st_st_Field");
+    var st_st_Field_SM = document.getElementById("st_st_Field_SM");
+    var st_st_Pass = document.getElementById("st_st_Pass");
+    var st_st_Pass_SM = document.getElementById("st_st_Pass_SM");
+    var st_st_Pass_confrm = document.getElementById("st_st_Pass_confrm");
+    var st_st_Pass_confrm_SM = document.getElementById("st_st_Pass_confrm_SM");
+
+    var st_st_form = document.getElementById("st_st_form");
+    var st_st_form_success = document.getElementById("st_st_form_success");
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4) {
+            var text = r.responseText
+            console.log(text);
+            if (text == 'Place enter first name') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'block';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter last name') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.innerHTML = text;
+                st_st_LName_SM.style.display = 'block';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter full name') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.innerHTML = text;
+                st_st_FullName_SM.style.display = 'block';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter full name with initials') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.innerHTML = text;
+                st_st_FullNameInit_SM.style.display = 'block';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Place enter address') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.innerHTML = text;
+                st_st_Address_SM.style.display = 'block';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please select gender') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.innerHTML = text;
+                st_st_Gender_SM.style.display = 'block';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter NIC No') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.innerHTML = text;
+                st_st_NIC_SM.style.display = 'block';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter mobile number') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.innerHTML = text;
+                st_st_Mobile_SM.style.display = 'block';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter land line number') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.innerHTML = text;
+                st_st_Landline_SM.style.display = 'block';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter email') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.innerHTML = text;
+                st_st_Email_SM.style.display = 'block';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please select university or institute') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none'
+                st_st_Uni_SM.innerHTML = text;;
+                st_st_Uni_SM.style.display = 'block';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please select degree') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.innerHTML = text;
+                st_st_Degree_SM.style.display = 'block';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please select field') {
+                st_st_FName_SM.innerHTML = text;
+                st_st_main_SM.style.display = 'none ';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_FName_SM.innerHTML = text;
+                st_st_Field_SM.style.display = 'block';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter password') {
+                st_st_main_SM.style.display = 'none';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.innerHTML = text;
+                st_st_Pass_SM.style.display = 'block';
+                st_st_Pass_confrm_SM.style.display = 'none';
+            } else if (text == 'Please enter confirm password') {
+                st_st_main_SM.style.display = 'none';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.innerHTML = text;
+                st_st_Pass_confrm_SM.style.display = 'block';
+            } else if (text == "Password doesn't match") {
+                st_st_main_SM.style.display = 'none';
+                st_st_FName_SM.style.display = 'none';
+                st_st_LName_SM.style.display = 'none';
+                st_st_FullName_SM.style.display = 'none';
+                st_st_FullNameInit_SM.style.display = 'none';
+                st_st_Address_SM.style.display = 'none';
+                st_st_Gender_SM.style.display = 'none';
+                st_st_NIC_SM.style.display = 'none';
+                st_st_Mobile_SM.style.display = 'none';
+                st_st_Landline_SM.style.display = 'none';
+                st_st_Email_SM.style.display = 'none';
+                st_st_Uni_SM.style.display = 'none';
+                st_st_Degree_SM.style.display = 'none';
+                st_st_Field_SM.style.display = 'none';
+                st_st_Pass_SM.style.display = 'none';
+                st_st_Pass_confrm_SM.innerHTML = text;
+                st_st_Pass_confrm_SM.style.display = 'block';
+            } else {
+                if (text == 'success') {
+                    st_st_main_SM.innerHTML = text;
+                    st_st_main_SM.style.display = 'block';
+                    st_st_FName_SM.style.display = 'none';
+                    st_st_LName_SM.style.display = 'none';
+                    st_st_FullName_SM.style.display = 'none';
+                    st_st_FullNameInit_SM.style.display = 'none';
+                    st_st_Address_SM.style.display = 'none';
+                    st_st_Gender_SM.style.display = 'none';
+                    st_st_NIC_SM.style.display = 'none';
+                    st_st_Mobile_SM.style.display = 'none';
+                    st_st_Landline_SM.style.display = 'none';
+                    st_st_Email_SM.style.display = 'none';
+                    st_st_Uni_SM.style.display = 'none';
+                    st_st_Degree_SM.style.display = 'none';
+                    st_st_Field_SM.style.display = 'none';
+                    st_st_Pass_SM.style.display = 'none';
+                    st_st_form.style.display = 'none';
+                    st_st_form_success.style.display = 'block';
+                } else {
+                    st_st_main_SM.innerHTML = text;
+                    st_st_main_SM.style.display = 'block';
+                    st_st_FName_SM.style.display = 'none';
+                    st_st_LName_SM.style.display = 'none';
+                    st_st_FullName_SM.style.display = 'none';
+                    st_st_FullNameInit_SM.style.display = 'none';
+                    st_st_Address_SM.style.display = 'none';
+                    st_st_Gender_SM.style.display = 'none';
+                    st_st_NIC_SM.style.display = 'none';
+                    st_st_Mobile_SM.style.display = 'none';
+                    st_st_Landline_SM.style.display = 'none';
+                    st_st_Email_SM.style.display = 'none';
+                    st_st_Uni_SM.style.display = 'none';
+                    st_st_Degree_SM.style.display = 'none';
+                    st_st_Field_SM.style.display = 'none';
+                    st_st_Pass_SM.style.display = 'none';
+                }
+            }
+        }
+    }
+
+    var f = new FormData();
+    f.append("st_st_FName", st_st_FName.value);
+    f.append("st_st_LName", st_st_LName.value);
+    f.append("st_st_FullName", st_st_FullName.value);
+    f.append("st_st_FullNameInit", st_st_FullNameInit.value);
+    f.append("st_st_Address", st_st_Address.value);
+    f.append("st_st_Gender", st_st_Gender.value);
+    f.append("st_st_NIC", st_st_NIC.value);
+    f.append("st_st_Mobile", st_st_Mobile.value);
+    f.append("st_st_Landline", st_st_Landline.value);
+    f.append("st_st_Email", st_st_Email.value);
+    f.append("st_st_Uni", st_st_Uni.value);
+    f.append("st_st_Degree", st_st_Degree.value);
+    f.append("st_st_Field", st_st_Field.value);
+    f.append("st_st_Pass", st_st_Pass.value);
+    f.append("st_st_Pass_confrm", st_st_Pass_confrm.value);
+
+    r.open("POST", "student_register_process_student.php", true);
+    r.send(f);
+
+}
+
 
 function enter_naita_id(nic) {
     console.log(nic);
@@ -1592,22 +1997,67 @@ function admin_add_inspector_close() {
     document.getElementById('admin_add_inspector').value = 'x';
 }
 
-
-function st_trn_worksite() {
-    let st_trn_worksite = document.getElementById('st_trn_worksite');
-    let st_other_worksite = document.getElementById('st_other_worksite');
-    console.log(st_trn_worksite.value);
-    if (st_trn_worksite.value=='z') {
-        st_other_worksite.style.display='block';
-    } else {
-        st_other_worksite.style.display='none';        
+function send_student_registration_email(email) {
+    console.log(email);
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            alert(t);
+        }else if (r.readyState < 4) {
+            console.log('sending.......');
+        }
     }
+    var f = new FormData();
+    f.append("email", email);
+    r.open('POST', 'email_for_student_registration.php', true);
+    r.send(f);
 }
 
+function send_training_establishment_email(uni_id) {
+    console.log(uni_id);
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            alert(t);
+        }
+    }
+    var f = new FormData();
+    f.append("uni_id", uni_id);
+    r.open('POST', 'email_for_training_establishment.php', true);
+    r.send(f);
+}
 
+function training_reg(st_id) {
 
+    var st_trn_worksite = document.getElementById('st_trn_worksite');
+    var st_trn_start_date = document.getElementById('st_trn_start_date');
+    var st_trn_start_date = document.getElementById('st_trn_end_date');
+    var st_trn_coordinator = document.getElementById('st_trn_coordinator');
+    var st_trn_coordinator_position = document.getElementById('st_trn_coordinator_position');
+    var st_trn_coordinator_contact = document.getElementById('st_trn_coordinator_contact');
 
-
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+        }
+    }
+    var f = new FormData();
+    f.append("st_id",st_id);
+    f.append("st_trn_worksite", st_trn_worksite.value);
+    f.append("st_trn_start_date", st_trn_start_date.value);
+    f.append("st_trn_end_date", st_trn_end_date.value);
+    f.append("st_trn_coordinator", st_trn_coordinator.value);
+    f.append("st_trn_coordinator_position", st_trn_coordinator_position.value);
+    f.append("st_trn_coordinator_contact", st_trn_coordinator_contact.value);
+    r.open('POST', 'training_establishment_reg_proccess.php', true);
+    r.send(f);
+}
 
 
 

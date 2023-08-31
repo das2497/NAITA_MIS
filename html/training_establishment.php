@@ -1,6 +1,13 @@
 <?php
 
 require 'connection.php';
+require 'encryption.php';
+
+if (isset($_GET['id'])) {
+    $id = ENCRIPT::decript($_GET['id']);
+    $rs = Database::search("SELECT * FROM student WHERE st_id='" . $id . "';");
+    $d = $rs->fetch_assoc();
+}
 
 ?>
 
@@ -41,7 +48,7 @@ require 'connection.php';
                     </div>
                     <div class="col-12">
                         <div class="row">
-                        <div class="col-12 g-2 mt-5 border-top border-bottom border-2 p-2">
+                            <div class="col-12 g-2 mt-5 border-top border-bottom border-2 p-2">
                                 <h1 class="text-center text-uppercase fw-bold fs-4">Your Details</h1>
                             </div>
                             <div class="col-12 col-lg-6 g-2">
@@ -157,16 +164,18 @@ require 'connection.php';
                                 <label class="form-label"><span class="text-danger">*</span>Password</label>
                                 <input type="text" class="form-control" id="ad_st_Pass" placeholder="Type Password" disabled>
                             </div>
+
                             <div class="col-12 g-2 mt-5 border-top border-bottom border-2 p-2">
                                 <h1 class="text-center text-uppercase fw-bold fs-4">Training establishment Details</h1>
                             </div>
+
                             <div class="col-12 g-2 ">
-                                <label class="form-label"><span class="text-danger">*</span>Field</label>
+                                <label class="form-label"><span class="text-danger">*</span>Worksite</label>
                                 <?php
                                 $st_r_worksite = Database::search("SELECT * FROM worksite;");
                                 $st_n_worksite = $st_r_worksite->num_rows;
                                 ?>
-                                <select class="form-select bg-transparent " id="st_trn_worksite" onchange="st_trn_worksite();">
+                                <select class="form-select bg-transparent " id="st_trn_worksite">
                                     <option value="x">Select your worksite</option>
                                     <?php
                                     for ($i = 0; $i < $n; $i++) {
@@ -176,33 +185,32 @@ require 'connection.php';
                                     <?php
                                     }
                                     ?>
-                                    <option value="z">Other</option>
                                 </select>
-                                <input type="text" class="form-control mt-2" id="st_other_worksite" placeholder="Enter your worksite" style="display: none;">
                             </div>
-                            <div class="col-12 g-2">
+                            <div class="col-12 col-lg-6 g-2">
                                 <label class="form-label"><span class="text-danger">*</span>Training establishment start date</label>
-                                <input type="date" class="form-control" id="">
+                                <input type="date" class="form-control" id="st_trn_start_date">
+                            </div>
+                            <div class="col-12 col-lg-6 g-2">
+                                <label class="form-label"><span class="text-danger">*</span>Training establishment end date</label>
+                                <input type="date" class="form-control" id="st_trn_end_date">
                             </div>
                             <div class="col-12 g-2">
                                 <label class="form-label"><span class="text-danger">*</span>Worksite Coordinator Name</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="st_trn_coordinator">
                             </div>
                             <div class="col-12 g-2">
                                 <label class="form-label"><span class="text-danger">*</span>Worksite Coordinator Position</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="st_trn_coordinator_position">
                             </div>
                             <div class="col-12 g-2">
                                 <label class="form-label"><span class="text-danger">*</span>Worksite Coordinator Contact No</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="st_trn_coordinator_contact">
                             </div>
                             <div class="col-12 g-4">
                                 <div class="row w-100">
-                                    <div class="col-6 d-grid">
-                                        <button type="button" class="btn btn-outline-danger fw-bold fs-4" data-bs-dismiss="modal" onclick="adminadddegreeclose();">Close</button>
-                                    </div>
-                                    <div class="col-6 d-grid">
-                                        <button class="btn btn-outline-primary fw-bold fs-4 " onclick="student_reg();">Register To Training</button>
+                                    <div class="col-12 d-grid">
+                                        <button class="btn btn-outline-primary fw-bold fs-4 shadow" onclick="training_reg('<?= $id; ?>');">Register To Training</button>
                                     </div>
                                 </div>
                             </div>
