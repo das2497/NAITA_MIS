@@ -36,19 +36,19 @@ $U = $con->fetch_assoc();
                     </div>
                 </div>
                 <div class="col-md-12"><label class="labels"><?php echo $U["uni_typ"]; ?></label>
-                    <input type="text" class="form-control" placeholder="<?php echo $U["uni_typ"]; ?> Name" value="<?php echo $U["uni_name"]; ?>">
+                    <input type="text" class="form-control" placeholder="<?php echo $U["uni_typ"]; ?> Name" value="<?php echo $U["uni_name"]; ?>" id="admin_indi_uni_name" disabled>
                 </div>
                 <div class="col-12 col-md-6"><label class="labels">contact no 1</label>
-                    <input type="text" class="form-control" placeholder="contact no 1" value="<?php echo $U["uni_contact_1"]; ?>">
+                    <input type="text" class="form-control" placeholder="contact no 1" value="<?php echo $U["uni_contact_1"]; ?>" id="admin_indi_uni_contact_1">
                 </div>
                 <div class="col-12 col-md-6"><label class="labels">contact_no_2</label>
-                    <input type="text" class="form-control" placeholder="contact no 2" value="<?php echo $U["uni_contact_2"]; ?>">
+                    <input type="text" class="form-control" placeholder="contact no 2" value="<?php echo $U["uni_contact_2"]; ?>" id="admin_indi_uni_contact_2">
                 </div>
                 <div class="col-12 col-md-6"><label class="labels">Email Address of the <?php echo $U["uni_typ"]; ?></label>
-                    <input type="text" class="form-control" placeholder="Email Address of the <?php echo $U["uni_typ"]; ?>" value="<?php echo $U["uni_email"]; ?>">
+                    <input type="text" class="form-control" placeholder="Email Address of the <?php echo $U["uni_typ"]; ?>" value="<?php echo $U["uni_email"]; ?>" id="admin_indi_uni_email">
                 </div>
                 <div class="col-12 col-md-6"><label class="labels">Password</label>
-                    <input type="text" class="form-control" placeholder="Password" value="<?php echo $U["uni_pass"]; ?>">
+                    <input type="text" class="form-control" placeholder="Password" value="<?php echo $U["uni_pass"]; ?>" id="admin_indi_uni_password" disabled>
                 </div>
 
                 <hr class="w-100 border-bottom border-5 mt-4">
@@ -70,10 +70,10 @@ $U = $con->fetch_assoc();
                             <thead>
                                 <tr>
                                     <th>
-                                        Degree Name
+                                        <b>Degree Name</b>
                                     </th>
                                     <th>
-                                        Field
+                                        <b>Field</b>
                                     </th>
                                 </tr>
                             </thead>
@@ -90,10 +90,10 @@ $U = $con->fetch_assoc();
                                 ?>
                                         <tr>
                                             <td>
-                                                <input type="text" value="<?php echo $d2["degree_name"]; ?>" class="w-100 form-control">
+                                                <input type="text" value="<?php echo $d2["degree_name"]; ?>" class="w-100 form-control" disabled>
                                             </td>
                                             <td>
-                                                <input type="text" value="<?php echo $d2["fld_name"]; ?>" class="w-100 form-control">
+                                                <input type="text" value="<?php echo $d2["fld_name"]; ?>" class="w-100 form-control" disabled>
                                             </td>
                                         </tr>
                                     <?php
@@ -119,7 +119,7 @@ $U = $con->fetch_assoc();
                 <div class="col-12 d-grid g-2 mt-4 text-center">
                     <div class="row ">
                         <div class="col-12 col-lg-6 d-grid ">
-                            <button class="btn btn-outline-primary shadow fw-bold profile-button" type="button" onclick="UNIUpdateProfile2();">Update Profile</button>
+                            <button class="btn btn-outline-primary shadow fw-bold profile-button" type="button" onclick="admin_indi_uni_update();">Update Profile</button>
                         </div>
                         <div class="col-12 col-lg-6 d-grid ">
                             <button class="btn btn-outline-danger shadow fw-bold mt-2 mt-lg-0" onclick="admin_indi_uni();">Go Back</button>

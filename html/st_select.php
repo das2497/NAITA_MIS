@@ -57,14 +57,14 @@ $tbn = $rstbl->num_rows;
                             <?php if ($tbd["naita_id"] == "") {
                             ?>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Recipient's username" id="add_nt_id<?= $tbd['nic']; ?>">
+                                    <input type="text" class="form-control" placeholder="Enter NAITA Id" id="add_nt_id<?= $tbd['nic']; ?>">
                                     <button class="btn btn-outline-primary fw-bold input-group-btn shadow" onclick="enter_naita_id(<?= $tbd['nic']; ?>);">Enter</button>
                                 </div>
                             <?php
                             } else {
                             ?>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Recipient's username" id="update_nt_id<?= $tbd['nic']; ?>" value="<?= $tbd["naita_id"]; ?>">
+                                    <input type="text" class="form-control" placeholder="Enter NAITA Id" id="update_nt_id<?= $tbd['nic']; ?>" value="<?= $tbd["naita_id"]; ?>">
                                     <button class="btn btn-outline-danger fw-bold input-group-btn shadow" onclick="update_naita_id(<?= $tbd['nic']; ?>);">Update</button>
                                 </div>
                             <?php

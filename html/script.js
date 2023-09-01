@@ -1535,6 +1535,66 @@ function admin_add_other_degree(elm) {
     }
 }
 
+function admin_indi_uni_update() {
+    console.log('admin_indi_uni_update');
+    var admin_indi_uni_name = document.getElementById('admin_indi_uni_name');
+    var admin_indi_uni_contact_1 = document.getElementById('admin_indi_uni_contact_1');
+    var admin_indi_uni_contact_2 = document.getElementById('admin_indi_uni_contact_2');
+    var admin_indi_uni_email = document.getElementById('admin_indi_uni_email');
+    var admin_indi_uni_password = document.getElementById('admin_indi_uni_password');
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            // if (t == 'Please select university') {
+            //     admin_add_deg_main.innerHTML = '';
+            //     admin_add_deg_uni_sm.innerHTML = t;
+            //     admin_add_deg_deg_sm.innerHTML = '';
+            //     admin_add_deg_deg_other_sm.innerHTML = '';
+            // } else if (t == 'Please select degree') {
+            //     admin_add_deg_main.innerHTML = '';
+            //     admin_add_deg_uni_sm.innerHTML = '';
+            //     admin_add_deg_deg_sm.innerHTML = t;
+            //     admin_add_deg_deg_other_sm.innerHTML = '';
+            // } else if (t == 'Please enter other degree') {
+            //     admin_add_deg_main.innerHTML = '';
+            //     admin_add_deg_uni_sm.innerHTML = '';
+            //     admin_add_deg_deg_sm.innerHTML = '';
+            //     admin_add_deg_deg_other_sm.innerHTML = t;
+            // } else if (t == 'success') {
+            //     admin_add_deg_main.classList.add('text-success', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
+            //     admin_add_deg_main.innerHTML = t;
+            //     admin_add_deg_uni_sm.innerHTML = '';
+            //     admin_add_deg_deg_sm.innerHTML = '';
+            //     admin_add_deg_deg_other_sm.innerHTML = '';
+            //     // location.reload();
+            // } else if (t == 'This degree already have') {
+            //     admin_add_deg_main.classList.add('text-danger', 'fs-4', 'text-center', 'mt-2');
+            //     admin_add_deg_main.innerHTML = t;
+            //     admin_add_deg_uni_sm.innerHTML = '';
+            //     admin_add_deg_deg_sm.innerHTML = '';
+            //     admin_add_deg_deg_other_sm.innerHTML = '';
+            // } else {
+            //     admin_add_deg_main.classList.add('text-danger', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
+            //     admin_add_deg_main.innerHTML = t;
+            //     admin_add_deg_uni_sm.innerHTML = '';
+            //     admin_add_deg_deg_sm.innerHTML = '';
+            //     admin_add_deg_deg_other_sm.innerHTML = '';
+            // }
+        }
+    }
+    var f = new FormData();
+    f.append('admin_indi_uni_name', admin_indi_uni_name.value);
+    f.append('admin_indi_uni_contact_1', admin_indi_uni_contact_1.value);
+    f.append('admin_indi_uni_contact_2', admin_indi_uni_contact_2.value);
+    f.append('admin_indi_uni_email', admin_indi_uni_email.value);
+    f.append('admin_indi_uni_password', admin_indi_uni_password.value);
+    r.open("POST", "admin_indi_uni_update_process.php", true);
+    r.send(f);
+}
+
 //=========================================================================================================================
 //------------ Assessment  
 //=========================================================================================================================

@@ -264,15 +264,15 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               <li class="sidebar-item" onclick="univrcti();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">Universities</span></a>
               </li>
-              <li class="sidebar-item" onclick="assrs();">
+              <!-- <li class="sidebar-item" onclick="assrs();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu">Assessors</span></a>
-              </li>
+              </li> -->
               <li class="sidebar-item" onclick="trnnplc();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-briefcase"></i><span class="hide-menu">Training Places</span></a>
               </li>
-              <li class="sidebar-item" onclick="rpots();">
+              <!-- <li class="sidebar-item" onclick="rpots();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-paper-cut-vertical"></i><span class="hide-menu">Reports</span></a>
-              </li>
+              </li> -->
               <li class="sidebar-item" onclick="assmts();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Assessments</span></a>
               </li>
@@ -1802,9 +1802,47 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             <div class="modal-body">
               <small id="admin_add_field_main"></small>
               <div class="row">
-
                 <div class="col-12 ">
-                  <h4>under developing</h4>
+                  <div class="row">
+                    <div class="col-12 ">
+                      <label class="form-label"><span class="text-danger">*</span>User Name</label><br>
+                      <small id="admin_add_admin_uname_sm" class="small text-danger d-block"></small>
+                      <input type="text" class="form-control" placeholder="Type User Name" id="admin_add_admin_uname">
+                    </div>
+                    <div class="col-12 ">
+                      <label class="form-label"><span class="text-danger">*</span>Name</label><br>
+                      <small id="admin_add_admin_name_sm" class="small text-danger d-block"></small>
+                      <input type="text" class="form-control" placeholder="Type Name" id="admin_add_admin_name">
+                    </div>
+                    <div class="col-12 ">
+                      <label class="form-label"><span class="text-danger">*</span>NIC</label><br>
+                      <small id="admin_add_admin_nic_sm" class="small text-danger d-block"></small>
+                      <input type="text" class="form-control" placeholder="Type NIC" id="admin_add_admin_nic">
+                    </div>
+                    <div class="col-12 ">
+                      <label class="form-label"><span class="text-danger">*</span>Gender</label><br>
+                      <small id="admin_add_admin_gender_sm" class="small text-danger d-block"></small>
+                      <select class="form-select" id="admin_add_admin_gender">
+                        <option value="x">Select gender</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                      </select>
+                    </div>
+                    <div class="col-12 ">
+                      <label class="form-label"><span class="text-danger">*</span>Admin type</label><br>
+                      <small id="admin_add_admin_adtype_sm" class="small text-danger d-block"></small>
+                      <select class="form-select" id="admin_add_admin_adtype">
+                        <option value="x">Select Admin type</option>
+                        <option value="1">Super admin</option>
+                        <option value="2">Admin</option>
+                      </select>
+                    </div>
+                    <div class="col-12 ">
+                      <label class="form-label"><span class="text-danger">*</span>Password</label><br>
+                      <small id="admin_add_admin_password_sm" class="small text-danger d-block"></small>
+                      <input type="text" class="form-control" placeholder="Type Password" id="admin_add_admin_password">
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="modal-footer">

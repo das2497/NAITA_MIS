@@ -11,18 +11,24 @@ INNER JOIN degree ON field.fld_deg_id=degree.deg_id
 INNER JOIN university ON degree.deg_uni_id=university.uni_id
 WHERE university.uni_id='" . $_POST['uni_id'] . "';");
 
-while ($d1 = $rs1->fetch_assoc()) {
+if ($rs1->num_rows == 0) {
+    echo 'No Students Found!';
+} else {
 
-    $rs2 = Database::search("SELECT * FROM student
-    INNER JOIN training_establishment ON student.st_id=training_establishment.tran_est_st_id
-    WHERE training_establishment.tran_est_st_id='" . $d1["st_id"] . "';");
+    while ($d1 = $rs1->fetch_assoc()) {
 
+        if ($d1['naita_id'] !== "") {
 
-    if ($rs2->num_rows == 0) {
-        $stid = $d1["st_id"];
-        echo $body = Email_BODY::training_establishment_body($stid);
-        Email::send($head, $body, $d1['email']);
+            $rs2 = Database::search("SELECT * FROM student
+            INNER JOIN training_establishment ON student.st_id=training_establishment.tran_est_st_id
+            WHERE training_establishment.tran_est_st_id='" . $d1["st_id"] . "';");
+
+            if ($rs2->num_rows == 0) {
+                $stid = $d1["st_id"];
+                $body = Email_BODY::training_establishment_body($stid);
+                Email::send($head, $body, $d1['email']);
+            }
+        }
     }
 }
-
 echo "successfully sent";

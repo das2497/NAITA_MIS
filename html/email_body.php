@@ -6,6 +6,11 @@ class Email_BODY
 {
 
     public static $student_registration_header = "noreply";
+
+    // function student_registration(){
+    //     return $this->
+    // }
+
     public static $student_registration = '<!DOCTYPE html>
 
     <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -140,14 +145,14 @@ class Email_BODY
     <tbody>
     <tr>
     <td>
-    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; border-radius: 0; background-color: #000; background-image: url("../assets/images/email/Header-bg.png"); background-repeat: no-repeat; background-size: cover; width: 700px; margin: 0 auto;" width="700">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; border-radius: 0; background-color: #000; width: 700px; margin: 0 auto;" width="700">
     <tbody>
     <tr>
     <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 20px; padding-left: 30px; padding-right: 10px; padding-top: 20px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="33.333333333333336%">
     <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-    <div align="center" class="alignment" style="line-height:10px"><a href="https://www.example.com" style="outline:none" tabindex="-1" target="_blank"><img alt="Your Logo" src="../assets/images/email/NAITA_Logo.png" style="display: block; height: auto; border: 0; max-width: 155px; width: 100%;" title="Your Logo" width="155"/></a></div>
+    <div align="center" class="alignment" style="line-height:10px"><a href="#" style="outline:none" tabindex="-1" target="_blank"><img alt="Your Logo" src="https://cloud1.email2go.io/061f193d29d6ec5b5c02ed242396c2a7/a085c30c9e11e9c5b0e011d82f74bb81fb0f7f7d8b16b2158a4de48732829fe6.png" style="display: block; height: auto; border: 0; max-width: 155px; width: 100%;" title="Your Logo" width="155"/></a></div>
     </td>
     </tr>
     </table>
@@ -222,6 +227,7 @@ class Email_BODY
     </td>
     </tr>
     </table>
+    <p>Registration link : </p>http://localhost/n2/html/student_registration.php
     </td>
     </tr>
     </tbody>
@@ -258,7 +264,7 @@ class Email_BODY
     <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-    <div align="center" class="alignment" style="line-height:10px"><a href="https://www.example.com" style="outline:none" tabindex="-1" target="_blank"><img alt="your-logo" src="../assets/images/email/NAITA_Logo.png" style="display: block; height: auto; border: 0; max-width: 48px; width: 100%;" title="your-logo" width="48"/></a></div>
+    <div align="center" class="alignment" style="line-height:10px"><a href="#" style="outline:none" tabindex="-1" target="_blank"><img alt="your-logo" src="https://cloud1.email2go.io/061f193d29d6ec5b5c02ed242396c2a7/a085c30c9e11e9c5b0e011d82f74bb81fb0f7f7d8b16b2158a4de48732829fe6.png" style="display: block; height: auto; border: 0; max-width: 48px; width: 100%;" title="your-logo" width="48"/></a></div>
     </td>
     </tr>
     </table>
@@ -457,14 +463,14 @@ class Email_BODY
         <tbody>
         <tr>
         <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; border-radius: 0; background-color: #000; background-image: url("../assets/images/email/Header-bg.png"); background-repeat: no-repeat; background-size: cover; width: 700px; margin: 0 auto;" width="700">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; border-radius: 0; background-color: #000; width: 700px; margin: 0 auto;" width="700">
         <tbody>
         <tr>
         <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 20px; padding-left: 30px; padding-right: 10px; padding-top: 20px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="33.333333333333336%">
         <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tr>
         <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-        <div align="center" class="alignment" style="line-height:10px"><a href="https://www.example.com" style="outline:none" tabindex="-1" target="_blank"><img alt="Your Logo" src="../assets/images/email/NAITA_Logo.png" style="display: block; height: auto; border: 0; max-width: 155px; width: 100%;" title="Your Logo" width="155"/></a></div>
+        <div align="center" class="alignment" style="line-height:10px"><a href="#" style="outline:none" tabindex="-1" target="_blank"><img alt="Your Logo" src="https://cloud1.email2go.io/061f193d29d6ec5b5c02ed242396c2a7/a085c30c9e11e9c5b0e011d82f74bb81fb0f7f7d8b16b2158a4de48732829fe6.png" style="display: block; height: auto; border: 0; max-width: 155px; width: 100%;" title="Your Logo" width="155"/></a></div>
         </td>
         </tr>
         </table>
@@ -503,7 +509,7 @@ class Email_BODY
         <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tr>
         <td class="pad" style="text-align:center;width:100%;">
-        <h1 style="margin: 0; color: #555555; direction: ltr; font-family: Inter, sans-serif; font-size: 23px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">STUDENT REGISTRATION</span></h1>
+        <h1 style="margin: 0; color: #555555; direction: ltr; font-family: Inter, sans-serif; font-size: 23px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">STUDENT TRAINING REGISTRATION</span></h1>
         </td>
         </tr>
         </table>
@@ -527,7 +533,7 @@ class Email_BODY
         <tr>
         <td class="pad">
         <div style="color:#515151;direction:ltr;font-family:Inter, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:left;mso-line-height-alt:24px;">
-        <p style="margin: 0;">Click this button to register to NAITA Industrial training.</p>
+        <p style="margin: 0;">Click this button to register to NAITA Industrial training division training program.</p>
         </div>
         </td>
         </tr>
@@ -535,10 +541,11 @@ class Email_BODY
         <table border="0" cellpadding="0" cellspacing="0" class="button_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tr>
         <td class="pad" style="padding-bottom:15px;padding-left:10px;padding-top:10px;text-align:center;">
-        <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost/n2/html/training_establishment.php?id=' . $encription . '" style="height:46px;width:144px;v-text-anchor:middle;" arcsize="0%" strokeweight="1.5pt" strokecolor="#201F42" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#201f42; font-family:Georgia, serif; font-size:16px"><![endif]--><a href="http://localhost/n2/html/student_registration.php" style="text-decoration:none;display:inline-block;color:#201f42;background-color:transparent;border-radius:0px;width:auto;border-top:2px solid #201F42;font-weight:400;border-right:2px solid #201F42;border-bottom:2px solid #201F42;border-left:2px solid #201F42;padding-top:5px;padding-bottom:5px;font-family:"Noto Serif", Georgia, serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">REGISTER</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+        <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost/n2/html/training_establishment.php" style="height:46px;width:144px;v-text-anchor:middle;" arcsize="0%" strokeweight="1.5pt" strokecolor="#201F42" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#201f42; font-family:Georgia, serif; font-size:16px"><![endif]--><a href="http://localhost/n2/html/training_establishment.php" style="text-decoration:none;display:inline-block;color:#201f42;background-color:transparent;border-radius:0px;width:auto;border-top:2px solid #201F42;font-weight:400;border-right:2px solid #201F42;border-bottom:2px solid #201F42;border-left:2px solid #201F42;padding-top:5px;padding-bottom:5px;font-family:"Noto Serif", Georgia, serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">REGISTER</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
         </td>
         </tr>
         </table>
+        <p>Registration link : </p>http://localhost/n2/html/training_establishment.php
         </td>
         </tr>
         </tbody>
@@ -575,7 +582,7 @@ class Email_BODY
         <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tr>
         <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-        <div align="center" class="alignment" style="line-height:10px"><a href="https://www.example.com" style="outline:none" tabindex="-1" target="_blank"><img alt="your-logo" src="../assets/images/email/NAITA_Logo.png" style="display: block; height: auto; border: 0; max-width: 48px; width: 100%;" title="your-logo" width="48"/></a></div>
+        <div align="center" class="alignment" style="line-height:10px"><a href="#" style="outline:none" tabindex="-1" target="_blank"><img alt="your-logo" src="https://cloud1.email2go.io/061f193d29d6ec5b5c02ed242396c2a7/a085c30c9e11e9c5b0e011d82f74bb81fb0f7f7d8b16b2158a4de48732829fe6.png" style="display: block; height: auto; border: 0; max-width: 48px; width: 100%;" title="your-logo" width="48"/></a></div>
         </td>
         </tr>
         </table>

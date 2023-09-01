@@ -49,5 +49,9 @@ $dateTime->modify('-1 day');
 $newDate = $dateTime->format('Y-m-d');
 
 echo "Original Date: $originalDate<br>";
-echo "New Date (One day earlier): $newDate";
+echo "New Date (One day earlier): $newDate<br/>";
 
+##########################################################################################################################
+
+
+echo md5('0000');
