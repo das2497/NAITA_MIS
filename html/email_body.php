@@ -1,6 +1,6 @@
 <?php
 require_once 'connection.php';
-require 'encryption.php';
+// require 'encryption.php';
 
 class Email_BODY
 {
@@ -327,8 +327,6 @@ class Email_BODY
     public static function training_establishment_body($st_id)
     {
 
-        $encription = ENCRIPT::encript($st_id);
-
         return '<!DOCTYPE html>
 
         <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -541,11 +539,11 @@ class Email_BODY
         <table border="0" cellpadding="0" cellspacing="0" class="button_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
         <tr>
         <td class="pad" style="padding-bottom:15px;padding-left:10px;padding-top:10px;text-align:center;">
-        <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost/n2/html/training_establishment.php" style="height:46px;width:144px;v-text-anchor:middle;" arcsize="0%" strokeweight="1.5pt" strokecolor="#201F42" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#201f42; font-family:Georgia, serif; font-size:16px"><![endif]--><a href="http://localhost/n2/html/training_establishment.php" style="text-decoration:none;display:inline-block;color:#201f42;background-color:transparent;border-radius:0px;width:auto;border-top:2px solid #201F42;font-weight:400;border-right:2px solid #201F42;border-bottom:2px solid #201F42;border-left:2px solid #201F42;padding-top:5px;padding-bottom:5px;font-family:"Noto Serif", Georgia, serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">REGISTER</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+        <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost/n2/html/training_establishment.php?id=' . $st_id . '" style="height:46px;width:144px;v-text-anchor:middle;" arcsize="0%" strokeweight="1.5pt" strokecolor="#201F42" fill="false"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#201f42; font-family:Georgia, serif; font-size:16px"><![endif]--><a href="http://localhost/n2/html/training_establishment.php?id=' . $st_id . '" style="text-decoration:none;display:inline-block;color:#201f42;background-color:transparent;border-radius:0px;width:auto;border-top:2px solid #201F42;font-weight:400;border-right:2px solid #201F42;border-bottom:2px solid #201F42;border-left:2px solid #201F42;padding-top:5px;padding-bottom:5px;font-family:"Noto Serif", Georgia, serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="word-break: break-word; line-height: 32px;">REGISTER</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
         </td>
         </tr>
         </table>
-        <p>Registration link : </p>http://localhost/n2/html/training_establishment.php
+        <p>Registration link : </p>http://localhost/n2/html/training_establishment.php?id=' . $st_id . '
         </td>
         </tr>
         </tbody>

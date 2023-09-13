@@ -28,7 +28,7 @@ $n2 = $c2->num_rows;
 $output = '';
 
 if (mysqli_num_rows($c2) > 0) {
-    $output .= "NAITA Id,NIC,Email,Name with initials,Full Name,Home address,Assesment date,Contact number,Institute,Field of training,Name of the Training establishment,Training Duration from,Training Duration to,Results,\n";
+    $output .= "Registration No,National ID,Email,Name with initials,Full Name,Home address,Contact number,Institute,Field of training,Name of the Training establishment,Training Duration from,Training Duration to,Results,Assesment date\n";
 
     while ($d = mysqli_fetch_array($c2)) {
         $output .= $d["naita_id"] . "," . $d["first_name"] . "," . $d["wrksit_name"] . "," . $d["tran_plc_name"] . "," . $d["uni_name"] . "," . $d["fld_name"] . "," . $d["as_date"] . "," . $d["status"] . "," . $d["parti_stat"] . "\n";

@@ -28,12 +28,12 @@ $det = $rs->fetch_assoc();
                         <div class="col-lg-6">
                             <div class="row">
                                 <div class="col-lg-8 d-grid col-12 border-bottom mb-3">
-                                    <button class="btn btn-outline-primary fw-bold shadow m-2">Upload Certificate</button>
+                                    <button class="btn btn-outline-primary fw-bold shadow m-2" data-bs-toggle="modal" data-bs-target="#training_establishment_details">Training Establishment Details</button>
                                 </div>
                                 <?php
                                 // if ($det["naita_id"] != "") {
                                 ?>
-                                    <!-- <div class="col-lg-8 d-grid col-12 border-bottom mb-3">                                    
+                                <!-- <div class="col-lg-8 d-grid col-12 border-bottom mb-3">                                    
                                         <button class="btn btn-outline-primary fw-bold shadow m-2">Send Training Establishment Registration Email</button>
                                     </div> -->
                                 <?php
@@ -180,180 +180,180 @@ $det = $rs->fetch_assoc();
                                     <?php
                                     if ($det["naita_id"] == "") {
                                     ?>
-                                        <input id="fn" type="text" class="form-control" placeholder="NAITA ID" <?php
-                                                                                                                if (isset($_SESSION["SA"])) {
-                                                                                                                ?>>
+                                        <input type="text" class="form-control" readonly placeholder="NAITA ID" value="Not Available" <?php
+                                                                                                                                        if (isset($_SESSION["SA"])) {
+                                                                                                                                        ?>>
                                     <?php
-                                                                                                                } else {
+                                                                                                                                        } else {
                                     ?>
-                                        readonly>
+                                        >
                                     <?php
-                                                                                                                }
-                                                                                                            } else {
+                                                                                                                                        }
+                                                                                                                                    } else {
 
                                     ?>
 
-                                    <input id="fn" type="text" class="form-control" placeholder="NAITA ID" <?php
-                                                                                                                if (isset($_SESSION["SA"])) {
+                                    <input type="text" class="form-control" readonly placeholder="NAITA ID" <?php
+                                                                                                                                        if (isset($_SESSION["SA"])) {
                                                                                                             ?> value=" <?php echo $det["naita_id"]; ?>">
                                 <?php
-                                                                                                                } else {
+                                                                                                                                        } else {
                                 ?>
-                                    value=" <?php echo $det["naita_id"]; ?>" readonly>
+                                    value=" <?php echo $det["naita_id"]; ?>" >
                             <?php
-                                                                                                                }
-                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                    }
 
                             ?>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-lg-6"><label class="labels">First Name</label>
-                            <input id="fn" type="text" class="form-control" placeholder="Full Name" <?php
-                                                                                                    if (isset($_SESSION["SA"])) {
-                                                                                                    ?> value=" <?php echo $det["first_name"]; ?>">
+                            <input id="st_prof_first_name" type="text" class="form-control" placeholder="First Name" <?php
+                                                                                                                        if (isset($_SESSION["SA"])) {
+                                                                                                                        ?> value=" <?php echo $det["first_name"]; ?>">
                         <?php
-                                                                                                    } else {
+                                                                                                                        } else {
                         ?>
-                            value=" <?php echo $det["first_name"]; ?>" readonly>
+                            value=" <?php echo $det["first_name"]; ?>">
                         <?php
-                                                                                                    }
+                                                                                                                        }
 
                         ?>
                         </div>
                         <div class="col-12 col-lg-6"><label class="labels">Last Name</label>
-                            <input type="text" id="ln" class="form-control" placeholder="Full Name" <?php
-                                                                                                    if (isset($_SESSION["SA"])) {
-                                                                                                    ?> value="<?php echo $det["last_name"]; ?>">
-                        <?php
-                                                                                                    } else {
-                        ?>
-                            value="<?php echo $det["last_name"]; ?>" readonly>
-                        <?php
-                                                                                                    }
-
-                        ?>
-                        </div>
-                        <div class="col-12 "><label class="labels">Full Name With initials</label>
-                            <input type="text" id="fuln" class="form-control" placeholder="Full Name With initials" <?php
+                            <input type="text" id="st_prof_last_name" class="form-control" placeholder="Last Name" <?php
                                                                                                                     if (isset($_SESSION["SA"])) {
-                                                                                                                    ?> value="<?php echo $det["full_name_with_init"]; ?>">
+                                                                                                                    ?> value="<?php echo $det["last_name"]; ?>">
                         <?php
                                                                                                                     } else {
                         ?>
-                            value="<?php echo $det["full_name_with_init"]; ?>" readonly>
+                            value="<?php echo $det["last_name"]; ?>" readonly>
                         <?php
                                                                                                                     }
 
                         ?>
                         </div>
-                        <div class="col-12 "><label class="labels">Full Name</label>
-                            <input type="text" id="fuln" class="form-control" placeholder="Full Name" <?php
-                                                                                                        if (isset($_SESSION["SA"])) {
-                                                                                                        ?> value="<?php echo $det["full_name"]; ?>">
+                        <div class="col-12 "><label class="labels">Full Name With initials</label>
+                            <input type="text" id="st_prof_full_name_with_init" class="form-control" placeholder="Full Name With initials" <?php
+                                                                                                                                            if (isset($_SESSION["SA"])) {
+                                                                                                                                            ?> value="<?php echo $det["full_name_with_init"]; ?>">
                         <?php
-                                                                                                        } else {
+                                                                                                                                            } else {
+                        ?>
+                            value="<?php echo $det["full_name_with_init"]; ?>" readonly>
+                        <?php
+                                                                                                                                            }
+
+                        ?>
+                        </div>
+                        <div class="col-12 "><label class="labels">Full Name</label>
+                            <input type="text" id="st_prof_full_name" class="form-control" placeholder="Full Name" <?php
+                                                                                                                    if (isset($_SESSION["SA"])) {
+                                                                                                                    ?> value="<?php echo $det["full_name"]; ?>">
+                        <?php
+                                                                                                                    } else {
                         ?>
                             value="<?php echo $det["full_name"]; ?>" readonly>
                         <?php
-                                                                                                        }
+                                                                                                                    }
 
                         ?>
                         </div>
                         <div class="col-md-12"><label class="labels">Address</label>
-                            <input type="text" id="addr" class="form-control" placeholder="Address" <?php
-                                                                                                    if (isset($_SESSION["SA"])) {
-                                                                                                    ?> value="<?php echo $det["address"]; ?>">
+                            <input type="text" id="st_prof_address" class="form-control" placeholder="Address" <?php
+                                                                                                                if (isset($_SESSION["SA"])) {
+                                                                                                                ?> value="<?php echo $det["address"]; ?>">
                         <?php
-                                                                                                    } else {
+                                                                                                                } else {
                         ?>
                             value="<?php echo $det["address"]; ?>" readonly>
                         <?php
-                                                                                                    }
+                                                                                                                }
 
                         ?>
 
                         </div>
                         <div class="col-12 col-md-6"><label class="labels">Gender</label>
-                            <input type="text" id="gen" class="form-control" placeholder="Gender" <?php
-                                                                                                    if (isset($_SESSION["SA"])) {
-                                                                                                    ?> value="<?php echo $det["gender_type"]; ?>">
+                            <input type="text" id="st_prof_gender" class="form-control" readonly placeholder="Gender" <?php
+                                                                                                                        if (isset($_SESSION["SA"])) {
+                                                                                                                        ?> value="<?php echo $det["gender_type"]; ?>">
                         <?php
-                                                                                                    } else {
+                                                                                                                        } else {
                         ?>
                             value="<?php echo $det["gender_type"]; ?>" readonly>
                         <?php
-                                                                                                    }
+                                                                                                                        }
 
                         ?>
 
                         </div>
                         <div class="col-12 col-md-6"><label class="labels">N.I.C. No</label>
-                            <input type="text" id="nic" class="form-control" placeholder="N.I.C. No" <?php
-                                                                                                        if (isset($_SESSION["SA"])) {
-                                                                                                        ?> value="<?php echo $det["nic"]; ?>">
+                            <input type="text" id="st_prof_nic" class="form-control" placeholder="N.I.C. No" <?php
+                                                                                                                if (isset($_SESSION["SA"])) {
+                                                                                                                ?> value="<?php echo $det["nic"]; ?>">
                         <?php
-                                                                                                        } else {
+                                                                                                                } else {
                         ?>
                             value="<?php echo $det["nic"]; ?>" readonly>
                         <?php
-                                                                                                        }
+                                                                                                                }
 
                         ?>
 
                         </div>
                         <div class="col-12 col-md-6"><label class="labels">Mobile No</label>
-                            <input type="text" id="mobl" class="form-control" placeholder="Mobile No" <?php
-                                                                                                        if (isset($_SESSION["SA"])) {
-                                                                                                        ?> value="<?php echo $det["mobile_no"]; ?>">
+                            <input type="text" id="st_prof_mobile" class="form-control" placeholder="Mobile No" <?php
+                                                                                                                if (isset($_SESSION["SA"])) {
+                                                                                                                ?> value="<?php echo $det["mobile_no"]; ?>">
                         <?php
-                                                                                                        } else {
+                                                                                                                } else {
                         ?>
                             value="<?php echo $det["mobile_no"]; ?>" readonly>
                         <?php
-                                                                                                        }
+                                                                                                                }
 
                         ?>
 
                         </div>
                         <div class="col-12 col-md-6"><label class="labels">Land Line No</label>
-                            <input type="text" id="land" class="form-control" placeholder="Land Line No" <?php
-                                                                                                            if (isset($_SESSION["SA"])) {
-                                                                                                            ?> value="<?php echo $det["land_line"]; ?>">
+                            <input type="text" id="st_prof_land" class="form-control" placeholder="Land Line No" <?php
+                                                                                                                    if (isset($_SESSION["SA"])) {
+                                                                                                                    ?> value="<?php echo $det["land_line"]; ?>">
                         <?php
-                                                                                                            } else {
+                                                                                                                    } else {
                         ?>
                             value="<?php echo $det["land_line"]; ?>" readonly>
                         <?php
-                                                                                                            }
+                                                                                                                    }
 
                         ?>
 
                         </div>
                         <div class="col-12 col-md-6"><label class="labels">Email Address</label>
-                            <input type="text" id="email" class="form-control" placeholder="Email Address" <?php
-                                                                                                            if (isset($_SESSION["SA"])) {
-                                                                                                            ?> value="<?php echo $det["email"]; ?>">
+                            <input type="text" id="st_prof_email" class="form-control" placeholder="Email Address" <?php
+                                                                                                                    if (isset($_SESSION["SA"])) {
+                                                                                                                    ?> value="<?php echo $det["email"]; ?>">
                         <?php
-                                                                                                            } else {
+                                                                                                                    } else {
                         ?>
                             value="<?php echo $det["email"]; ?>" readonly>
                         <?php
-                                                                                                            }
+                                                                                                                    }
 
                         ?>
 
                         </div>
                         <div class="col-12 col-md-6"><label class="labels">Password</label>
-                            <input type="text" id="paswd" class="form-control" placeholder="Password" <?php
-                                                                                                        if (isset($_SESSION["SA"])) {
-                                                                                                        ?> value="<?php echo $det["password"]; ?>">
+                            <input type="text" id="st_prof_password" class="form-control" placeholder="Password" <?php
+                                                                                                                    if (isset($_SESSION["SA"])) {
+                                                                                                                    ?> value="<?php echo $det["password"]; ?>">
                         <?php
-                                                                                                        } else {
+                                                                                                                    } else {
                         ?>
                             value="<?php echo $det["password"]; ?>" readonly>
                         <?php
-                                                                                                        }
+                                                                                                                    }
 
                         ?>
 
@@ -365,20 +365,20 @@ $det = $rs->fetch_assoc();
                                 $rs2 = Database::search("SELECT * FROM university;");
                                 $n = $rs2->num_rows;
                             ?>
-                                <select class="form-select" id="su">
+                                <select class="form-select" id="st_prof_university" disabled>
                                     <option value="x">Select Your Univercity</option>
                                     <?php
                                     for ($i = 0; $i < $n; $i++) {
                                         $university = $rs2->fetch_assoc();
 
-                                        if ($university["university_id"] == $det["university_id"]) {
+                                        if ($university["uni_id"] == $det["uni_id"]) {
                                     ?>
-                                            <option value="<?php echo $university["university_id"]; ?>" selected><?php echo $university["university_name"]; ?></option>
+                                            <option value="<?php echo $university["uni_id"]; ?>" selected><?php echo $university["uni_name"]; ?></option>
                                         <?php
                                         } else {
 
                                         ?>
-                                            <option value="<?php echo $university["university_id"]; ?>"><?php echo $university["university_name"]; ?></option>
+                                            <option value="<?php echo $university["uni_id"]; ?>"><?php echo $university["uni_name"]; ?></option>
                                     <?php
                                         }
                                     }
@@ -403,7 +403,7 @@ $det = $rs->fetch_assoc();
                                 $rs2 = Database::search("SELECT * FROM field;");
                                 $n = $rs2->num_rows;
                             ?>
-                                <select class="form-select" id="sr">
+                                <select class="form-select" id="st_prof_field" disabled>
                                     <option value="x">Select your Relevent Field</option>
                                     <?php
                                     for ($i = 0; $i < $n; $i++) {
@@ -443,21 +443,21 @@ $det = $rs->fetch_assoc();
                                 $rs2 = Database::search("SELECT * FROM degree;");
                                 $n = $rs2->num_rows;
                             ?>
-                                <select class="form-select" id="sd">
+                                <select class="form-select" id="st_prof_degree" disabled>
                                     <option value="x">Select your Degree / Diploma / NVQ</option>
                                     <?php
                                     for ($i = 0; $i < $n; $i++) {
                                         $degree = $rs2->fetch_assoc();
 
-                                        if ($degree["id"] == $det["degree_id"]) {
+                                        if ($degree["deg_id"] == $det["deg_id"]) {
                                     ?>
-                                            <option value="<?php echo $degree["id"]; ?>" selected><?php echo $degree["degree_name"]; ?></option>
+                                            <option value="<?php echo $degree["deg_id"]; ?>" selected><?php echo $degree["degree_name"]; ?></option>
                                         <?php
                                         } else {
 
 
                                         ?>
-                                            <option value="<?php echo $degree["id"]; ?>"><?php echo $degree["degree_name"]; ?></option>
+                                            <option value="<?php echo $degree["deg_id"]; ?>"><?php echo $degree["degree_name"]; ?></option>
                                     <?php
                                         }
                                     }
@@ -476,28 +476,22 @@ $det = $rs->fetch_assoc();
                             ?>
 
                         </div>
+                        <div class="col-12">
+                            <p class="fs-4 text-danger text-center" id="st_prof_main"></p>
+                        </div>
                         <div class="col-12 text-center">
                             <div class="row mt-4">
                                 <div class="col-12 col-lg-6 d-grid ">
-                                    <button class="btn btn-outline-primary shadow fw-bold" type="button" <?php
-
-                                                                                                    $x = $det['st_id'];
-
-                                                                                                    if (isset($_SESSION['As'])) {
-                                                                                                    ?> onclick="SUpdateProfile('<?php echo $x; ?>');" <?php
-                                                                                                                                                    } elseif (isset($_SESSION['Md'])) {
-                                                                                                                                                        ?> onclick="SUpdateProfileM('<?php echo $x; ?>');" <?php
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                            ?>>Update Profile</button>
+                                    <button class="btn btn-outline-primary shadow fw-bold" type="button" onclick="st_prof_update_admin('<?php echo $x; ?>');">Update Profile</button>
                                 </div>
                                 <div class="col-12 col-lg-6 d-grid mt-2 mt-lg-0">
                                     <button class="btn btn-outline-danger shadow fw-bold" <?php
-                                                                                    if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
-                                                                                    ?> onclick="std_Back_to_select_admin();" <?php
-                                                                                                                            } elseif (isset($_SESSION['Uni'])) {
-                                                                                                                                ?> onclick="std_Back_to_select_uni();" <?php
-                                                                                                                                                    }
-                                                                                                                                                        ?>>Go Back</button>
+                                                                                            if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
+                                                                                            ?> onclick="std_Back_to_select_admin();" <?php
+                                                                                                                                    } elseif (isset($_SESSION['Uni'])) {
+                                                                                                                                        ?> onclick="std_Back_to_select_uni();" <?php
+                                                                                                                                                                            }
+                                                                                                                                                                                ?>>Go Back</button>
                                 </div>
                             </div>
                         </div>
@@ -506,3 +500,61 @@ $det = $rs->fetch_assoc();
                 </div>
             </div>
         </div>
+
+        <!-- ================ training establishment details ========================================== -->
+
+        <div class="modal fade " id="training_establishment_details" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content ">
+                    <small class="text-success fw-bold fs-4 text-center mt-2" id="admnaddegalrt"></small>
+                    <div class="modal-header">
+                        <h1 class="text-center text-uppercase fw-bold fs-4">Student Training Establishment Details</h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <?php
+
+                            $rste = Database::search("SELECT * FROM training_establishment WHERE tran_est_st_id='" . $det["st_id"] . "';");
+
+                            if ($rste->num_rows == 0) {
+                            ?>
+                                <div class="col-12">
+                                <p class="fs-4 text-danger text-center">This student is not yet registered for training</p>
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <th>start date</th>
+                                            <th>end date</th>
+                                            <th>efective date</th>
+                                            <th>worksite</th>
+                                            <th>training period</th>
+                                            <th>Monitoring state</th>
+                                            <th>training coordinator</th>
+                                            <th>coordinator position</th>
+                                            <th>coordinator contact</th>
+                                        </thead>
+                                    </table>
+                                </div>
+                            <?php
+                            }
+
+
+                            ?>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row w-100">
+                            <div class="col-12 d-grid">
+                                <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================ training establishment details ========================================== -->

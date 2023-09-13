@@ -1,13 +1,13 @@
 <?php
-require 'connection.php';
+// require 'connection.php';
 
-$rstbl = Database::search("SELECT DISTINCT(YEAR(reg_date)) AS YEAR
-FROM student
-INNER JOIN field ON student.field_fld_id=field.fld_id
-INNER JOIN degree ON field.fld_deg_id=degree.deg_id
-INNER JOIN university ON degree.deg_uni_id=university.uni_id
-WHERE university.uni_id='" . $_POST["uniID"] . "';");
-$tbn = $rstbl->num_rows;
+// $rstbl = Database::search("SELECT DISTINCT(YEAR(reg_date)) AS YEAR
+// FROM student
+// INNER JOIN field ON student.field_fld_id=field.fld_id
+// INNER JOIN degree ON field.fld_deg_id=degree.deg_id
+// INNER JOIN university ON degree.deg_uni_id=university.uni_id
+// WHERE university.uni_id='" . $_POST["uniID"] . "';");
+// $tbn = $rstbl->num_rows;
 
 ?>
 
@@ -23,24 +23,8 @@ $tbn = $rstbl->num_rows;
                     <th scope="col">Year</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
-
-                for ($i = 0; $i < $tbn; $i++) {
-                    $ursr = $rstbl->fetch_assoc();
-
-                    // $date = new DateTime($ursr["YEAR"]);
-                    // $year = $date->format('Y');
-                ?>
-
-                    <tr class="table-warning" onclick="stmdegrr('<?= $ursr['YEAR']; ?>','<?= $_POST['uniID']; ?>');">
-                        <td><?= $i + 1; ?></td>
-                        <td><?= $ursr["YEAR"]; ?></td>
-                    </tr>
-                <?php
-
-                }
-                ?>
+            <tbody id="pg_admin_student_batch">
+              
             </tbody>
         </table>
 

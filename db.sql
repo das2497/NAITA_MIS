@@ -638,7 +638,7 @@ CREATE TABLE `student` (
   KEY `fk_student_field1_idx` (`field_fld_id`),
   CONSTRAINT `fk_student_field1` FOREIGN KEY (`field_fld_id`) REFERENCES `field` (`fld_id`),
   CONSTRAINT `fk_student_gender` FOREIGN KEY (`gender_gn_id`) REFERENCES `gender` (`gn_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -647,7 +647,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'2222','wwwww','aaaa','wwwww','dddddd','555','ttttt','56655','7777','gggg','0000','2023-06-21',1,1),(5,'2223','Dhanushka','Sandagiri','Dhanushka','Sandagiri','8888','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-06-24',1,1),(6,'2224','Dhanushka','Sandagiri','Dhanushka','Sandagiri','971153733','751,Nungamuwa,Pallewela','+94774771042','077200382','danushka@gmail.com','0000','2023-06-26',1,2),(7,'2225','Kasun','Harsha','Kasun Harsha kumara','k.p. Kasun Harsha kumara','971153555','no 7, nittambuwa.','0774771042','0332296678','kasun87@gmail.com','0000','2023-07-07',1,2);
+INSERT INTO `student` VALUES (1,'2222','wwwww','aaaa','wwwww','dddddd','555','ttttt','56655','7777','gggg','0000','2023-06-21',1,1),(5,'2223','    Dhanushka','Sandagiri','Dhanushka','Sandagiri','8888','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-06-24',1,1),(6,'2224','Dhanushka','Sandagiri','Dhanushka','Sandagiri','971153733','751,Nungamuwa,Pallewela','+94774771042','077200382','danushka@gmail.com','0000','2023-06-26',1,2),(7,'2225','Kasun','Harsha','Kasun Harsha kumara','k.p. Kasun Harsha kumara','971153555','no 7, nittambuwa.','0774771042','0332296678','kasun87@gmail.com','0000','2023-07-07',1,2),(8,NULL,'Dhanushka','Sandagiri','Sandagiri','Dhanushka','7777','751,Nungamuwa,Pallewela','+94774771042','Sri Lanka','danushkasandagiri@gmail.com','0000','2023-09-01',1,1);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -662,10 +662,14 @@ CREATE TABLE `training_establishment` (
   `tran_est_id` int NOT NULL AUTO_INCREMENT,
   `tran_est_from` date NOT NULL,
   `tran_est_to` date NOT NULL,
+  `tran_efective_date` date NOT NULL,
   `tran_est_st_id` int NOT NULL,
   `worksite_wrksit_id` int NOT NULL,
   `tran_perion` int NOT NULL,
   `tran_monit_stat_id` int NOT NULL,
+  `tran_coordinator` varchar(80) DEFAULT NULL,
+  `tran_coordinator_position` varchar(80) DEFAULT NULL,
+  `tran_coordinator_contact` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`tran_est_id`),
   KEY `fk_training_establishment_student1_idx` (`tran_est_st_id`),
   KEY `fk_training_establishment_worksite1_idx` (`worksite_wrksit_id`),
@@ -684,7 +688,7 @@ CREATE TABLE `training_establishment` (
 
 LOCK TABLES `training_establishment` WRITE;
 /*!40000 ALTER TABLE `training_establishment` DISABLE KEYS */;
-INSERT INTO `training_establishment` VALUES (2,'2023-05-16','2023-11-16',1,1,1,1),(3,'2023-07-23','2023-12-23',5,1,1,1),(4,'2023-07-23','2023-12-23',6,1,1,1),(5,'2023-07-24','2023-12-24',7,1,1,1);
+INSERT INTO `training_establishment` VALUES (2,'2023-05-16','2023-11-16','0000-00-00',1,1,1,1,NULL,NULL,NULL),(3,'2023-07-23','2023-12-23','0000-00-00',5,1,1,1,NULL,NULL,NULL),(4,'2023-07-23','2023-12-23','0000-00-00',6,1,1,1,NULL,NULL,NULL),(5,'2023-07-24','2023-12-24','0000-00-00',7,1,1,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `training_establishment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -775,7 +779,7 @@ CREATE TABLE `university` (
 
 LOCK TABLES `university` WRITE;
 /*!40000 ALTER TABLE `university` DISABLE KEYS */;
-INSERT INTO `university` VALUES (81,'University of Colombo','kkk','777','77777',1,1,'0000'),(84,'University of Kelaniya','kkkkkk','77','7777',1,1,'0000');
+INSERT INTO `university` VALUES (81,'University of Colombo','danushkasandagiri@gmail.com','0774771042','0774771042',1,1,'0000'),(84,'University of Kelaniya','danushkasandagiri@gmail.com','77','7777',1,1,'0000');
 /*!40000 ALTER TABLE `university` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -788,7 +792,6 @@ DROP TABLE IF EXISTS `worksite`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `worksite` (
   `wrksit_id` int NOT NULL AUTO_INCREMENT,
-  `wrksit_uid` varchar(45) NOT NULL,
   `wrksit_name` varchar(45) NOT NULL,
   `wrksit_address` varchar(45) NOT NULL,
   `wrksit_email` varchar(45) NOT NULL,
@@ -811,7 +814,7 @@ CREATE TABLE `worksite` (
 
 LOCK TABLES `worksite` WRITE;
 /*!40000 ALTER TABLE `worksite` DISABLE KEYS */;
-INSERT INTO `worksite` VALUES (1,'2222','Sri lanka telecome , Kuliyapitiya\n','Kuliyapitiya\n','ggggg','44444','88888888','0000',14,1);
+INSERT INTO `worksite` VALUES (1,'Sri lanka telecome , Kuliyapitiya\n','Kuliyapitiya\n','ggggg','44444','88888888','0000',14,1);
 /*!40000 ALTER TABLE `worksite` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -824,4 +827,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-08 13:48:21
+-- Dump completed on 2023-09-05  0:22:37

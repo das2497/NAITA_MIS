@@ -512,17 +512,29 @@ function stmUni(uniID) {
         if (this.readyState == 4) {
             var t = r.responseText;
 
-            // alert(t);
-
             unimBody.style.display = "none";
             stmBody.style.display = "block";
             stmBody.innerHTML = t;
+            pg_admin_student_batch(1, uniID);
         }
     }
 
     r.open("POST", "st_batch.php", true);
     r.send(f);
+}
 
+function pg_admin_student_batch(pg, uniID) {
+    console.log('pg_admin_student_batch');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            // console.log(r.responseText);
+            console.log(uniID);
+            document.getElementById('pg_admin_student_batch').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "pg_admin_student_batch_process.php?pg=" + pg + "&uniID=" + uniID, true);
+    r.send();
 }
 
 function std_Back_to_uni() {
@@ -547,10 +559,25 @@ function stmdegrr(year, uni) {
             stmBody.style.display = "none";
             degBody.style.display = "block";
             degBody.innerHTML = t;
+            pg_admin_student_degree(1, uni, year);
         }
     }
     r.open("POST", "st_degree.php", true);
     r.send(f);
+}
+
+function pg_admin_student_degree(pg, uniID, year) {
+    console.log('pg_admin_student_batch');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            // console.log(r.responseText);
+            console.log(uniID);
+            document.getElementById('pg_admin_student_degree').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "pg_admin_student_degree_process.php?pg=" + pg + "&uni=" + uniID + "&yr=" + year, true);
+    r.send();
 }
 
 function std_Back_to_batch() {
@@ -574,11 +601,10 @@ function stmfield(uni, deg, yr) {
         if (this.readyState == 4) {
             var t = r.responseText;
 
-            // alert(t);
-
             degBody.style.display = "none";
             fieldBody.style.display = "block";
             fieldBody.innerHTML = t;
+            pg_admin_student_field(1, uni, deg, yr);
         }
     }
 
@@ -586,6 +612,17 @@ function stmfield(uni, deg, yr) {
     r.send(f);
 }
 
+function pg_admin_student_field(pg, uni, deg, year) {
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            // console.log(r.responseText);
+            document.getElementById('pg_admin_student_field').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "pg_admin_student_field_process.php?pg=" + pg + "&uni=" + uni + "&deg=" + deg + "&yr=" + year, true);
+    r.send();
+}
 
 function std_Back_to_degree() {
     document.getElementById("fieldBody").style.display = 'none';
@@ -611,12 +648,25 @@ function stmstudent(uni, deg, yr, field) {
             fieldBody.style.display = "none";
             selctBody.style.display = "block";
             selctBody.innerHTML = t;
+            pg_admin_student_select(1, uni, deg, yr, field)
         }
     }
 
     r.open("POST", "st_select.php", true);
     r.send(f);
 
+}
+
+function pg_admin_student_select(pg, uni, deg, year, field) {
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            // console.log(r.responseText);
+            document.getElementById('pg_admin_student_select').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "pg_admin_student_select_process.php?pg=" + pg + "&uni=" + uni + "&deg=" + deg + "&yr=" + year + "&field=" + field, true);
+    r.send();
 }
 
 function std_Back_to_field() {
@@ -692,7 +742,7 @@ function admin_student_reg() {
             console.log(text);
             if (text == 'Place enter first name') {
                 ad_st_FName_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'block';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -709,7 +759,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter last name') {
                 ad_st_LName_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'block';
                 ad_st_FullName_SM.style.display = 'none';
@@ -726,7 +776,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter full name') {
                 ad_st_FullName_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'block';
@@ -742,8 +792,8 @@ function admin_student_reg() {
                 ad_st_Field_SM.style.display = 'none';
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter full name with initials') {
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FullNameInit_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -760,7 +810,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Place enter address') {
                 ad_st_Address_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -777,7 +827,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please select gender') {
                 ad_st_Gender_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -794,7 +844,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter NIC No') {
                 ad_st_NIC_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -811,7 +861,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter mobile number') {
                 ad_st_Mobile_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -828,7 +878,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter land line number') {
                 ad_st_Landline_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -845,7 +895,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter email') {
                 ad_st_Email_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -862,7 +912,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please select university or institute') {
                 ad_st_Uni_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -879,7 +929,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please select degree') {
                 ad_st_Degree_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -896,7 +946,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please select field') {
                 ad_st_Field_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -913,7 +963,7 @@ function admin_student_reg() {
                 ad_st_Pass_SM.style.display = 'none';
             } else if (text == 'Please enter password') {
                 ad_st_Pass_SM.innerHTML = text;
-                ad_st_main_SM.style.display = 'none ';
+                ad_st_main_SM.innerHTML = text;
                 ad_st_FName_SM.style.display = 'none';
                 ad_st_LName_SM.style.display = 'none';
                 ad_st_FullName_SM.style.display = 'none';
@@ -932,7 +982,6 @@ function admin_student_reg() {
 
                 if (text == 'success') {
                     ad_st_main_SM.innerHTML = text;
-                    ad_st_main_SM.style.display = 'block';
                     ad_st_FName_SM.style.display = 'none';
                     ad_st_LName_SM.style.display = 'none';
                     ad_st_FullName_SM.style.display = 'none';
@@ -950,7 +999,6 @@ function admin_student_reg() {
                     location.reload();
                 } else {
                     ad_st_main_SM.innerHTML = text;
-                    ad_st_main_SM.style.display = 'block';
                     ad_st_FName_SM.style.display = 'none';
                     ad_st_LName_SM.style.display = 'none';
                     ad_st_FullName_SM.style.display = 'none';
@@ -1352,6 +1400,7 @@ function student_reg() {
                     st_st_Pass_SM.style.display = 'none';
                     st_st_form.style.display = 'none';
                     st_st_form_success.style.display = 'block';
+                    location.reload();
                 } else {
                     st_st_main_SM.innerHTML = text;
                     st_st_main_SM.style.display = 'block';
@@ -1405,9 +1454,10 @@ function enter_naita_id(nic) {
         if (r.readyState == 4) {
             var t = r.responseText;
 
-            if (t != "") {
-                console.log(t);
-                alert(t);
+            console.log(t);
+            alert(t);
+            if (t == "success") {
+                location.reload();
             }
 
         }
@@ -1430,6 +1480,7 @@ function update_naita_id(nic) {
             if (t != "") {
                 console.log(t);
                 alert(t);
+                location.reload();
             }
 
         }
@@ -1548,41 +1599,8 @@ function admin_indi_uni_update() {
         if (this.readyState == 4) {
             var t = r.responseText;
             console.log(t);
-            // if (t == 'Please select university') {
-            //     admin_add_deg_main.innerHTML = '';
-            //     admin_add_deg_uni_sm.innerHTML = t;
-            //     admin_add_deg_deg_sm.innerHTML = '';
-            //     admin_add_deg_deg_other_sm.innerHTML = '';
-            // } else if (t == 'Please select degree') {
-            //     admin_add_deg_main.innerHTML = '';
-            //     admin_add_deg_uni_sm.innerHTML = '';
-            //     admin_add_deg_deg_sm.innerHTML = t;
-            //     admin_add_deg_deg_other_sm.innerHTML = '';
-            // } else if (t == 'Please enter other degree') {
-            //     admin_add_deg_main.innerHTML = '';
-            //     admin_add_deg_uni_sm.innerHTML = '';
-            //     admin_add_deg_deg_sm.innerHTML = '';
-            //     admin_add_deg_deg_other_sm.innerHTML = t;
-            // } else if (t == 'success') {
-            //     admin_add_deg_main.classList.add('text-success', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
-            //     admin_add_deg_main.innerHTML = t;
-            //     admin_add_deg_uni_sm.innerHTML = '';
-            //     admin_add_deg_deg_sm.innerHTML = '';
-            //     admin_add_deg_deg_other_sm.innerHTML = '';
-            //     // location.reload();
-            // } else if (t == 'This degree already have') {
-            //     admin_add_deg_main.classList.add('text-danger', 'fs-4', 'text-center', 'mt-2');
-            //     admin_add_deg_main.innerHTML = t;
-            //     admin_add_deg_uni_sm.innerHTML = '';
-            //     admin_add_deg_deg_sm.innerHTML = '';
-            //     admin_add_deg_deg_other_sm.innerHTML = '';
-            // } else {
-            //     admin_add_deg_main.classList.add('text-danger', 'fw-bold', 'fs-4', 'text-center', 'mt-2', 'd-block');
-            //     admin_add_deg_main.innerHTML = t;
-            //     admin_add_deg_uni_sm.innerHTML = '';
-            //     admin_add_deg_deg_sm.innerHTML = '';
-            //     admin_add_deg_deg_other_sm.innerHTML = '';
-            // }
+            document.getElementById('admin_indi_uni_main').innerHTML = t;
+            location.reload();
         }
     }
     var f = new FormData();
@@ -1919,6 +1937,7 @@ function admin_add_field() {
                 admin_add_field_main.innerHTML = t;
                 admin_add_field_deg_sm.innerHTML = '';
                 admin_add_field_field_sm.innerHTML = '';
+                location.reload();
             } else if (t == 'This field already registered') {
                 admin_add_field_main.classList.add('text-danger', 'text-center', 'mt-2');
                 admin_add_field_main.innerHTML = t;
@@ -2043,7 +2062,10 @@ function admin_add_inspector() {
         if (r.status == 200 && r.readyState == 4) {
             var t = r.responseText;
             console.log(t);
-            alert(t);
+            document.getElementById('admin_add_inspector_main').innerHTML = t;
+            if (t == 'sucess') {
+                location.reload();
+            }
         }
     }
     var f = new FormData();
@@ -2065,7 +2087,7 @@ function send_student_registration_email(email) {
             var t = r.responseText;
             console.log(t);
             alert(t);
-        }else if (r.readyState < 4) {
+        } else if (r.readyState < 4) {
             console.log('sending.......');
         }
     }
@@ -2093,31 +2115,135 @@ function send_training_establishment_email(uni_id) {
 
 function training_reg(st_id) {
 
+    var st_trn_training_place = document.getElementById('st_trn_training_place');
     var st_trn_worksite = document.getElementById('st_trn_worksite');
     var st_trn_start_date = document.getElementById('st_trn_start_date');
-    var st_trn_start_date = document.getElementById('st_trn_end_date');
     var st_trn_coordinator = document.getElementById('st_trn_coordinator');
     var st_trn_coordinator_position = document.getElementById('st_trn_coordinator_position');
     var st_trn_coordinator_contact = document.getElementById('st_trn_coordinator_contact');
+    var ad_st_main = document.getElementById('ad_st_main');
 
     var r = new XMLHttpRequest();
     r.onreadystatechange = function () {
         if (r.status == 200 && r.readyState == 4) {
             var t = r.responseText;
             console.log(t);
+            ad_st_main.innerHTML = t;
+            if (t == 'succss') {
+                document.getElementById('ad_st_Form').style.display = 'none';
+                document.getElementById('ad_st_success').style.display = 'block';
+            }
         }
     }
     var f = new FormData();
-    f.append("st_id",st_id);
+    f.append("st_id", st_id);
+    f.append("st_trn_training_place", st_trn_training_place.value);
     f.append("st_trn_worksite", st_trn_worksite.value);
     f.append("st_trn_start_date", st_trn_start_date.value);
-    f.append("st_trn_end_date", st_trn_end_date.value);
     f.append("st_trn_coordinator", st_trn_coordinator.value);
     f.append("st_trn_coordinator_position", st_trn_coordinator_position.value);
     f.append("st_trn_coordinator_contact", st_trn_coordinator_contact.value);
     r.open('POST', 'training_establishment_reg_proccess.php', true);
     r.send(f);
 }
+
+function admin_add_admin() {
+    console.log('admin_add_admin');
+    var admin_add_admin_uname = document.getElementById('admin_add_admin_uname');
+    var admin_add_admin_name = document.getElementById('admin_add_admin_name');
+    var admin_add_admin_nic = document.getElementById('admin_add_admin_nic');
+    var admin_add_admin_gender = document.getElementById('admin_add_admin_gender');
+    var admin_add_admin_adtype = document.getElementById('admin_add_admin_adtype');
+    var admin_add_admin_password = document.getElementById('admin_add_admin_password');
+    var admin_add_admin_main = document.getElementById('admin_add_admin_main');
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            admin_add_admin_main.innerHTML = t;
+            if (t == 'sucess') {
+                location.reload();
+            }
+        }
+    }
+    var f = new FormData();
+    f.append("admin_add_admin_uname", admin_add_admin_uname.value);
+    f.append("admin_add_admin_name", admin_add_admin_name.value);
+    f.append("admin_add_admin_nic", admin_add_admin_nic.value);
+    f.append("admin_add_admin_gender", admin_add_admin_gender.value);
+    f.append("admin_add_admin_adtype", admin_add_admin_adtype.value);
+    f.append("admin_add_admin_password", admin_add_admin_password.value);
+    r.open('POST', 'admin_add_admin_proccess.php', true);
+    r.send(f);
+}
+
+function st_prof_update_admin(st_id) {
+    console.log(st_id);
+    var st_prof_first_name = document.getElementById('st_prof_first_name');
+    var st_prof_last_name = document.getElementById('st_prof_last_name');
+    var st_prof_full_name_with_init = document.getElementById('st_prof_full_name_with_init');
+    var st_prof_full_name = document.getElementById('st_prof_full_name');
+    var st_prof_address = document.getElementById('st_prof_address');
+    var st_prof_gender = document.getElementById('st_prof_gender');
+    var st_prof_nic = document.getElementById('st_prof_nic');
+    var st_prof_mobile = document.getElementById('st_prof_mobile');
+    var st_prof_land = document.getElementById('st_prof_land');
+    var st_prof_email = document.getElementById('st_prof_email');
+    var st_prof_password = document.getElementById('st_prof_password');
+    var st_prof_university = document.getElementById('st_prof_university');
+    var st_prof_field = document.getElementById('st_prof_field');
+    var st_prof_degree = document.getElementById('st_prof_degree');
+
+    var st_prof_main = document.getElementById('st_prof_main');
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            st_prof_main.innerHTML = t;
+            location.reload();
+        }
+    }
+    var f = new FormData();
+    f.append("st_prof_first_name", st_prof_first_name.value);
+    f.append("st_prof_last_name", st_prof_last_name.value);
+    f.append("st_prof_full_name_with_init", st_prof_full_name_with_init.value);
+    f.append("st_prof_full_name", st_prof_full_name.value);
+    f.append("st_prof_address", st_prof_address.value);
+    f.append("st_prof_gender", st_prof_gender.value);
+    f.append("st_prof_nic", st_prof_nic.value);
+    f.append("st_prof_mobile", st_prof_mobile.value);
+    f.append("st_prof_land", st_prof_land.value);
+    f.append("st_prof_email", st_prof_email.value);
+    f.append("st_prof_password", st_prof_password.value);
+    f.append("st_prof_university", st_prof_university.value);
+    f.append("st_prof_field", st_prof_field.value);
+    f.append("st_prof_degree", st_prof_degree.value);
+    r.open('POST', 'st_prof_update_admin_proccess.php', true);
+    r.send(f);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'connection.php';
+require_once 'connection.php';
 
 if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
 
@@ -362,8 +362,21 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <h1 class="font-light text-white">
                               <i class="mdi mdi-library"></i>
                             </h1>
-                            <h6 class="text-white text-uppercase text-truncate">ASSESSORS</h6>
-                            <h4 class="text-white text-uppercase">60</h4>
+                            <h6 class="text-white text-uppercase text-truncate">Universities</h6>
+                            <?php
+                            $rs_ad_dash_st = Database::search('SELECT COUNT(uni_id) FROM university;');
+                            $d_ad_dash_st = $rs_ad_dash_st->fetch_assoc();
+
+                            ?>
+                            <h4 class="text-white text-uppercase"><?php
+                                                                  if ($rs_ad_dash_st->num_rows > 0) {
+                                                                    echo $d_ad_dash_st['COUNT(uni_id)'];
+                                                                  } else {
+                                                                    echo '_ _ _';
+                                                                  }
+
+
+                                                                  ?></h4>
                           </div>
                         </div>
                       </div>
@@ -373,8 +386,21 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <h1 class="font-light text-white">
                               <i class="mdi mdi-library"></i>
                             </h1>
-                            <h6 class="text-white text-uppercase text-truncate">Inspectors</h6>
-                            <h4 class="text-white text-uppercase">20</h4>
+                            <h6 class="text-white text-uppercase text-truncate">Degrees</h6>
+                            <?php
+                            $rs_ad_dash_st = Database::search('SELECT COUNT(deg_id) FROM degree;');
+                            $d_ad_dash_st = $rs_ad_dash_st->fetch_assoc();
+
+                            ?>
+                            <h4 class="text-white text-uppercase"><?php
+                                                                  if ($rs_ad_dash_st->num_rows > 0) {
+                                                                    echo $d_ad_dash_st['COUNT(deg_id)'];
+                                                                  } else {
+                                                                    echo '_ _ _';
+                                                                  }
+
+
+                                                                  ?></h4>
                           </div>
                         </div>
                       </div>
@@ -384,8 +410,21 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <h1 class="font-light text-white">
                               <i class="mdi mdi-poll"></i>
                             </h1>
-                            <h6 class="text-white text-uppercase text-truncate">Students to Monitoring</h6>
-                            <h4 class="text-white text-uppercase">18,000</h4>
+                            <h6 class="text-white text-uppercase text-truncate">Fields</h6>
+                            <?php
+                            $rs_ad_dash_st = Database::search('SELECT COUNT(fld_id) FROM field;');
+                            $d_ad_dash_st = $rs_ad_dash_st->fetch_assoc();
+
+                            ?>
+                            <h4 class="text-white text-uppercase"><?php
+                                                                  if ($rs_ad_dash_st->num_rows > 0) {
+                                                                    echo $d_ad_dash_st['COUNT(fld_id)'];
+                                                                  } else {
+                                                                    echo '_ _ _';
+                                                                  }
+
+
+                                                                  ?></h4>
                           </div>
                         </div>
                       </div>
@@ -395,8 +434,21 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <h1 class="font-light text-white">
                               <i class="mdi mdi-clipboard-text"></i>
                             </h1>
-                            <h6 class="text-white text-uppercase text-truncate">Students to Assessments</h6>
-                            <h4 class="text-white text-uppercase">15,000</h4>
+                            <h6 class="text-white text-uppercase text-truncate">Training Registered Students</h6>
+                            <?php
+                            $rs_ad_dash_st = Database::search('SELECT COUNT(tran_est_id) FROM training_establishment;');
+                            $d_ad_dash_st = $rs_ad_dash_st->fetch_assoc();
+
+                            ?>
+                            <h4 class="text-white text-uppercase"><?php
+                                                                  if ($rs_ad_dash_st->num_rows > 0) {
+                                                                    echo $d_ad_dash_st['COUNT(tran_est_id)'];
+                                                                  } else {
+                                                                    echo '_ _ _';
+                                                                  }
+
+
+                                                                  ?></h4>
                           </div>
                         </div>
                       </div>
@@ -406,8 +458,21 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <h1 class="font-light text-white">
                               <i class="mdi mdi-school"></i>
                             </h1>
-                            <h6 class="text-white text-uppercase text-truncate">All Completed Students</h6>
-                            <h4 class="text-white text-uppercase">30,000</h4>
+                            <h6 class="text-white text-uppercase text-truncate">Assessment Selected Students</h6>
+                            <?php
+                            $rs_ad_dash_st = Database::search('SELECT COUNT(as_id) FROM assessment;');
+                            $d_ad_dash_st = $rs_ad_dash_st->fetch_assoc();
+
+                            ?>
+                            <h4 class="text-white text-uppercase"><?php
+                                                                  if ($rs_ad_dash_st->num_rows > 0) {
+                                                                    echo $d_ad_dash_st['COUNT(as_id)'];
+                                                                  } else {
+                                                                    echo '_ _ _';
+                                                                  }
+
+
+                                                                  ?></h4>
                           </div>
                         </div>
                       </div>
@@ -567,16 +632,16 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             <div class="col-12 " id="stdnt" style="display: none;">
               <h1 class="text-decoration-underline text-center border border-2 border-primary  p-2 rounded my-2 text-uppercase fw-bold">Students</h1>
               <div class="row">
-                <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
+                <!-- <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
                   <input class="d-none" type="file" accept="pdf/*" id="addcontract" />
                   <label for="addcontract" onclick="selctcontract();" class="btn btn-outline-primary  fw-bold shadow m-2">Select Contract Form
                     <small id="viewM" class="text-warning"></small>
                   </label>
-                </div>
-                <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
+                </div> -->
+                <!-- <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
                   <button class="btn btn-outline-primary  fw-bold shadow m-2" onclick="upload_contract();">Upload Contract Form</button>
-                </div>
-                <div class="col-12 offset-0 col-lg-2 offset-lg-6 d-grid">
+                </div> -->
+                <div class="col-12 offset-0 col-lg-2 offset-lg-10 d-grid">
                   <button class="btn btn-outline-primary  fw-bold shadow m-2" data-bs-toggle="modal" data-bs-target="#add_student">Add New Student</button>
                 </div>
                 <div class="col-12">
@@ -595,26 +660,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                           <th scope="col">University Name</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <?php
-                        $urs = Database::search("SELECT *
-                        FROM university
-                        INNER JOIN uni_type ON university.uni_type_uni_typ_id=uni_type.uni_typ_id;");
-                        $un = $urs->num_rows;
+                      <tbody id="pg_admin_student_university">
 
-                        for ($i = 0; $i < $un; $i++) {
-                          $ursr = $urs->fetch_assoc();
-                        ?>
-
-                          <tr class="table-primary" onclick="stmUni(<?= $ursr['uni_id']; ?>);">
-                            <td><?= $i + 1; ?></td>
-                            <td><?= $ursr["uni_typ"]; ?></td>
-                            <td><?= $ursr["uni_name"]; ?></td>
-                          </tr>
-                        <?php
-
-                        }
-                        ?>
                       </tbody>
                     </table>
                   </div>
@@ -647,7 +694,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                       <table class="table table-striped shadow">
                         <thead>
                           <tr>
-                            <th scope="col">University ID</th>
+                            <th scope="col">#</th>
                             <th scope="col">University Type</th>
                             <th scope="col">University Name</th>
                             <th scope="col">Email</th>
@@ -656,31 +703,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                             <th>Government or not</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <?php
-                          $urs = Database::search("SELECT *
-                      FROM university
-                      INNER JOIN uni_type ON university.uni_type_uni_typ_id=uni_type.uni_typ_id
-                      INNER JOIN gov_status ON university.gov_status_govstat_id=gov_status.govstat_id;");
-                          $un = $urs->num_rows;
+                        <tbody id="pg_admin_university_university">
 
-                          for ($i = 0; $i < $un; $i++) {
-                            $ursr = $urs->fetch_assoc();
-                          ?>
-
-                            <tr class="table-danger" onclick="admin_uni(<?= $ursr['uni_id']; ?>);">
-                              <td><?= $i + 1; ?></td>
-                              <td><?= $ursr["uni_typ"]; ?></td>
-                              <td><?= $ursr["uni_name"]; ?></td>
-                              <td><?= $ursr["uni_email"]; ?></td>
-                              <td><?= $ursr["uni_contact_1"]; ?></td>
-                              <td><?= $ursr["uni_contact_2"]; ?></td>
-                              <td><?= $ursr["gov_stat"]; ?></td>
-                            </tr>
-                          <?php
-
-                          }
-                          ?>
                         </tbody>
                       </table>
                     </div>
@@ -712,7 +736,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                   <button class="btn btn-outline-primary  fw-bold shadow m-2">Add New Worksite</button>
                 </div>
                 <div class="col-10 offset-1 col-lg-4 offset-lg-0 d-grid">
-                  <button class="btn btn-outline-primary  fw-bold shadow m-2">Add New Training Place</button>
+                  <button class="btn btn-outline-primary  fw-bold shadow m-2" data-bs-toggle="modal" data-bs-target="#add_training_place" type="button">Add New Training Place</button>
                 </div>
               </div>
             </div>
@@ -924,7 +948,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                         <th scope="col"></th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="pg_admin_assessment_all_assessment">
                       <?php
                       $rs_admin_assessment = Database::search("SELECT * FROM assessment
                       INNER JOIN inspector ON assessment.inspector_ins_id=inspector.ins_id
@@ -1235,7 +1259,6 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             </div>
             <div class="modal-body">
               <div class="row">
-                <small id="ad_st_main_SM" style="display: none;" class="text-danger"></small>
                 <div class="col-12 g-2">
                   <label class="form-label"><span class="text-danger">*</span>First Name</label>
                   <small id="ad_st_FName_SM" style="display: none;" class="text-danger">Please Enter First Name</small>
@@ -1366,8 +1389,9 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             </div>
             <div class="modal-footer">
               <div class="row w-100">
+                <small id="ad_st_main_SM" class="text-danger fs-4 text-center pb-4"></small>
                 <div class="col-6 d-grid">
-                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="adminadddegreeclose();">Close</button>
+                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="admin_student_reg_close();">Close</button>
                 </div>
                 <div class="col-6 d-grid">
                   <button class="btn btn-outline-primary fw-bold fs-4 " onclick="admin_student_reg();">Register now</button>
@@ -1510,7 +1534,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <!-- ================== add University ======================================================= -->
 
       <div class="modal fade " id="add_university" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog ">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content ">
             <div class="modal-header">
               <h1 class="text-center fw-bold text-uppercase">University Or Institute Register</h1>
@@ -1622,7 +1646,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <!-- ================== add degree ======================================================= -->
 
       <div class="modal fade " id="add_degree" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog ">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content ">
             <div class="modal-header">
               <h1 class="text-center fw-bold text-uppercase fs-2">Add Degree</h1>
@@ -1692,7 +1716,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       <!-- =========================== add field ================================================= -->
 
       <div class="modal fade " id="add_field" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog ">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content ">
             <div class="modal-header">
               <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Field</h1>
@@ -1742,6 +1766,79 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
 
       <!-- =========================== add field ================================================= -->
 
+
+
+      <!-- ================================add training Place=============================================== -->
+
+      <div class="modal fade " id="add_training_place" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Training Place</h1>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Training Place Name</label><br>
+                  <input type="text" class="form-control" placeholder="Type Training Place Name" id="admin_add_training_place_name">
+                </div>
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Training Place Address</label><br>
+                  <input type="text" class="form-control" placeholder="Type Training Place Address" id="admin_add_training_place_address">
+                </div>
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Training Place Email</label><br>
+                  <input type="text" class="form-control" placeholder="Type Training Place Name" id="admin_add_training_place_email">
+                </div>
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Training Place Contact 1</label><br>
+                  <input type="text" class="form-control" placeholder="Type Training Place Address" id="admin_add_training_place_contact_1">
+                </div>
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Training Place Contact 2</label><br>
+                  <input type="text" class="form-control" placeholder="Type Training Place Address" id="admin_add_training_place_contact_2">
+                </div>
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Training Place </label><br>
+                  <input type="text" class="form-control" placeholder="Type Training Place Address" id="admin_add_training_place_contact_2">
+                </div>
+                <div class="col-12 ">
+                  <label class="form-label"><span class="text-danger">*</span>Select District</label><br>
+                  <?php
+                  $admin_add_training_place_district_rs = Database::search("SELECT * FROM districts;");
+                  $admin_add_training_place_district_num = $admin_add_training_place_district_rs->num_rows;
+                  ?>
+                  <select class="form-select bg-transparent" id="admin_add_training_place_district">
+                    <option value="x">Select District</option>
+                    <?php
+                    for ($i = 0; $i < $admin_add_training_place_district_num; $i++) {
+                      $admin_add_training_place_district_dt = $admin_add_training_place_district_rs->fetch_assoc();
+                    ?>
+                      <option value="<?= $admin_add_training_place_district_dt["district_id"]; ?>"><?= $admin_add_training_place_district_dt["district"]; ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="row w-100">
+                <p class="fs-4 text-danger text-center" id="admin_add_inspector_main"></p>
+                <div class="col-6 d-grid">
+                  <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="">Close</button>
+                </div>
+                <div class="col-6 d-grid">
+                  <button type="button" class="btn btn-outline-primary fw-bold" onclick="">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===============================add training Place================================================ -->
+
       <!-- ================================add inspector=============================================== -->
 
       <div class="modal fade " id="add_inspector" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1751,7 +1848,6 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Inspector</h1>
             </div>
             <div class="modal-body">
-              <small id="admin_add_field_main"></small>
               <div class="row">
                 <div class="col-12 ">
                   <label class="form-label"><span class="text-danger">*</span>Select Admin</label><br>
@@ -1766,9 +1862,19 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                     <?php
                     for ($i = 0; $i < $n_admin_add_field_inspector; $i++) {
                       $d_admin_add_field_inspector = $rs_admin_add_field_inspector->fetch_assoc();
+
+                      $d_admin_add_field_inspector_ins_rs = Database::search("SELECT * FROM inspector WHERE admin_ad_id='" . $d_admin_add_field_inspector["ad_id"] . "';");
+                      $d_admin_add_field_inspector_ins_dt = $d_admin_add_field_inspector_ins_rs->fetch_assoc();
+
+                      if ($d_admin_add_field_inspector['ad_id'] == $d_admin_add_field_inspector_ins_dt['admin_ad_id']) {
                     ?>
-                      <option value="<?= $d_admin_add_field_inspector["ad_id"]; ?>"><?= $d_admin_add_field_inspector["name"] . ' - ' . $d_admin_add_field_inspector["admn_typ"]; ?></option>
+                        <option value="<?= $d_admin_add_field_inspector["ad_id"]; ?>"><?= $d_admin_add_field_inspector["name"] . ' | ' . $d_admin_add_field_inspector["admn_typ"] . ' | ' . $d_admin_add_field_inspector["ad_nic"]; ?><span> : INSPECTOR</span></option>
+                      <?php
+                      } else {
+                      ?>
+                        <option value="<?= $d_admin_add_field_inspector["ad_id"]; ?>"><?= $d_admin_add_field_inspector["name"] . ' | ' . $d_admin_add_field_inspector["admn_typ"] . ' | ' . $d_admin_add_field_inspector["ad_nic"]; ?></option>
                     <?php
+                      }
                     }
                     ?>
                   </select>
@@ -1777,6 +1883,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
             </div>
             <div class="modal-footer">
               <div class="row w-100">
+                <p class="fs-4 text-danger text-center" id="admin_add_inspector_main"></p>
                 <div class="col-6 d-grid">
                   <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="admin_add_inspector_close();">Close</button>
                 </div>
@@ -1800,7 +1907,6 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               <h1 class="text-center fw-bold text-uppercase fs-2" id="staticBackdropLabel">Add Admin</h1>
             </div>
             <div class="modal-body">
-              <small id="admin_add_field_main"></small>
               <div class="row">
                 <div class="col-12 ">
                   <div class="row">
@@ -1847,11 +1953,12 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               </div>
               <div class="modal-footer">
                 <div class="row w-100">
+                  <p class="fs-4 text-danger text-center" id="admin_add_admin_main"></p>
                   <div class="col-6 d-grid">
                     <button type="button" class="btn btn-outline-danger fw-bold" data-bs-dismiss="modal" onclick="">Close</button>
                   </div>
                   <div class="col-6 d-grid">
-                    <button type="button" class="btn btn-outline-primary fw-bold" onclick="" disabled>Add</button>
+                    <button type="button" class="btn btn-outline-primary fw-bold" onclick="admin_add_admin();">Add</button>
                   </div>
                 </div>
               </div>
@@ -1861,9 +1968,18 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
 
         <!-- ===============================add admin================================================ -->
 
+
         <!-- ============================================================== -->
         <!-- MODALS -->
         <!-- ============================================================== -->
+
+        <!-- =================================================================== -->
+        <!-- Pagination -->
+        <!-- =================================================================== -->
+        <script src="pagination.js"></script>
+        <!-- =================================================================== -->
+        <!-- Pagination -->
+        <!-- =================================================================== -->
 
         <!-- ============================================================== -->
         <!-- All Jquery -->
@@ -1892,6 +2008,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
         <script src="../dist/js/pages/chart/chart-page-init.js"></script>
         <script src="script.js"></script>
         <!-- newly -->
+  </body>
 
   </html>
 

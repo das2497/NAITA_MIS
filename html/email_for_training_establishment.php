@@ -17,8 +17,8 @@ if ($rs1->num_rows == 0) {
 
     while ($d1 = $rs1->fetch_assoc()) {
 
-        if ($d1['naita_id'] !== "") {
-
+        if ($d1['naita_id'] == "") {
+        } else {
             $rs2 = Database::search("SELECT * FROM student
             INNER JOIN training_establishment ON student.st_id=training_establishment.tran_est_st_id
             WHERE training_establishment.tran_est_st_id='" . $d1["st_id"] . "';");
