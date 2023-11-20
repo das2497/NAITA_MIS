@@ -1,3 +1,8 @@
+function admin_load() {
+    admin_assessment_sort();
+    admin_all_students_data();
+}
+
 //====================================================================================================================================
 //-------------------------STUDENT FUNCTIONS-------------------------------------------------------------------------------------------
 //====================================================================================================================================
@@ -174,6 +179,7 @@ function login() {
         if (r.readyState == 4) {
             var t = r.responseText;
             // alert(t);
+            console.log(t);
             if (t == "Please enter Username") {
                 unameSM.innerHTML = t;
                 unameSM.style.display = "block";
@@ -2097,6 +2103,24 @@ function send_student_registration_email(email) {
     r.send(f);
 }
 
+function send_student_registration_email_individualy(uni_id, deg_id, field_id) {
+    console.log('send_student_registration_email_individualy');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            alert(t);
+        }
+    }
+    var f = new FormData();
+    f.append("uni_id", uni_id);
+    f.append("deg_id", deg_id);
+    f.append("field_id", field_id);
+    r.open('POST', 'email_for_student_registration_individual.php', true);
+    r.send(f);
+}
+
 function send_training_establishment_email(uni_id) {
     console.log(uni_id);
     var r = new XMLHttpRequest();
@@ -2226,7 +2250,23 @@ function st_prof_update_admin(st_id) {
     r.send(f);
 }
 
-
+function admin_all_students_data() {
+    console.log('admin_all_students_data');
+    let admin_all_students_data_search = document.getElementById('admin_all_students_data_search');
+    let admin_all_students_data = document.getElementById('admin_all_students_data');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            admin_all_students_data.innerHTML = t;
+        }
+    }
+    var f = new FormData();
+    f.append('admin_all_students_data_search', admin_all_students_data_search.value);
+    r.open('POST', 'admin_all_students_data.php', true);
+    r.send(f);
+}
 
 
 

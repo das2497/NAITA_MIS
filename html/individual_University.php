@@ -75,6 +75,12 @@ $U = $con->fetch_assoc();
                                     <th>
                                         <b>Field</b>
                                     </th>
+                                    <th>
+                                        <b>Send Student Registration</b>
+                                    </th>
+                                    <th>
+                                        <b>Send Training Registration</b>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,6 +100,12 @@ $U = $con->fetch_assoc();
                                             </td>
                                             <td>
                                                 <input type="text" value="<?php echo $d2["fld_name"]; ?>" class="w-100 form-control" disabled>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-primary px-5 shadow" onclick="send_student_registration_email_individualy('<?= $x; ?>','<?= $d2['deg_id']; ?>','<?= $d2['fld_id']; ?>');"><b>Send</b></button>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-primary px-5 shadow"><b>Send</b></button>
                                             </td>
                                         </tr>
                                     <?php

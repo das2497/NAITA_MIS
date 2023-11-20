@@ -97,6 +97,6 @@ class Email
     }
 }
 
-// Test sending an email
-$result = Email::send('Test Subject', '<h4>Hello</h4>', 'danushkasandagiri@gmail.com');
-echo $result;
+// // Test sending an email
+// $result = Email::send('Test Subject', '<h4>Hello</h4>', 'danushkasandagiri@gmail.com');
+// echo $result;

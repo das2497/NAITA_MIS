@@ -2,8 +2,8 @@
 
 require 'connection.php';
 
-if (isset($_COOKIE[md5('st_st_register')])) {
-} else {
+// if (isset($_COOKIE[md5('st_st_register')])) {
+// } else {
 
 
 
@@ -227,4 +227,4 @@ if (isset($_COOKIE[md5('st_st_register')])) {
 
 <?php
 
-}
+// }

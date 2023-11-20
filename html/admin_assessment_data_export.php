@@ -425,27 +425,68 @@ switch ($search) {
         break;
 }
 
-$output = '';
+// $output = '';
 
-$c2 = Database::search($query . ";");
-$n2 = $c2->num_rows;
+// $c2 = Database::search($query . ";");
+// $n2 = $c2->num_rows;
 
-// echo $n2;
-// echo "</br>";
-// echo "</br>";
+// // echo $n2;
+// // echo "</br>";
+// // echo "</br>";
 
-if (mysqli_num_rows($c2) > 0) {
-    $output .= "NAITA Id,First Name,Worksite,Training Place,University,Field,Assessment date,Assessment Status,participation\n";
-    $output .= "NAITA Id;First Name;Worksite;Training Place;University;Field;Assessment date;Assessment Status;participation\n";
+// if (mysqli_num_rows($c2) > 0) {
+//     $output .= "NAITA Id,First Name,Worksite,Training Place,University,Field,Assessment date,Assessment Status,participation\n";
+//     $output .= "NAITA Id;First Name;Worksite;Training Place;University;Field;Assessment date;Assessment Status;participation\n";
 
 
-    while ($d = mysqli_fetch_array($c2)) {
-        $output .= $d["naita_id"] . "," . $d["first_name"] . "," . $d["wrksit_name"] . "," . $d["tran_plc_name"] . "," . $d["uni_name"] . "," . $d["fld_name"] . "," . $d["as_date"] . "," . $d["status"] . "," . $d["parti_stat"] . "\n";
-    }
+//     while ($d = mysqli_fetch_array($c2)) {
+//         $output .= $d["naita_id"] . "," . $d["first_name"] . "," . $d["wrksit_name"] . "," . $d["tran_plc_name"] . "," . $d["uni_name"] . "," . $d["fld_name"] . "," . $d["as_date"] . "," . $d["status"] . "," . $d["parti_stat"] . "\n";
+//     }
 
-    header('Content-Type: application/xls');
-    header('Content-Disposition: attachment; filename=download.xls');
-    echo $output;
-} else {
-    echo "<span>No data to export .xls file. </span>";
-}
+//     header('Content-Type: application/xls');
+//     header('Content-Disposition: attachment; filename=download.xls');
+//     echo $output;
+// } else {
+//     echo "<span>No data to export .xls file. </span>";
+// }
+
+//==========================================================================
+
+
+// Filter the excel data 
+function filterData(&$str){ 
+    $str = preg_replace("/\t/", "\\t", $str); 
+    $str = preg_replace("/\r?\n/", "\\n", $str); 
+    if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"'; 
+} 
+
+// Excel file name for download 
+$fileName = "all_assessment_data_" . date('Y-m-d') . ".xls"; 
+
+// Column names 
+$fields = array('NAITA Id', 'First Name','Worksite','Training Place','University','Field','Assessment date','Assessment Status','participation'); 
+
+// Display column names as first row 
+$excelData = implode("\t", array_values($fields)) . "\n"; 
+
+// Fetch records from database 
+$rs = Database::search($query.";");
+if($rs->num_rows > 0){ 
+    // Output each row of the data 
+    while($row = $rs->fetch_assoc()){ 
+        $lineData = array($row['naita_id'], $row['first_name'], $row['wrksit_name'], $row['tran_plc_name'], $row['uni_name'], $row['fld_name'], $row['as_date'], $row['status'], $row['parti_stat']); 
+        // array_walk($lineData, 'filterData'); 
+        $excelData .= implode("\t", array_values($lineData)) . "\n"; 
+    } 
+}else{ 
+    $excelData .= 'No records found...'. "\n"; 
+} 
+
+// Headers for download 
+header("Content-Type: application/vnd.ms-excel"); 
+header("Content-Disposition: attachment; filename=\"$fileName\""); 
+
+// Render excel data 
+echo $excelData; 
+
+exit;

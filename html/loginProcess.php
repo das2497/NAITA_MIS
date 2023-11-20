@@ -13,8 +13,8 @@ if (empty($_POST["uname"])) {
     INNER JOIN gender ON admin.ad_gn_id=gender.gn_id
     WHERE admin.uname='" . $_POST["uname"] . "' AND admin.ad_pass='" . $_POST["pass"] . "';");
 
-    $rs2 = Database::search("SELECT * FROM student
-    WHERE email='" . $_POST["uname"] . "' AND PASSWORD='" . $_POST["pass"] . "';");
+    // $rs2 = Database::search("SELECT * FROM student
+    // WHERE email='" . $_POST["uname"] . "' AND PASSWORD='" . $_POST["pass"] . "';");
 
     if (!empty($rs1) && $rs1->num_rows > 0) {
         $d = $rs1->fetch_assoc();
@@ -26,10 +26,12 @@ if (empty($_POST["uname"])) {
             $_SESSION["AD"] = $d;
             echo "1";
         }
-    } elseif (!empty($rs2) && $rs2->num_rows > 0) {
-        $_SESSION["ST"] = $rs2->fetch_assoc();
-        echo "2";
-    } else {
+    }
+    // elseif (!empty($rs2) && $rs2->num_rows > 0) {
+    //     $_SESSION["ST"] = $rs2->fetch_assoc();
+    //     echo "2";
+    // } 
+    else {
         echo "Invalid Username Or Password ";
     }
 

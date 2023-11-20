@@ -448,12 +448,35 @@ switch ($search) {
     <tbody>
         <?php
 
+        require_once 'pagination.php';
+
+        $pg;
+        $js_function_name = "assessment_loadPage";
+
+        if (isset($_GET['pg'])) {
+            $pg = $_GET['pg'];
+        } else {
+            $pg = 1;
+        }
+
+        $rows = 8;
+        $offset = 1 + ($pg - 1) * $rows;
+        $urs = Database::search($query . " ORDER BY as_id ASC LIMIT $rows OFFSET " . ($offset - 1) . ";");
+        $un = $urs->num_rows;
+
+        // echo $query . " ORDER BY ID ASC LIMIT $rows OFFSET " . ($offset - 1) . ";";
+
+        $urs2 = Database::search($query . ';');
+        $un2 = $urs2->num_rows;
+
         $rs_admin_assessment = Database::search($query . ';');
+
+        $pagination = Pagination::pg($rows, $un2, $js_function_name);
 
         // echo  $query . ";";
 
-        for ($i = 0; $i < $rs_admin_assessment->num_rows; $i++) {
-            $d_admin_assessmen = $rs_admin_assessment->fetch_assoc();
+        for ($i = 0; $i < $un; $i++) {
+            $d_admin_assessmen = $urs->fetch_assoc();
         ?>
             <tr class="table-warning">
                 <td><?= $i + 1; ?></td>
@@ -506,9 +529,15 @@ switch ($search) {
                     </div>
                 </td>
             </tr>
+
         <?php
         }
         ?>
+
+
+        <tr>
+            <td colspan="3"><?= $pagination; ?></td>
+        </tr>
 
     </tbody>
 </table>

@@ -38,7 +38,7 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
     <![endif]-->
   </head>
 
-  <body>
+  <body onload="admin_load();">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -255,9 +255,9 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               <li class="sidebar-item" onclick="dashb();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
               </li>
-              <li class="sidebar-item" onclick="meetin();">
+              <!-- <li class="sidebar-item" onclick="meetin();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-monitor" aria-hidden="true"></i><span class="hide-menu"> Meeting Schedule</span></a>
-              </li>
+              </li> -->
               <li class="sidebar-item" onclick="studnts();">
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Students</span></a>
               </li>
@@ -482,6 +482,22 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
               </div>
               <div class="col-12">
                 <div class="row">
+                  <div class="col-12 col-md-6 pt-4">
+                    <div class="row">
+                      <div class="col-12 shadow p-2">
+                        <h4>Students without Registration number : <?php
+                                                                    $rs_without_reg_no = Database::search("SELECT *
+                        FROM student
+                        WHERE student.naita_id IS NULL;");
+                                                                    echo $rs_without_reg_no->num_rows;
+                                                                    ?></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-12">
+                <div class="row">
                   <div class="col-12 col-md-3 border border-1 border-dark shadow p-2 m-2">
                     <div class="row g-2 p-1" style="background-color:#d3f6ef;">
                       <div class="col-12 text-uppercase fw-bold">2023-06-28
@@ -509,35 +525,8 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 col-md-3 border border-1 border-dark shadow p-2 m-2">
-                    <div class="row g-2 p-1" style="background-color:#d3f6ef;">
-                      <div class="col-12 text-uppercase fw-bold">2023-06-30
-                      </div>
-                      <div class="col-md-12  bg-white fw-bold">
-                        <i class="icon-social-dribbble font-purple-soft"></i> University of Colombo
-                      </div>
-                      <div class="col-md-12  bg-white fw-bold">
-                        <i class="icon-tag font-green-dark"></i> BSc Software Engineering
-                      </div>
-                      <div class="col-md-12  bg-white fw-bold">
-                        <i class="icon-tag font-green-dark"></i> IT
-                      </div>
-                      <div class="col-md-12 bg-white fw-bold">
-                        <i class="icon-clock font-purple-studio"></i> 19:00 PM to 00:00 AM
-                      </div>
-                      <div class="col-md-12 fw-bold" style="background-color: #d4d4d4;">
-                        <i class="icon-user font-green-jungle"></i> 1'st Monitoring
-                      </div>
-                      <div class="col-md-12 fw-bold" style="background-color: #d4d4d4;">
-                        <i class="icon-user font-green-jungle"></i> Miss Dinushi Ranasinghe
-                      </div>
-                      <div class="col-md-12 fw-bold text-white bg-dark " style="padding: 5px;">
-                        <i class="fa fa-map-marker font-green-meadow"></i> Colombo Head Office - Online
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- ============================================================== -->
             <!-- DASHBOARD -->
@@ -641,7 +630,10 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
                 <!-- <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
                   <button class="btn btn-outline-primary  fw-bold shadow m-2" onclick="upload_contract();">Upload Contract Form</button>
                 </div> -->
-                <div class="col-12 offset-0 col-lg-2 offset-lg-10 d-grid">
+                <div class="col-12 offset-0 col-lg-2 offset-lg-8 d-grid">
+                  <button class="btn btn-outline-primary  fw-bold shadow m-2" data-bs-toggle="modal" data-bs-target="#all_students">All Training Established Students</button>
+                </div>
+                <div class="col-12 offset-0 col-lg-2 offset-lg-0 d-grid">
                   <button class="btn btn-outline-primary  fw-bold shadow m-2" data-bs-toggle="modal" data-bs-target="#add_student">Add New Student</button>
                 </div>
                 <div class="col-12">
@@ -1403,6 +1395,63 @@ if (isset($_SESSION["SA"]) || isset($_SESSION["AD"])) {
       </div>
 
       <!-- ================ Add Students ========================================== -->
+
+      <!-- ========================== All Students =============================== -->
+
+      <div class="modal fade" id="all_students" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="text-center fw-bold text-uppercase" id="staticBackdropLabel">All Training Established Students</h1>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" onkeyup="admin_all_students_data();" id="admin_all_students_data_search" placeholder="Type to search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                      </svg></span>
+                  </div>
+                </div>
+                <div class="col-12">
+
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <th scope="col">Registration no</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">NIC</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">Mobile Number</th>
+                        <th scope="col">Land Number</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">University</th>
+                        <th scope="col">Degree</th>
+                        <th scope="col">Field</th>
+                        <th scope="col">Registered Date</th>
+                        <th scope="col">Training Place</th>
+                        <th scope="col">Worksite</th>
+                      </thead>
+                      <tbody id="admin_all_students_data">
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-danger fw-bold shadow" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================== All Students =============================== -->
 
       <!-- ========================== Create Assessment =============================== -->
 

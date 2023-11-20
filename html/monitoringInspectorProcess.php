@@ -49,9 +49,30 @@ require 'createSearchQuery.php';
 $query = CREATE_SEARCH_QUERY::query($_GET["sb"], $_GET["sc"], $_GET["su"], $_GET["sf"], $_GET["sm"]);
 
 require 'connection.php';
+require 'pagination.php';
 
-$rsm = Database::search($query .= " ORDER BY student.st_id;");
-$nsm = $rsm->num_rows;
+$pg;
+$js_function_name = "pg_admin_Available_Training_Students_to_Monitoring";
+
+if (isset($_GET['pg'])) {
+    $pg = $_GET['pg'];
+} else {
+    $pg = 1;
+}
+
+$rows = 10;
+$offset = 1 + ($pg - 1) * $rows;
+
+$urs = Database::search($query . " ORDER BY degree.deg_id ASC LIMIT $rows OFFSET " . ($offset - 1) . ";");
+$un = $urs->num_rows;
+
+$urs2 = Database::search($query . ";");
+$un2 = $urs2->num_rows;
+
+$pagination = Pagination::pg($rows, $un2, $js_function_name);
+
+// $rsm = Database::search($query .= " ORDER BY student.st_id;");
+// $nsm = $rsm->num_rows;
 
 // echo $query;
 
@@ -83,8 +104,8 @@ $inspector = $rsins->fetch_assoc();
                 <?php
                 require 'monitoringValidation.php';
 
-                for ($i = 0; $i < $nsm; $i++) {
-                    $tbd = $rsm->fetch_assoc();
+                for ($i = 0; $i < $un; $i++) {
+                    $tbd = $urs->fetch_assoc();
 
                     $x = MonitValidation::x($tbd['st_id']);
 
@@ -111,7 +132,9 @@ $inspector = $rsins->fetch_assoc();
                 }
 
                 ?>
-
+                <tr>
+                    <td colspan="9999"><?= $pagination; ?></td>
+                </tr>
             </tbody>
         </table>
 

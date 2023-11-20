@@ -1,9 +1,15 @@
 <?php
-
+session_start();
 
 require 'connection.php';
+require 'pagination.php';
 
-session_start();
+$pg;
+if (isset($_GET['pg'])) {
+    $pg = $_GET['pg'];
+} else {
+    $pg = 1;
+}
 
 ?>
 
@@ -71,8 +77,25 @@ session_start();
                     <tbody>
                         <?php
 
+                        $js_function_name = "pg_admin_inspector_Selected_Students_To_Monitoring";
 
-                        $rstb3 = Database::search("SELECT *
+                        // $rstb3 = Database::search("SELECT *
+                        // FROM selected_to_assess
+                        // INNER JOIN student ON selected_to_assess.sltd_asses_student=student.st_id
+                        // INNER JOIN gender ON student.gender_gn_id=gender.gn_id
+                        // INNER JOIN field ON student.field_fld_id=field.fld_id
+                        // INNER JOIN degree ON field.fld_deg_id=degree.deg_id
+                        // INNER JOIN university ON degree.deg_uni_id=university.uni_id
+                        // INNER JOIN uni_type ON university.uni_type_uni_typ_id=uni_type.uni_typ_id
+                        // INNER JOIN gov_status ON university.gov_status_govstat_id=gov_status.govstat_id
+                        // INNER JOIN training_establishment ON student.st_id=training_establishment.tran_est_st_id
+                        // INNER JOIN worksite ON training_establishment.worksite_wrksit_id=worksite.wrksit_id
+                        // INNER JOIN training_place ON worksite.wrksit_tran_plc_id=training_place.tran_plc_id
+                        // INNER JOIN monitoring_status ON training_establishment.tran_monit_stat_id=monitoring_status.monit_stat_id
+                        // WHERE selected_to_assess.sltd_asses_inspector='" . $_POST["inid"] . "' AND selected_to_assess.sltd_asses_approved='0';");
+                        // $tbn3 = $rstb3->num_rows;
+
+                        $query = "SELECT *
                         FROM selected_to_assess
                         INNER JOIN student ON selected_to_assess.sltd_asses_student=student.st_id
                         INNER JOIN gender ON student.gender_gn_id=gender.gn_id
@@ -85,12 +108,22 @@ session_start();
                         INNER JOIN worksite ON training_establishment.worksite_wrksit_id=worksite.wrksit_id
                         INNER JOIN training_place ON worksite.wrksit_tran_plc_id=training_place.tran_plc_id
                         INNER JOIN monitoring_status ON training_establishment.tran_monit_stat_id=monitoring_status.monit_stat_id
-                        WHERE selected_to_assess.sltd_asses_inspector='" . $_POST["inid"] . "' AND selected_to_assess.sltd_asses_approved='0';");
+                        WHERE selected_to_assess.sltd_asses_inspector='" . $_POST["inid"] . "' AND selected_to_assess.sltd_asses_approved='0'";
 
-                        $tbn3 = $rstb3->num_rows;
 
-                        for ($i = 0; $i < $tbn3; $i++) {
-                            $tbd2 = $rstb3->fetch_assoc();
+                        $rows = 10;
+                        $offset = 1 + ($pg - 1) * $rows;
+
+                        $urs = Database::search($query . " ORDER BY degree.deg_id ASC LIMIT $rows OFFSET " . ($offset - 1) . ";");
+                        $un = $urs->num_rows;
+
+                        $urs2 = Database::search($query . ";");
+                        $un2 = $urs2->num_rows;
+
+                        $pagination = Pagination::pg($rows, $un2, $js_function_name);
+
+                        for ($i = 0; $i < $un; $i++) {
+                            $tbd2 = $urs->fetch_assoc();
 
                         ?>
                             <tr onclick="" id="<?= $tbd2["naita_id"] + $i + 1; ?>" class="table-warning">
@@ -115,7 +148,9 @@ session_start();
                         }
 
                         ?>
-
+                        <tr>
+                            <td colspan="9999"><?= $pagination; ?></td>
+                        </tr>
                     </tbody>
                 </table>
 
