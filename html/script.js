@@ -1,6 +1,10 @@
 function admin_load() {
     admin_assessment_sort();
     admin_all_students_data();
+    admin_all_full_students_data();
+    pg_admin_all_students_data(1);
+    pg_admin_all_full_students_data(1);
+    pg_admin_all_training_places(1);
 }
 
 //====================================================================================================================================
@@ -344,13 +348,17 @@ function AdeselctST(ins_id, date) {
     var table = document.getElementById("selctdstdntssupr");
     var rows = table.getElementsByTagName("tr");
 
-    console.log(rows.length);
+    console.log('rows.length ' + rows.length);
 
     var r = new XMLHttpRequest();
     r.onreadystatechange = function () {
         if (r.readyState == 4) {
             var text = r.responseText;
             console.log(text);
+            if (text == 'success') {
+                alert(text);
+                window.location.reload();
+            }
 
         }
     }
@@ -364,13 +372,13 @@ function AdeselctST(ins_id, date) {
     for (var i = 1; i < rows.length; i++) {
         var checkbox = rows[i].getElementsByTagName("input")[0];
 
-        // console.log(checkbox);
+        console.log('checkbox ' + checkbox);
 
         // Check if the checkbox is checked or not
         if (checkbox.checked) {
             var nt_id = rows[i].getElementsByTagName("td")[2];
 
-            // console.log(nt_id.innerHTML);
+            console.log('nt_id.innerHTML ' + nt_id.innerHTML);
 
             f.append("nt_id" + i, nt_id.innerHTML);
 
@@ -2269,15 +2277,135 @@ function admin_all_students_data() {
 }
 
 
+function pg_admin_all_students_data(pg) {
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            console.log(r.responseText);
+            document.getElementById('admin_all_students_data').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "admin_all_students_data.php?pg=" + pg, true);
+    r.send();
+}
 
+function admin_all_full_students_data() {
+    console.log('admin_all_full_students_data');
+    let admin_all_full_students_data_search = document.getElementById('admin_all_full_students_data_search');
+    let admin_all_full_students_data = document.getElementById('admin_all_full_students_data');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            console.log(t);
+            admin_all_full_students_data.innerHTML = t;
+        }
+    }
+    var f = new FormData();
+    f.append('admin_all_full_students_data_search', admin_all_full_students_data_search.value);
+    r.open('POST', 'admin_all_full_students_data.php', true);
+    r.send(f);
+}
 
+function pg_admin_all_full_students_data(pg) {
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            console.log(r.responseText);
+            document.getElementById('admin_all_full_students_data').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "admin_all_full_students_data.php?pg=" + pg, true);
+    r.send();
+}
 
+function admin_add_ADD_training_place() {
+    let admin_add_training_place_name = document.getElementById('admin_add_training_place_name');
+    let admin_add_training_place_address = document.getElementById('admin_add_training_place_address');
+    let admin_add_training_place_email = document.getElementById('admin_add_training_place_email');
+    let admin_add_training_place_contact_1 = document.getElementById('admin_add_training_place_contact_1');
+    let admin_add_training_place_contact_2 = document.getElementById('admin_add_training_place_contact_2');
+    let admin_add_training_place_district = document.getElementById('admin_add_training_place_district');
+    let admin_add_training_place_coordinator = document.getElementById('admin_add_training_place_coordinator');
+    let admin_add_training_place_coordinator_position = document.getElementById('admin_add_training_place_coordinator_position');
+    let admin_add_training_place_warn = document.getElementById('admin_add_training_place_warn');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            console.log(r.responseText);
+            admin_add_training_place_warn.innerHTML = r.responseText;
+            if (r.responseText == 'success') {
+                location.reload();
+            }
+        }
+    }
+    var f = new FormData();
+    f.append('admin_add_training_place_name', admin_add_training_place_name.value);
+    f.append('admin_add_training_place_address', admin_add_training_place_address.value);
+    f.append('admin_add_training_place_email', admin_add_training_place_email.value);
+    f.append('admin_add_training_place_contact_1', admin_add_training_place_contact_1.value);
+    f.append('admin_add_training_place_district', admin_add_training_place_district.value);
+    f.append('admin_add_training_place_contact_2', admin_add_training_place_contact_2.value);
+    f.append('admin_add_training_place_coordinator', admin_add_training_place_coordinator.value);
+    f.append('admin_add_training_place_coordinator_position', admin_add_training_place_coordinator_position.value);
+    r.open("POST", "admin_add_ADD_training_place_process.php", true);
+    r.send(f);
+}
 
+function admin_add_ADD_training_place_clear() {
+    document.getElementById('admin_add_training_place_name').innerHTML = '';
+    document.getElementById('admin_add_training_place_address').innerHTML = '';
+    document.getElementById('admin_add_training_place_email').innerHTML = '';
+    document.getElementById('admin_add_training_place_contact_1').innerHTML = '';
+    document.getElementById('admin_add_training_place_contact_2').innerHTML = '';
+    document.getElementById('admin_add_training_place_district').value = 'x'
+    document.getElementById('admin_add_training_place_coordinator').innerHTML = '';
+    document.getElementById('admin_add_training_place_coordinator_position').innerHTML = '';
+    document.getElementById('admin_add_training_place_warn').innerHTML = '';
+}
 
+function pg_admin_all_training_places(pg) {
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            console.log(r.responseText);
+            document.getElementById('all_training_places').innerHTML = r.responseText;
+        }
+    }
+    r.open("GET", "admin_all_training_places.php?pg=" + pg, true);
+    r.send();
+}
 
-
-
-
+function admin_add_ADD_worksite() {
+    let admin_add_worksite_name = document.getElementById('admin_add_worksite_name');
+    let admin_add_worksite_address = document.getElementById('admin_add_worksite_address');
+    let admin_add_worksite_email = document.getElementById('admin_add_worksite_email');
+    let admin_add_worksite_contact_1 = document.getElementById('admin_add_worksite_contact_1');
+    let admin_add_worksite_contact_2 = document.getElementById('admin_add_worksite_contact_2');
+    let admin_add_worksite_district = document.getElementById('admin_add_worksite_district');
+    let admin_add_worksite_training_place = document.getElementById('admin_add_worksite_training_place');
+    let admin_add_worksite_warn = document.getElementById('admin_add_worksite_warn');
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function () {
+        if (r.readyState == 4 && r.status == 200) {
+            console.log(r.responseText);
+            admin_add_worksite_warn.innerHTML = r.responseText;
+            if (r.responseText == 'success') {
+                location.reload();
+            }
+        }
+    }
+    var f = new FormData();
+    f.append('admin_add_worksite_name', admin_add_worksite_name.value);
+    f.append('admin_add_worksite_address', admin_add_worksite_address.value);
+    f.append('admin_add_worksite_email', admin_add_worksite_email.value);
+    f.append('admin_add_worksite_contact_1', admin_add_worksite_contact_1.value);
+    f.append('admin_add_worksite_contact_2', admin_add_worksite_contact_2.value);
+    f.append('admin_add_worksite_district', admin_add_worksite_district.value);
+    f.append('admin_add_worksite_training_place', admin_add_worksite_training_place.value);
+    r.open("POST", "admin_add_ADD_worksite_process.php", true);
+    r.send(f);
+}
 
 
 

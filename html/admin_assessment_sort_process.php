@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'connection.php';
 
 $search = $_POST['admin_assessment_sort_srch'];
@@ -475,62 +475,75 @@ switch ($search) {
 
         // echo  $query . ";";
 
+        $ins_id;
+
+        if (isset($_SESSION["SA"])) {
+            $ins_id = $_SESSION["SA"]["ad_id"];
+        } else if (isset($_SESSION["AD"])) {
+            $ins_id = $_SESSION["AD"]["ad_id"];
+        }
+
+
         for ($i = 0; $i < $un; $i++) {
             $d_admin_assessmen = $urs->fetch_assoc();
+
+            if ($ins_id == $d_admin_assessmen['ad_id']) {
+
         ?>
-            <tr class="table-warning">
-                <td><?= $i + 1; ?></td>
-                <td><?= $d_admin_assessmen['naita_id']; ?></td>
-                <td><?= $d_admin_assessmen['first_name']; ?></td>
-                <td><?= $d_admin_assessmen['wrksit_name']; ?></td>
-                <td><?= $d_admin_assessmen['tran_plc_name']; ?></td>
-                <td><?= $d_admin_assessmen['uni_name']; ?></td>
-                <td><?= $d_admin_assessmen['fld_name']; ?></td>
-                <td><?= $d_admin_assessmen['as_date']; ?></td>
-                <td>
-                    <select class="form-select" id="assess_select_pass<?= $d_admin_assessmen['naita_id']; ?>">
-                        <?php
-                        $rs_admin_assessment_stat = Database::search("SELECT * FROM as_status;");
-                        while ($d_admin_assessment_stat = $rs_admin_assessment_stat->fetch_assoc()) {
-                            if ($d_admin_assessment_stat['status'] == $d_admin_assessmen['status']) {
-                        ?>
-                                <option value="<?= $d_admin_assessment_stat['asstat_id']; ?>" selected><?= $d_admin_assessment_stat['status']; ?></option>
+                <tr class="table-warning">
+                    <td><?= $i + 1; ?></td>
+                    <td><?= $d_admin_assessmen['naita_id']; ?></td>
+                    <td><?= $d_admin_assessmen['first_name']; ?></td>
+                    <td><?= $d_admin_assessmen['wrksit_name']; ?></td>
+                    <td><?= $d_admin_assessmen['tran_plc_name']; ?></td>
+                    <td><?= $d_admin_assessmen['uni_name']; ?></td>
+                    <td><?= $d_admin_assessmen['fld_name']; ?></td>
+                    <td><?= $d_admin_assessmen['as_date']; ?></td>
+                    <td>
+                        <select class="form-select" id="assess_select_pass<?= $d_admin_assessmen['naita_id']; ?>">
                             <?php
-                            } else {
+                            $rs_admin_assessment_stat = Database::search("SELECT * FROM as_status;");
+                            while ($d_admin_assessment_stat = $rs_admin_assessment_stat->fetch_assoc()) {
+                                if ($d_admin_assessment_stat['status'] == $d_admin_assessmen['status']) {
                             ?>
-                                <option value="<?= $d_admin_assessment_stat['asstat_id']; ?>"><?= $d_admin_assessment_stat['status']; ?></option>
-                        <?php
-                            }
-                        }
-                        ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="form-select" id="assess_select_present<?= $d_admin_assessmen['naita_id']; ?>">
-                        <?php
-                        $rs_admin_assessment_pati = Database::search("SELECT * FROM participation;");
-                        while ($d_admin_assessment_pati = $rs_admin_assessment_pati->fetch_assoc()) {
-                            if ($d_admin_assessment_pati['parti_id'] == $d_admin_assessmen['participation_parti_id']) {
-                        ?>
-                                <option selected value="<?= $d_admin_assessment_pati['parti_id'] ?>"><?= $d_admin_assessment_pati['parti_stat'] ?></option>
+                                    <option value="<?= $d_admin_assessment_stat['asstat_id']; ?>" selected><?= $d_admin_assessment_stat['status']; ?></option>
+                                <?php
+                                } else {
+                                ?>
+                                    <option value="<?= $d_admin_assessment_stat['asstat_id']; ?>"><?= $d_admin_assessment_stat['status']; ?></option>
                             <?php
-                            } else {
-                            ?>
-                                <option value="<?= $d_admin_assessment_pati['parti_id'] ?>"><?= $d_admin_assessment_pati['parti_stat'] ?></option>
-                        <?php
+                                }
                             }
-                        }
-                        ?>
-                    </select>
-                </td>
-                <td>
-                    <div class="col d-grid">
-                        <button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Submit</button>
-                    </div>
-                </td>
-            </tr>
+                            ?>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-select" id="assess_select_present<?= $d_admin_assessmen['naita_id']; ?>">
+                            <?php
+                            $rs_admin_assessment_pati = Database::search("SELECT * FROM participation;");
+                            while ($d_admin_assessment_pati = $rs_admin_assessment_pati->fetch_assoc()) {
+                                if ($d_admin_assessment_pati['parti_id'] == $d_admin_assessmen['participation_parti_id']) {
+                            ?>
+                                    <option selected value="<?= $d_admin_assessment_pati['parti_id'] ?>"><?= $d_admin_assessment_pati['parti_stat'] ?></option>
+                                <?php
+                                } else {
+                                ?>
+                                    <option value="<?= $d_admin_assessment_pati['parti_id'] ?>"><?= $d_admin_assessment_pati['parti_stat'] ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="col d-grid">
+                            <button class="btn btn-outline-primary fw-bold" onclick="assessment_checked('<?= $d_admin_assessmen['naita_id']; ?>');">Submit</button>
+                        </div>
+                    </td>
+                </tr>
 
         <?php
+            }
         }
         ?>
 

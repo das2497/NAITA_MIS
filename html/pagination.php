@@ -54,3 +54,15 @@ class Pagination
         return $return;
     }
 }
+
+// function pg_admin_all_students_data(pg) {
+//     var r = new XMLHttpRequest();
+//     r.onreadystatechange = function () {
+//         if (r.readyState == 4 && r.status == 200) {
+//             console.log(r.responseText);
+//             document.getElementById('admin_all_students_data').innerHTML = r.responseText;
+//         }
+//     }
+//     r.open("GET", "admin_all_students_data.php?pg=" + pg, true);
+//     r.send();
+// }

@@ -35,7 +35,21 @@ if ($createassesmnt_uni != 'x' && $createassesmnt_batch != 'x'  && $createassesm
             WHERE  university.uni_id='" . $createassesmnt_uni . "' 
             AND YEAR(student.reg_date)='" . $createassesmnt_batch . "' 
             AND field.fld_name='" . $createassesmnt_field . "' 
-            AND degree.degree_name='" . $createassesmnt_degre . "';");
+            AND degree.degree_name='" . $createassesmnt_degre . "'
+            AND student.naita_id IS NOT NULL;");
+
+            // echo "SELECT * FROM training_establishment
+            // INNER JOIN student ON training_establishment.tran_est_st_id=student.st_id
+            // INNER JOIN field ON student.field_fld_id=field.fld_id
+            // INNER JOIN degree ON field.fld_deg_id=degree.deg_id
+            // INNER JOIN university ON degree.deg_uni_id=university.uni_id
+            // INNER JOIN worksite ON training_establishment.worksite_wrksit_id=worksite.wrksit_id
+            // INNER JOIN training_place ON worksite.wrksit_tran_plc_id=training_place.tran_plc_id
+            // WHERE  university.uni_id='" . $createassesmnt_uni . "' 
+            // AND YEAR(student.reg_date)='" . $createassesmnt_batch . "' 
+            // AND field.fld_name='" . $createassesmnt_field . "' 
+            // AND degree.degree_name='" . $createassesmnt_degre . "'
+            // AND student.naita_id IS NOT NULL;";
 
             if ($rs->num_rows > 0) {
 

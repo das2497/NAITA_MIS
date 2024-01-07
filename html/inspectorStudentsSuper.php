@@ -2,14 +2,14 @@
 session_start();
 
 require 'connection.php';
-require 'pagination.php';
+// require 'pagination.php';
 
-$pg;
-if (isset($_GET['pg'])) {
-    $pg = $_GET['pg'];
-} else {
-    $pg = 1;
-}
+// $pg;
+// if (isset($_GET['pg'])) {
+//     $pg = $_GET['pg'];
+// } else {
+//     $pg = 1;
+// }
 
 ?>
 
@@ -77,7 +77,7 @@ if (isset($_GET['pg'])) {
                     <tbody>
                         <?php
 
-                        $js_function_name = "pg_admin_inspector_Selected_Students_To_Monitoring";
+                        // $js_function_name = "pg_admin_inspector_Selected_Students_To_Monitoring";
 
                         // $rstb3 = Database::search("SELECT *
                         // FROM selected_to_assess
@@ -111,19 +111,19 @@ if (isset($_GET['pg'])) {
                         WHERE selected_to_assess.sltd_asses_inspector='" . $_POST["inid"] . "' AND selected_to_assess.sltd_asses_approved='0'";
 
 
-                        $rows = 10;
-                        $offset = 1 + ($pg - 1) * $rows;
+                        // $rows = 10;
+                        // $offset = 1 + ($pg - 1) * $rows;
 
-                        $urs = Database::search($query . " ORDER BY degree.deg_id ASC LIMIT $rows OFFSET " . ($offset - 1) . ";");
-                        $un = $urs->num_rows;
+                        // $urs = Database::search($query . " ORDER BY degree.deg_id ASC LIMIT $rows OFFSET " . ($offset - 1) . ";");
+                        // $un = $urs->num_rows;
 
                         $urs2 = Database::search($query . ";");
                         $un2 = $urs2->num_rows;
 
-                        $pagination = Pagination::pg($rows, $un2, $js_function_name);
+                        // $pagination = Pagination::pg($rows, $un2, $js_function_name);
 
-                        for ($i = 0; $i < $un; $i++) {
-                            $tbd2 = $urs->fetch_assoc();
+                        for ($i = 0; $i < $un2; $i++) {
+                            $tbd2 = $urs2->fetch_assoc();
 
                         ?>
                             <tr onclick="" id="<?= $tbd2["naita_id"] + $i + 1; ?>" class="table-warning">
@@ -148,9 +148,9 @@ if (isset($_GET['pg'])) {
                         }
 
                         ?>
-                        <tr>
+                        <!-- <tr>
                             <td colspan="9999"><?= $pagination; ?></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
 
